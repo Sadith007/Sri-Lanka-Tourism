@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sri Lanka Tourism — The Wonder of Asia</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9963A;
+    --gold-light: #E8C27A;
+    --green-deep: #1A3A2E;
+    --green-mid: #2D6A4F;
+    --green-bright: #52B788;
+    --cream: #FAF6EF;
+    --dark: #0E1F18;
+    --text: #2C2C2A;
+    --text-muted: #6B6B68;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    overflow-x: hidden;
+  }
+
+  /* PAGE SYSTEM */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.4s, box-shadow 0.4s;
+    background: rgba(10, 20, 15, 0.0);
+  }
+  nav.scrolled, nav.solid {
+    background: rgba(10, 20, 15, 0.96);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+  }
+  .nav-logo span { color: var(--gold-light); }
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+    cursor: pointer;
+  }
+  .nav-links a:hover, .nav-links a.active-link { color: var(--gold-light); }
+  .nav-cta {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--gold-light); color: var(--dark); }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 680px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+  .hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.55);
+  }
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(10,20,14,0.7) 0%, rgba(10,20,14,0.2) 60%, transparent 100%);
+    z-index: 1;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 10;
+    padding: 0 5rem;
+    max-width: 680px;
+    animation: heroIn 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold-light);
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 6vw, 5.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-light);
+    display: block;
+  }
+  .hero-desc {
+    font-size: 1.05rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.8);
+    line-height: 1.75;
+    max-width: 460px;
+    margin-bottom: 2.5rem;
+  }
+  .hero-btns {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+  }
+  .btn-primary {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2.2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: var(--gold-light); color: var(--dark); transform: translateY(-2px); }
+  .btn-ghost {
+    color: rgba(255,255,255,0.85);
+    border: 1px solid rgba(255,255,255,0.4);
+    padding: 0.88rem 2rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+    text-decoration: none;
+    display: inline-block;
+    background: transparent;
+  }
+  .btn-ghost:hover { border-color: var(--gold-light); color: var(--gold-light); }
+
+  /* Photo strip */
+  .hero-photo-strip {
+    position: absolute;
+    right: 0; top: 0; bottom: 0;
+    width: 38%;
+    z-index: 5;
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 3px;
+    overflow: hidden;
+  }
+  .hero-photo-strip img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.75);
+    transition: filter 0.4s;
+  }
+  .hero-photo-strip img:hover { filter: brightness(1); }
+
+  /* Hero stats bar */
+  .hero-stats {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    display: flex;
+    padding: 1.75rem 5rem;
+    background: rgba(10,20,14,0.6);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    gap: 3rem;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--gold-light);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-top: 0.25rem;
+  }
+  .stat-divider {
+    width: 1px;
+    background: rgba(255,255,255,0.15);
+    align-self: stretch;
+  }
+
+  /* SECTION STYLES */
+  section { position: relative; }
+
+  .section-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .section-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 1px;
+    background: var(--green-mid);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--green-deep);
+    margin-bottom: 1rem;
+  }
+  .section-title em { font-style: italic; color: var(--gold); }
+  .section-desc {
+    font-size: 1rem;
+    font-weight: 300;
+    color: var(--text-muted);
+    line-height: 1.8;
+    max-width: 500px;
+  }
+
+  /* HOME PHOTO GALLERY */
+  .home-gallery {
+    padding: 5rem;
+    background: var(--cream);
+  }
+  .home-gallery-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+  .home-gallery-header .section-desc { margin: 0 auto; }
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 280px 280px;
+    gap: 1rem;
+  }
+  .gallery-grid .g-item {
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+  }
+  .gallery-grid .g-item:first-child {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+  .gallery-grid .g-item img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter: brightness(0.85);
+  }
+  .gallery-grid .g-item:hover img { transform: scale(1.05); filter: brightness(1); }
+  .g-label {
+    position: absolute;
+    bottom: 1rem; left: 1rem;
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 400;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+  }
+
+  /* EXPERIENCES */
+  .experiences {
+    padding: 7rem 5rem;
+    background: var(--cream);
+  }
+  .experiences-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3.5rem;
+  }
+  .experiences-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto auto;
+    gap: 1.25rem;
+  }
+  .exp-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    background: var(--green-deep);
+  }
+  .exp-card:first-child { grid-row: span 2; }
+  .exp-card-img {
+    width: 100%;
+    height: 100%;
+    min-height: 260px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    filter: brightness(0.75);
+  }
+  .exp-card:first-child .exp-card-img { min-height: 560px; }
+  .exp-card:hover .exp-card-img { transform: scale(1.06); filter: brightness(0.65); }
+  .exp-card-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(14,31,24,0.85) 0%, transparent 55%);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.75rem;
+  }
+  .exp-card-tag {
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-bottom: 0.4rem;
+  }
+  .exp-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .exp-card:first-child .exp-card-title { font-size: 2.2rem; }
+  .exp-card-desc {
+    font-size: 0.82rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.6;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+  }
+  .exp-card:hover .exp-card-desc { max-height: 100px; }
+  .exp-card-arrow {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    width: 2rem;
+    height: 2rem;
+    border: 1px solid rgba(255,255,255,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 1rem;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .exp-card:hover .exp-card-arrow { background: var(--gold); border-color: var(--gold); }
+
+  /* DESTINATIONS MARQUEE */
+  .destinations {
+    padding: 7rem 5rem;
+    background: var(--green-deep);
+    overflow: hidden;
+  }
+  .destinations .section-eyebrow { color: var(--gold-light); }
+  .destinations .section-eyebrow::before { background: var(--gold-light); }
+  .destinations .section-title { color: #fff; }
+  .destinations .section-desc { color: rgba(255,255,255,0.55); max-width: 420px; }
+  .dest-row {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+    animation: scrollDest 35s linear infinite;
+    width: max-content;
+  }
+  .dest-row:hover { animation-play-state: paused; }
+  @keyframes scrollDest {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+  .dest-card {
+    flex: 0 0 280px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    background: var(--green-mid);
+  }
+  .dest-card img {
+    width: 100%;
+    height: 360px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+    filter: brightness(0.8);
+  }
+  .dest-card:hover img { transform: scale(1.08); filter: brightness(0.65); }
+  .dest-card-info {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 1.5rem;
+    background: linear-gradient(to top, rgba(14,31,24,0.95) 0%, transparent 100%);
+  }
+  .dest-card-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.45rem;
+    font-weight: 400;
+    color: #fff;
+  }
+  .dest-card-region {
+    font-size: 0.72rem;
+    font-weight: 400;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-light);
+    margin-top: 0.2rem;
+  }
+
+  /* CULTURE */
+  .culture {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 560px;
+  }
+  .culture-img { position: relative; overflow: hidden; }
+  .culture-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.85);
+    display: block;
+    transition: transform 0.8s ease;
+  }
+  .culture-img:hover img { transform: scale(1.04); }
+  .culture-content {
+    background: var(--gold);
+    padding: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .culture-content .section-eyebrow { color: rgba(255,255,255,0.7); }
+  .culture-content .section-eyebrow::before { background: rgba(255,255,255,0.7); }
+  .culture-content .section-title { color: #fff; }
+  .culture-content .section-desc { color: rgba(255,255,255,0.8); max-width: 100%; }
+  .culture-list {
+    margin-top: 2rem; list-style: none;
+    display: flex; flex-direction: column; gap: 0.75rem;
+  }
+  .culture-list li {
+    display: flex; align-items: center; gap: 0.75rem;
+    font-size: 0.9rem; color: rgba(255,255,255,0.85);
+  }
+  .culture-list li::before {
+    content: '';
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.6);
+    flex-shrink: 0;
+  }
+
+  /* TRAVEL ESSENTIALS */
+  .essentials { padding: 7rem 5rem; background: #F2EDE4; }
+  .essentials-header { text-align: center; margin-bottom: 4rem; }
+  .essentials-header .section-desc { margin: 0 auto; text-align: center; }
+  .essentials-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .ess-card {
+    background: #fff;
+    padding: 2rem 1.75rem;
+    border-top: 3px solid var(--green-mid);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .ess-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(14,31,24,0.1); }
+  .ess-icon { width: 3rem; height: 3rem; margin-bottom: 1.25rem; }
+  .ess-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; font-weight: 600;
+    color: var(--green-deep); margin-bottom: 0.75rem;
+  }
+  .ess-card p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+
+  /* SEASONS */
+  .seasons { display: grid; grid-template-columns: repeat(4, 1fr); height: 400px; }
+  .season-panel { position: relative; overflow: hidden; cursor: pointer; }
+  .season-panel img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: brightness(0.55);
+    transition: transform 0.5s ease, filter 0.5s ease;
+    display: block;
+  }
+  .season-panel:hover img { transform: scale(1.08); filter: brightness(0.4); }
+  .season-label {
+    position: absolute;
+    bottom: 2rem; left: 1.5rem; right: 1.5rem;
+  }
+  .season-month {
+    font-size: 0.68rem; font-weight: 500;
+    letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--gold-light); margin-bottom: 0.3rem;
+  }
+  .season-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: #fff; line-height: 1.2;
+  }
+  .season-desc {
+    font-size: 0.8rem; color: rgba(255,255,255,0.7);
+    margin-top: 0.5rem; max-height: 0;
+    overflow: hidden; transition: max-height 0.4s ease;
+  }
+  .season-panel:hover .season-desc { max-height: 80px; }
+
+  /* NEWSLETTER */
+  .newsletter { padding: 6rem 5rem; background: var(--dark); text-align: center; }
+  .newsletter h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem; font-weight: 300;
+    color: #fff; margin-bottom: 1rem;
+  }
+  .newsletter h2 em { font-style: italic; color: var(--gold-light); }
+  .newsletter p { font-size: 0.95rem; color: rgba(255,255,255,0.55); font-weight: 300; margin-bottom: 2.5rem; }
+  .newsletter-form { display: flex; gap: 0; max-width: 520px; margin: 0 auto; }
+  .newsletter-form input {
+    flex: 1; padding: 0.9rem 1.5rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
+    color: #fff; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 300; outline: none;
+    transition: border-color 0.2s;
+  }
+  .newsletter-form input::placeholder { color: rgba(255,255,255,0.35); }
+  .newsletter-form input:focus { border-color: var(--gold); }
+  .newsletter-form button {
+    background: var(--gold); color: #fff; border: none;
+    padding: 0.9rem 2rem; font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase;
+    cursor: pointer; transition: background 0.2s; white-space: nowrap;
+  }
+  .newsletter-form button:hover { background: var(--gold-light); color: var(--dark); }
+
+  /* FOOTER */
+  footer { background: var(--green-deep); padding: 4rem 5rem 2.5rem; color: rgba(255,255,255,0.6); }
+  .footer-top {
+    display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 3rem;
+  }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: #fff; margin-bottom: 0.75rem; }
+  .footer-brand span { color: var(--gold-light); }
+  .footer-tagline { font-size: 0.82rem; line-height: 1.75; max-width: 220px; margin-bottom: 1.5rem; }
+  .social-links { display: flex; gap: 0.75rem; }
+  .social-link {
+    width: 2rem; height: 2rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.6); font-size: 0.8rem;
+    text-decoration: none; transition: border-color 0.2s, color 0.2s;
+  }
+  .social-link:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .footer-col h4 { font-size: 0.72rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 1.25rem; }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 0.65rem; }
+  .footer-col ul li a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.88rem; font-weight: 300; transition: color 0.2s; cursor: pointer; }
+  .footer-col ul li a:hover { color: var(--gold-light); }
+  .footer-bottom { border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; display: flex; justify-content: space-between; align-items: center; font-size: 0.8rem; }
+
+  /* INNER PAGE HERO */
+  .page-hero {
+    position: relative;
+    height: 55vh;
+    min-height: 420px;
+    display: flex;
+    align-items: flex-end;
+    padding: 4rem 5rem;
+    overflow: hidden;
+  }
+  .page-hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+  }
+  .page-hero-bg img {
+    width: 100%; height: 100%;
+    object-fit: cover; filter: brightness(0.45);
+  }
+  .page-hero-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,20,14,0.8) 0%, transparent 60%);
+    z-index: 1;
+  }
+  .page-hero-content {
+    position: relative; z-index: 2;
+    animation: heroIn 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+  .page-hero-content .hero-eyebrow { margin-bottom: 0.75rem; }
+  .page-hero-content h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.8rem, 5vw, 4.5rem);
+    font-weight: 300; color: #fff; line-height: 1.05;
+  }
+  .page-hero-content h1 em { font-style: italic; color: var(--gold-light); }
+  .page-hero-content p {
+    margin-top: 1rem;
+    font-size: 1rem; font-weight: 300;
+    color: rgba(255,255,255,0.75); max-width: 560px; line-height: 1.7;
+  }
+
+  /* EXPERIENCES PAGE */
+  .exp-page-grid {
+    padding: 5rem;
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+  .exp-full-card {
+    background: #fff;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .exp-full-card:hover { transform: translateY(-6px); box-shadow: 0 20px 60px rgba(14,31,24,0.12); }
+  .exp-full-card img { width: 100%; height: 240px; object-fit: cover; display: block; transition: transform 0.5s; }
+  .exp-full-card:hover img { transform: scale(1.04); }
+  .exp-full-info { padding: 1.75rem; }
+  .exp-full-tag {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--green-mid); margin-bottom: 0.5rem;
+  }
+  .exp-full-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem; font-weight: 400;
+    color: var(--green-deep); margin-bottom: 0.75rem;
+  }
+  .exp-full-desc { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.7; }
+
+  /* DESTINATIONS PAGE */
+  .dest-page-intro {
+    padding: 5rem;
+    background: var(--cream);
+  }
+  .dest-page-grid {
+    padding: 0 5rem 5rem;
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+  .dest-full-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    height: 420px;
+  }
+  .dest-full-card img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease, filter 0.4s;
+    filter: brightness(0.7);
+  }
+  .dest-full-card:hover img { transform: scale(1.06); filter: brightness(0.55); }
+  .dest-full-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2.5rem 2rem;
+    background: linear-gradient(to top, rgba(14,31,24,0.9) 0%, transparent 100%);
+  }
+  .dest-full-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 400; color: #fff;
+  }
+  .dest-full-region {
+    font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--gold-light); margin-top: 0.3rem;
+  }
+  .dest-full-desc {
+    font-size: 0.85rem; color: rgba(255,255,255,0.75);
+    line-height: 1.6; margin-top: 0.5rem;
+    max-height: 0; overflow: hidden; transition: max-height 0.4s;
+  }
+  .dest-full-card:hover .dest-full-desc { max-height: 80px; }
+
+  /* CULTURE PAGE */
+  .culture-page { background: var(--cream); }
+  .culture-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 480px;
+  }
+  .culture-section.reverse { direction: rtl; }
+  .culture-section.reverse > * { direction: ltr; }
+  .culture-section-img { overflow: hidden; }
+  .culture-section-img img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.9); }
+  .culture-section-text {
+    padding: 4rem;
+    display: flex; flex-direction: column; justify-content: center;
+    background: #fff;
+  }
+  .culture-section.alt .culture-section-text { background: var(--green-deep); }
+  .culture-section.alt .section-title { color: #fff; }
+  .culture-section.alt .section-desc { color: rgba(255,255,255,0.7); }
+  .culture-section.alt .section-eyebrow { color: var(--gold-light); }
+  .culture-section.alt .section-eyebrow::before { background: var(--gold-light); }
+  .culture-fact-list { list-style: none; margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.6rem; }
+  .culture-fact-list li { font-size: 0.9rem; color: var(--text-muted); display: flex; align-items: center; gap: 0.6rem; }
+  .culture-section.alt .culture-fact-list li { color: rgba(255,255,255,0.7); }
+  .culture-fact-list li::before { content: '✦'; color: var(--gold); font-size: 0.6rem; }
+
+  /* PLAN YOUR TRIP PAGE */
+  .plan-page { background: var(--cream); }
+  .plan-intro { padding: 5rem; }
+  .plan-cards {
+    padding: 0 5rem 5rem;
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  }
+  .plan-card {
+    background: #fff; padding: 2.5rem 2rem;
+    border-bottom: 3px solid var(--gold);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .plan-card:hover { transform: translateY(-6px); box-shadow: 0 20px 48px rgba(14,31,24,0.1); }
+  .plan-icon { font-size: 2rem; margin-bottom: 1rem; }
+  .plan-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem; font-weight: 600;
+    color: var(--green-deep); margin-bottom: 0.75rem;
+  }
+  .plan-card p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+  .plan-card ul { margin-top: 0.75rem; padding-left: 1rem; }
+  .plan-card ul li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+  .itinerary-section {
+    background: var(--green-deep);
+    padding: 5rem;
+  }
+  .itinerary-section .section-title { color: #fff; }
+  .itinerary-section .section-eyebrow { color: var(--gold-light); }
+  .itinerary-section .section-eyebrow::before { background: var(--gold-light); }
+  .itinerary-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .itin-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 1.75rem;
+    transition: background 0.25s;
+  }
+  .itin-card:hover { background: rgba(255,255,255,0.1); }
+  .itin-day {
+    font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem;
+  }
+  .itin-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem; color: #fff; margin-bottom: 0.75rem;
+  }
+  .itin-desc { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* BEST TIME PAGE */
+  .besttime-page { background: var(--cream); }
+  .seasons-full {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+  }
+  .season-full-panel { position: relative; overflow: hidden; height: 480px; cursor: pointer; }
+  .season-full-panel img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.55); transition: transform 0.6s, filter 0.4s; }
+  .season-full-panel:hover img { transform: scale(1.05); filter: brightness(0.4); }
+  .season-full-info {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    padding: 2.5rem;
+    background: linear-gradient(to top, rgba(14,31,24,0.9) 0%, transparent 80%);
+  }
+  .season-full-months {
+    font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em;
+    text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.3rem;
+  }
+  .season-full-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem; font-weight: 300; color: #fff;
+  }
+  .season-full-desc {
+    font-size: 0.88rem; color: rgba(255,255,255,0.75);
+    line-height: 1.6; margin-top: 0.75rem; max-width: 380px;
+  }
+  .climate-strip {
+    padding: 5rem;
+    background: #F2EDE4;
+  }
+  .climate-table { width: 100%; border-collapse: collapse; margin-top: 2.5rem; }
+  .climate-table th {
+    background: var(--green-deep); color: var(--gold-light);
+    padding: 1rem; font-size: 0.75rem; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase; text-align: center;
+  }
+  .climate-table td {
+    padding: 0.9rem 1rem; font-size: 0.88rem; color: var(--text);
+    border-bottom: 1px solid rgba(0,0,0,0.06); text-align: center;
+  }
+  .climate-table tr:nth-child(even) td { background: rgba(45,106,79,0.04); }
+  .good { color: var(--green-mid); font-weight: 500; }
+  .great { color: var(--gold); font-weight: 500; }
+  .wet { color: #888; }
+
+  /* Scroll indicator */
+  .scroll-indicator {
+    position: absolute; bottom: 7rem; right: 4rem;
+    display: flex; flex-direction: column;
+    align-items: center; gap: 0.5rem; z-index: 10;
+  }
+  .scroll-indicator span { font-size: 0.65rem; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.45); writing-mode: vertical-rl; }
+  .scroll-line { width: 1px; height: 60px; background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  /* HAMBURGER BUTTON */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 200;
+  }
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #fff;
+    transition: transform 0.3s, opacity 0.3s;
+    border-radius: 2px;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* MOBILE MENU OVERLAY */
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10,20,14,0.98);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5rem;
+    backdrop-filter: blur(16px);
+  }
+  .mobile-menu.open { display: flex; animation: fadeIn 0.25s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 300;
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.2s;
+    letter-spacing: 0.04em;
+  }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .mobile-menu .mobile-cta {
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 0.9rem 2.5rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    margin-top: 1rem;
+    transition: background 0.2s;
+  }
+  .mobile-menu .mobile-cta:hover { background: var(--gold-light); color: var(--dark); }
+
+  /* ===================== */
+  /* RESPONSIVE BREAKPOINTS */
+  /* ===================== */
+
+  @media (max-width: 1024px) {
+    nav { padding: 1.1rem 2rem; }
+    .hero-content { padding: 0 3rem; }
+    .hero-stats { padding: 1.5rem 3rem; gap: 2rem; }
+    .experiences { padding: 5rem 3rem; }
+    .destinations { padding: 5rem 3rem; }
+    .essentials { padding: 5rem 3rem; }
+    .essentials-grid { grid-template-columns: repeat(2, 1fr); }
+    .home-gallery { padding: 4rem 3rem; }
+    .exp-page-grid { padding: 3rem; grid-template-columns: repeat(2, 1fr); }
+    .dest-page-grid { padding: 0 3rem 3rem; }
+    .plan-cards { padding: 0 3rem 3rem; grid-template-columns: repeat(2, 1fr); }
+    .itinerary-section { padding: 4rem 3rem; }
+    .itinerary-grid { grid-template-columns: repeat(2, 1fr); }
+    .plan-intro { padding: 4rem 3rem; }
+    .dest-page-intro { padding: 4rem 3rem; }
+    .climate-strip { padding: 4rem 3rem; }
+    footer { padding: 3rem 3rem 2rem; }
+    .culture-content { padding: 3.5rem; }
+  }
+
+  @media (max-width: 768px) {
+    /* NAV — hide links, show hamburger */
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    nav { padding: 1rem 1.25rem; background: rgba(10,20,14,0.9) !important; backdrop-filter: blur(10px); }
+
+    /* HERO */
+    .hero { min-height: 100svh; align-items: flex-end; padding-bottom: 5rem; }
+    .hero-content { padding: 0 1.5rem 2rem; max-width: 100%; }
+    .hero h1 { font-size: 2.8rem; }
+    .hero-desc { font-size: 0.95rem; max-width: 100%; }
+    .hero-btns { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 0.9rem 1.5rem; }
+    .hero-photo-strip { display: none; }
+    .hero-stats {
+      padding: 1rem 1.25rem;
+      gap: 0;
+      flex-wrap: wrap;
+      justify-content: space-between;
+    }
+    .stat-item { flex: 0 0 45%; text-align: left; padding: 0.5rem 0; }
+    .stat-divider { display: none; }
+    .stat-num { font-size: 1.5rem; }
+    .stat-label { font-size: 0.65rem; }
+    .scroll-indicator { display: none; }
+
+    /* HOME GALLERY */
+    .home-gallery { padding: 3rem 1.25rem; }
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 200px 200px 200px;
+    }
+    .gallery-grid .g-item:first-child {
+      grid-column: span 2;
+      grid-row: span 1;
+    }
+
+    /* EXPERIENCES */
+    .experiences { padding: 3.5rem 1.25rem; }
+    .experiences-header { flex-direction: column; gap: 1rem; align-items: flex-start; }
+    .experiences-grid {
+      grid-template-columns: 1fr;
+      grid-template-rows: auto;
+    }
+    .exp-card:first-child { grid-row: auto; }
+    .exp-card-img, .exp-card:first-child .exp-card-img { min-height: 240px; }
+    .exp-card:first-child .exp-card-title { font-size: 1.7rem; }
+
+    /* DESTINATIONS MARQUEE */
+    .destinations { padding: 3.5rem 0 3.5rem 1.25rem; }
+    .destinations > div { padding-right: 1.25rem; }
+    .dest-card { flex: 0 0 220px; }
+    .dest-card img { height: 280px; }
+
+    /* CULTURE STRIP */
+    .culture { grid-template-columns: 1fr; }
+    .culture-img { height: 280px; }
+    .culture-content { padding: 2.5rem 1.5rem; }
+
+    /* ESSENTIALS */
+    .essentials { padding: 3.5rem 1.25rem; }
+    .essentials-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .ess-card { padding: 1.5rem 1.25rem; }
+
+    /* SEASONS */
+    .seasons {
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      height: auto;
+    }
+    .season-panel { height: 220px; }
+    .season-desc { max-height: 60px !important; }
+
+    /* NEWSLETTER */
+    .newsletter { padding: 4rem 1.5rem; }
+    .newsletter h2 { font-size: 2rem; }
+    .newsletter-form { flex-direction: column; }
+    .newsletter-form input { border-right: 1px solid rgba(255,255,255,0.15); border-bottom: none; }
+    .newsletter-form button { width: 100%; }
+
+    /* FOOTER */
+    footer { padding: 2.5rem 1.25rem 1.5rem; }
+    .footer-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; font-size: 0.75rem; }
+
+    /* PAGE HERO */
+    .page-hero { padding: 5rem 1.5rem 2.5rem; min-height: 340px; height: auto; }
+    .page-hero-content h1 { font-size: 2.2rem; }
+    .page-hero-content p { font-size: 0.9rem; }
+
+    /* EXPERIENCES PAGE */
+    .exp-page-grid { padding: 2.5rem 1.25rem; grid-template-columns: 1fr; gap: 1.25rem; }
+    .exp-full-card img { height: 200px; }
+
+    /* DESTINATIONS PAGE */
+    .dest-page-intro { padding: 2.5rem 1.25rem; }
+    .dest-page-grid { padding: 0 1.25rem 2.5rem; grid-template-columns: 1fr; }
+    .dest-full-card { height: 320px; }
+
+    /* CULTURE PAGE */
+    .culture-section, .culture-section.reverse {
+      grid-template-columns: 1fr;
+      direction: ltr;
+    }
+    .culture-section-img { height: 250px; }
+    .culture-section-text { padding: 2.5rem 1.5rem; }
+
+    /* PLAN PAGE */
+    .plan-intro { padding: 2.5rem 1.25rem; }
+    .plan-cards { padding: 0 1.25rem 2.5rem; grid-template-columns: 1fr; gap: 1rem; }
+    .plan-card { padding: 1.75rem 1.25rem; }
+    .itinerary-section { padding: 3rem 1.25rem; }
+    .itinerary-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+
+    /* BEST TIME PAGE */
+    .seasons-full { grid-template-columns: 1fr; }
+    .season-full-panel { height: 300px; }
+    .climate-strip { padding: 3rem 1.25rem; overflow-x: auto; }
+    .climate-table { font-size: 0.78rem; min-width: 480px; }
+    .climate-table th, .climate-table td { padding: 0.65rem 0.5rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 2.2rem; }
+    .section-title { font-size: 1.8rem; }
+    .gallery-grid { grid-template-columns: 1fr; grid-template-rows: auto; }
+    .gallery-grid .g-item { height: 220px; }
+    .gallery-grid .g-item:first-child { grid-column: auto; grid-row: auto; }
+    .essentials-grid { grid-template-columns: 1fr; }
+    .seasons { grid-template-columns: 1fr; }
+    .season-panel { height: 200px; }
+    .footer-top { grid-template-columns: 1fr; }
+    .hero-stats { justify-content: flex-start; gap: 1rem; }
+    .stat-item { flex: 0 0 auto; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="main-nav">
+  <a class="nav-logo" onclick="goPage('home'); return false;">🌿 Sri Lanka <span>Tourism</span></a>
+  <ul class="nav-links">
+    <li><a onclick="goPage('experiences')" id="nav-experiences">Experiences</a></li>
+    <li><a onclick="goPage('destinations')" id="nav-destinations">Destinations</a></li>
+    <li><a onclick="goPage('culture')" id="nav-culture">Culture</a></li>
+    <li><a onclick="goPage('plan')" id="nav-plan">Plan Your Trip</a></li>
+    <li><a onclick="goPage('besttime')" id="nav-besttime">Best Time</a></li>
+  </ul>
+  <button class="nav-cta" onclick="goPage('plan')">Plan My Journey</button>
+  <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobile-menu">
+  <a onclick="mobileGoPage('home')">Home</a>
+  <a onclick="mobileGoPage('experiences')">Experiences</a>
+  <a onclick="mobileGoPage('destinations')">Destinations</a>
+  <a onclick="mobileGoPage('culture')">Culture</a>
+  <a onclick="mobileGoPage('plan')">Plan Your Trip</a>
+  <a onclick="mobileGoPage('besttime')">Best Time</a>
+  <button class="mobile-cta" onclick="mobileGoPage('plan')">Plan My Journey</button>
+</div>
+
+<!-- ===== HOME PAGE ===== -->
+<div id="page-home" class="page active">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1586500036706-41963de24d8b?w=1800&q=80" alt="Sri Lanka landscape" loading="eager">
+    </div>
+
+    <div class="hero-photo-strip">
+      <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&q=80" alt="Sigiriya">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Sri Lanka beach">
+      <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=600&q=80" alt="Tea hills">
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-eyebrow">The Wonder of Asia</div>
+      <h1>Discover the <em>Soul of Sri Lanka</em></h1>
+      <p class="hero-desc">Ancient temples, emerald tea hills, wild elephants, pristine beaches — one island, a thousand lifetimes of wonder.</p>
+      <div class="hero-btns">
+        <a class="btn-primary" onclick="goPage('experiences')">Explore Now</a>
+        <a class="btn-ghost" onclick="goPage('plan')">Plan Your Trip</a>
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-num">8</div>
+        <div class="stat-label">UNESCO World Heritage Sites</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">1,340km</div>
+        <div class="stat-label">Coastline</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">26</div>
+        <div class="stat-label">National Parks</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">3,000</div>
+        <div class="stat-label">Years of History</div>
+      </div>
+      <div class="stat-divider"></div>
+      <div class="stat-item">
+        <div class="stat-num">Year-Round</div>
+        <div class="stat-label">Sunshine Destination</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PHOTO GALLERY -->
+  <section class="home-gallery">
+    <div class="home-gallery-header">
+      <div class="section-eyebrow" style="justify-content:center;">Sri Lankan Beauty</div>
+      <h2 class="section-title" style="text-align:center;">A land of <em>breathtaking</em> diversity</h2>
+      <p class="section-desc" style="margin:0 auto; text-align:center;">From misty highlands to golden coasts, ancient ruins to dense jungle — every frame is a postcard.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=1200&q=80" alt="Sigiriya Rock Fortress">
+        <div class="g-label">Sigiriya</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&q=80" alt="Beach">
+        <div class="g-label">Southern Coast</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=600&q=80" alt="Tea Plantation">
+        <div class="g-label">Hill Country</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=600&q=80" alt="Elephant">
+        <div class="g-label">Yala Wildlife</div>
+      </div>
+      <div class="g-item">
+        <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=600&q=80" alt="Galle Fort">
+        <div class="g-label">Galle Fort</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EXPERIENCES PREVIEW -->
+  <section class="experiences" id="experiences">
+    <div class="experiences-header">
+      <div>
+        <div class="section-eyebrow">What awaits you</div>
+        <h2 class="section-title">Experiences that <em>stir the soul</em></h2>
+      </div>
+      <div class="section-desc">From ancient ruins to pristine reef, every corner of this teardrop island holds something extraordinary.</div>
+    </div>
+    <div class="experiences-grid">
+      <div class="exp-card" onclick="goPage('experiences')">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=900&q=80" alt="Sigiriya">
+        <div class="exp-card-overlay">
+          <div class="exp-card-tag">Signature Experience</div>
+          <div class="exp-card-title">Ancient Rock Fortresses & Frescoes</div>
+          <div class="exp-card-desc">Climb Sigiriya, the 5th-century rock fortress soaring 200m above the jungle plains, adorned with celestial frescoes.</div>
+        </div>
+        <div class="exp-card-arrow">↗</div>
+      </div>
+      <div class="exp-card" onclick="goPage('experiences')">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Beach">
+        <div class="exp-card-overlay">
+          <div class="exp-card-tag">Coastal</div>
+          <div class="exp-card-title">Sun-Kissed Beaches</div>
+          <div class="exp-card-desc">350+ beaches from surf-swept Arugam Bay to the calm turquoise of Mirissa.</div>
+        </div>
+        <div class="exp-card-arrow">↗</div>
+      </div>
+      <div class="exp-card" onclick="goPage('experiences')">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=700&q=80" alt="Wildlife">
+        <div class="exp-card-overlay">
+          <div class="exp-card-tag">Wildlife</div>
+          <div class="exp-card-title">Safari & Wild Elephants</div>
+          <div class="exp-card-desc">Yala National Park hosts the world's highest density of wild leopards alongside herds of elephants.</div>
+        </div>
+        <div class="exp-card-arrow">↗</div>
+      </div>
+      <div class="exp-card" onclick="goPage('experiences')">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=700&q=80" alt="Tea">
+        <div class="exp-card-overlay">
+          <div class="exp-card-tag">Hill Country</div>
+          <div class="exp-card-title">Tea Trails & Misty Highlands</div>
+          <div class="exp-card-desc">Wander through endless emerald tea plantations in Nuwara Eliya and Ella.</div>
+        </div>
+        <div class="exp-card-arrow">↗</div>
+      </div>
+      <div class="exp-card" onclick="goPage('experiences')">
+        <img class="exp-card-img" src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=700&q=80" alt="Temple">
+        <div class="exp-card-overlay">
+          <div class="exp-card-tag">Heritage</div>
+          <div class="exp-card-title">Sacred Temples & Ruins</div>
+          <div class="exp-card-desc">Ancient Anuradhapura and Polonnaruwa — sacred cities alive with 2,000 years of devotion.</div>
+        </div>
+        <div class="exp-card-arrow">↗</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTINATIONS MARQUEE -->
+  <section class="destinations">
+    <div>
+      <div class="section-eyebrow">Top Destinations</div>
+      <h2 class="section-title">Places that <em>linger</em> in memory</h2>
+      <p class="section-desc">From misty mountains to golden coasts, each corner of Sri Lanka tells a different story.</p>
+    </div>
+    <div class="dest-row">
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=400&q=75" alt="Sigiriya">
+        <div class="dest-card-info"><div class="dest-card-name">Sigiriya</div><div class="dest-card-region">North Central</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=75" alt="Mirissa">
+        <div class="dest-card-info"><div class="dest-card-name">Mirissa</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=400&q=75" alt="Ella">
+        <div class="dest-card-info"><div class="dest-card-name">Ella</div><div class="dest-card-region">Uva Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1592278877031-e1c57e26ca55?w=400&q=75" alt="Kandy">
+        <div class="dest-card-info"><div class="dest-card-name">Kandy</div><div class="dest-card-region">Central Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=400&q=75" alt="Yala">
+        <div class="dest-card-info"><div class="dest-card-name">Yala</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=400&q=75" alt="Trincomalee">
+        <div class="dest-card-info"><div class="dest-card-name">Trincomalee</div><div class="dest-card-region">Eastern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=75" alt="Galle">
+        <div class="dest-card-info"><div class="dest-card-name">Galle</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=400&q=75" alt="Sigiriya">
+        <div class="dest-card-info"><div class="dest-card-name">Sigiriya</div><div class="dest-card-region">North Central</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=400&q=75" alt="Mirissa">
+        <div class="dest-card-info"><div class="dest-card-name">Mirissa</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=400&q=75" alt="Ella">
+        <div class="dest-card-info"><div class="dest-card-name">Ella</div><div class="dest-card-region">Uva Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1592278877031-e1c57e26ca55?w=400&q=75" alt="Kandy">
+        <div class="dest-card-info"><div class="dest-card-name">Kandy</div><div class="dest-card-region">Central Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=400&q=75" alt="Yala">
+        <div class="dest-card-info"><div class="dest-card-name">Yala</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=400&q=75" alt="Trincomalee">
+        <div class="dest-card-info"><div class="dest-card-name">Trincomalee</div><div class="dest-card-region">Eastern Province</div></div>
+      </div>
+      <div class="dest-card" onclick="goPage('destinations')">
+        <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=75" alt="Galle">
+        <div class="dest-card-info"><div class="dest-card-name">Galle</div><div class="dest-card-region">Southern Province</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CULTURE -->
+  <section class="culture">
+    <div class="culture-img">
+      <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=900&q=80" alt="Sri Lanka Culture">
+    </div>
+    <div class="culture-content">
+      <div class="section-eyebrow">Living Traditions</div>
+      <h2 class="section-title">A culture <em>alive</em> with ritual</h2>
+      <p class="section-desc">Sri Lanka's cultural tapestry is woven from 2,500 years of Buddhism, Hindu ceremony, colonial legacy, and ancient Vedda heritage.</p>
+      <ul class="culture-list">
+        <li>Esala Perahera — the grandest procession in Asia</li>
+        <li>Temple of the Tooth Relic, Kandy</li>
+        <li>Authentic Ayurvedic healing traditions</li>
+        <li>Vibrant Sinhala and Tamil New Year festivities</li>
+        <li>Ancient mask-carving and devil dancing rituals</li>
+      </ul>
+      <a class="btn-ghost" style="margin-top:2rem;border-color:rgba(255,255,255,0.5);color:#fff;display:inline-block;width:fit-content;" onclick="goPage('culture')">Explore Culture</a>
+    </div>
+  </section>
+
+  <!-- PLAN ESSENTIALS -->
+  <section class="essentials">
+    <div class="essentials-header">
+      <div class="section-eyebrow" style="justify-content:center;">Before You Go</div>
+      <h2 class="section-title">Travel <em>Essentials</em></h2>
+      <p class="section-desc">Everything you need to know for a seamless journey to the teardrop of the Indian Ocean.</p>
+    </div>
+    <div class="essentials-grid">
+      <div class="ess-card">
+        <svg class="ess-icon" viewBox="0 0 48 48" fill="none"><rect x="8" y="16" width="32" height="22" rx="2" stroke="#2D6A4F" stroke-width="2"/><path d="M16 16V12a8 8 0 0116 0v4" stroke="#2D6A4F" stroke-width="2"/><circle cx="24" cy="27" r="3" fill="#C9963A"/></svg>
+        <h3>Visa & Entry</h3>
+        <p>Most nationalities can obtain an Electronic Travel Authorisation (ETA) online in minutes. Valid for 30 days, extendable to 6 months.</p>
+      </div>
+      <div class="ess-card">
+        <svg class="ess-icon" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="16" stroke="#2D6A4F" stroke-width="2"/><path d="M24 8v16l8 8" stroke="#C9963A" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Best Time to Visit</h3>
+        <p>The west and south coasts shine from December to March. The east coast glows from May to September. Sri Lanka truly is a year-round destination.</p>
+      </div>
+      <div class="ess-card">
+        <svg class="ess-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4L4 24l20 20 20-20L24 4z" stroke="#2D6A4F" stroke-width="2"/><circle cx="24" cy="24" r="5" fill="#C9963A"/></svg>
+        <h3>Getting Around</h3>
+        <p>Sri Lanka's scenic railway is legendary — especially the hill country route from Kandy to Ella. Tuk-tuks, buses, and private drivers complete the picture.</p>
+      </div>
+      <div class="ess-card">
+        <svg class="ess-icon" viewBox="0 0 48 48" fill="none"><path d="M24 4C16 4 10 10 10 18c0 10 14 26 14 26s14-16 14-26c0-8-6-14-14-14z" stroke="#2D6A4F" stroke-width="2"/><circle cx="24" cy="18" r="4" fill="#C9963A"/></svg>
+        <h3>Currency & Costs</h3>
+        <p>Sri Lankan Rupee (LKR). Sri Lanka offers excellent value — from budget guesthouses to world-class boutique jungle lodges.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEASONS BANNER -->
+  <section class="seasons">
+    <div class="season-panel" onclick="goPage('besttime')">
+      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=600&q=75" alt="West Coast">
+      <div class="season-label">
+        <div class="season-month">Dec — Mar</div>
+        <div class="season-name">West Coast Sunshine</div>
+        <div class="season-desc">Colombo, Galle, Mirissa and Bentota bask in dry, sunny days. Perfect for beach holidays and whale watching.</div>
+      </div>
+    </div>
+    <div class="season-panel" onclick="goPage('besttime')">
+      <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=600&q=75" alt="Hill Country">
+      <div class="season-label">
+        <div class="season-month">Year-Round</div>
+        <div class="season-name">Hill Country Mists</div>
+        <div class="season-desc">Ella, Nuwara Eliya and Horton Plains remain lush and cool throughout the year — a refuge from coastal heat.</div>
+      </div>
+    </div>
+    <div class="season-panel" onclick="goPage('besttime')">
+      <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=600&q=75" alt="East Coast">
+      <div class="season-label">
+        <div class="season-month">May — Sep</div>
+        <div class="season-name">East Coast Escape</div>
+        <div class="season-desc">Trincomalee and Arugam Bay awaken with calm azure waters and world-class surf.</div>
+      </div>
+    </div>
+    <div class="season-panel" onclick="goPage('besttime')">
+      <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=600&q=75" alt="Perahera">
+      <div class="season-label">
+        <div class="season-month">Jul — Aug</div>
+        <div class="season-name">Festival Season</div>
+        <div class="season-desc">Witness the grandeur of the Kandy Esala Perahera — 10 nights of torchlit processions and ceremony.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter">
+    <h2>Ready to discover <em>wonder</em>?</h2>
+    <p>Get travel inspiration, seasonal guides, and hidden gems delivered to your inbox.</p>
+    <div class="newsletter-form">
+      <input type="email" placeholder="Your email address">
+      <button onclick="subscribeNewsletter(this)">Subscribe</button>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">🌿 Sri Lanka <span>Tourism</span></div>
+        <p class="footer-tagline">The official source for travel inspiration, planning resources, and visitor information for Sri Lanka.</p>
+        <div class="social-links">
+          <a href="#" class="social-link">f</a>
+          <a href="#" class="social-link">in</a>
+          <a href="#" class="social-link">tw</a>
+          <a href="#" class="social-link">yt</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Explore</h4>
+        <ul>
+          <li><a onclick="goPage('destinations')">Destinations</a></li>
+          <li><a onclick="goPage('experiences')">Experiences</a></li>
+          <li><a onclick="goPage('experiences')">Wildlife & Nature</a></li>
+          <li><a onclick="goPage('culture')">Heritage Sites</a></li>
+          <li><a onclick="goPage('destinations')">Beaches</a></li>
+          <li><a onclick="goPage('destinations')">Hill Country</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Plan</h4>
+        <ul>
+          <li><a onclick="goPage('plan')">Visa & Entry</a></li>
+          <li><a onclick="goPage('plan')">Getting There</a></li>
+          <li><a onclick="goPage('plan')">Getting Around</a></li>
+          <li><a onclick="goPage('plan')">Accommodation</a></li>
+          <li><a onclick="goPage('plan')">Food & Cuisine</a></li>
+          <li><a onclick="goPage('plan')">Travel Tips</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Sri Lanka Tourism</h4>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Press & Media</a></li>
+          <li><a onclick="goPage('besttime')">Best Time to Visit</a></li>
+          <li><a href="#">Responsible Tourism</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span>Privacy Policy · Terms of Use · Sitemap</span>
+    </div>
+  </footer>
+
+</div><!-- /page-home -->
+
+<!-- ===== EXPERIENCES PAGE ===== -->
+<div id="page-experiences" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=1600&q=80" alt="Experiences">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">What Awaits You</div>
+      <h1>Experiences that <em>stir the soul</em></h1>
+      <p>From scaling ancient rock fortresses to swimming with blue whales — Sri Lanka delivers once-in-a-lifetime encounters at every turn.</p>
+    </div>
+  </div>
+
+  <div class="exp-page-grid">
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=700&q=80" alt="Sigiriya">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Heritage</div>
+        <div class="exp-full-title">Sigiriya Rock Fortress</div>
+        <p class="exp-full-desc">Climb the 5th-century rock fortress soaring 200m above the plains. UNESCO World Heritage Site adorned with ancient frescoes and royal gardens.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=700&q=80" alt="Beach">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Coastal</div>
+        <div class="exp-full-title">Sun-Kissed Beaches</div>
+        <p class="exp-full-desc">Over 350 beaches line Sri Lanka's coast. From the wild surf of Arugam Bay to the tranquil turquoise of Unawatuna — every mood has its shore.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=700&q=80" alt="Wildlife">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Wildlife</div>
+        <div class="exp-full-title">Safari & Wild Elephants</div>
+        <p class="exp-full-desc">Yala National Park holds the world's highest density of wild leopards. Spot herds of elephants, sloth bears, and crocodiles in their natural habitat.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=700&q=80" alt="Tea">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Hill Country</div>
+        <div class="exp-full-title">Tea Trails & Mist</div>
+        <p class="exp-full-desc">Wander through emerald tea estates in Nuwara Eliya and Ella. Ride the iconic Kandy–Ella train through some of Asia's most scenic mountain passes.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=700&q=80" alt="Culture">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Culture</div>
+        <div class="exp-full-title">Temples & Ceremonies</div>
+        <p class="exp-full-desc">Visit the sacred Temple of the Tooth Relic in Kandy. Witness Esala Perahera — 10 nights of torchlit elephants, drummers, and ancient ritual.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=700&q=80" alt="Diving">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Ocean</div>
+        <div class="exp-full-title">Whale Watching & Diving</div>
+        <p class="exp-full-desc">Mirissa offers some of the world's best blue whale sightings. Pigeon Island and Bar Reef rank among the finest dive sites in the Indian Ocean.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=700&q=80" alt="Galle">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">History</div>
+        <div class="exp-full-title">Galle Fort</div>
+        <p class="exp-full-desc">Walk the ramparts of Galle Fort — a Dutch colonial masterpiece. Explore cobblestone lanes filled with galleries, cafés, and living history.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=700&q=80" alt="Ella">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Adventure</div>
+        <div class="exp-full-title">Hiking & Nine Arches</div>
+        <p class="exp-full-desc">Trek to Little Adam's Peak, Ella Rock, or Horton Plains' World's End. The iconic Nine Arch Bridge framed by jungle is one of Sri Lanka's most photographed views.</p>
+      </div>
+    </div>
+    <div class="exp-full-card">
+      <img src="https://images.unsplash.com/photo-1592278877031-e1c57e26ca55?w=700&q=80" alt="Ayurveda">
+      <div class="exp-full-info">
+        <div class="exp-full-tag">Wellness</div>
+        <div class="exp-full-title">Ayurveda & Wellness</div>
+        <p class="exp-full-desc">Immerse in authentic Ayurvedic retreats — a 3,000-year healing tradition using herbal treatments, oils, and meditation in lush jungle settings.</p>
+      </div>
+    </div>
+  </div>
+
+  <section class="newsletter" style="margin-top:0;">
+    <h2>Ready to <em>experience</em> it all?</h2>
+    <p>Let us help you craft your perfect Sri Lanka journey.</p>
+    <div style="margin-top:1rem;"><a class="btn-primary" onclick="goPage('plan')">Plan Your Trip</a></div>
+  </section>
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== DESTINATIONS PAGE ===== -->
+<div id="page-destinations" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=1600&q=80" alt="Destinations">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">Top Destinations</div>
+      <h1>Places that <em>linger</em> in memory</h1>
+      <p>Eight provinces, hundreds of hidden corners, and seven UNESCO World Heritage Sites — discover where to go in Sri Lanka.</p>
+    </div>
+  </div>
+
+  <div class="dest-page-intro">
+    <div class="section-eyebrow">Explore by Region</div>
+    <h2 class="section-title">The island's <em>iconic</em> destinations</h2>
+    <p class="section-desc">Whether you chase ancient ruins, jungle wildlife, mountain trains, or golden beaches — Sri Lanka's destinations deliver in every season.</p>
+  </div>
+
+  <div class="dest-page-grid">
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=900&q=80" alt="Sigiriya">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Sigiriya</div>
+        <div class="dest-full-region">North Central Province</div>
+        <div class="dest-full-desc">The iconic Lion Rock fortress. A 5th-century citadel rising from the jungle with royal gardens, mirror walls, and celestial frescoes.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1592278877031-e1c57e26ca55?w=900&q=80" alt="Kandy">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Kandy</div>
+        <div class="dest-full-region">Central Province</div>
+        <div class="dest-full-desc">Sri Lanka's cultural capital. Home to the sacred Temple of the Tooth Relic, Peradeniya Botanical Gardens, and the magnificent Esala Perahera festival.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1542401886-65d6c61db217?w=900&q=80" alt="Ella">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Ella</div>
+        <div class="dest-full-region">Uva Province</div>
+        <div class="dest-full-desc">A cool mountain village surrounded by tea estates. Famous for the Nine Arch Bridge, Ella Rock trek, and the legendary Kandy–Ella train ride.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=900&q=80" alt="Galle">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Galle</div>
+        <div class="dest-full-region">Southern Province</div>
+        <div class="dest-full-desc">A UNESCO World Heritage fortified city with Dutch colonial architecture, boutique hotels, art galleries, and some of the island's finest restaurants.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80" alt="Mirissa">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Mirissa</div>
+        <div class="dest-full-region">Southern Province</div>
+        <div class="dest-full-desc">Crescent-shaped beach paradise and the island's top whale-watching spot. Blue whales and sperm whales are regularly sighted offshore from November to April.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1571406252241-db0280bd36cd?w=900&q=80" alt="Yala">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Yala National Park</div>
+        <div class="dest-full-region">Southern Province</div>
+        <div class="dest-full-desc">The world's highest density of wild leopards. Plus elephants, sloth bears, crocodiles, and over 200 bird species in a dramatic landscape of lagoons and scrubland.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=900&q=80" alt="Trincomalee">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Trincomalee</div>
+        <div class="dest-full-region">Eastern Province</div>
+        <div class="dest-full-desc">One of the world's finest natural harbours. Crystal clear bays, pristine Nilaveli and Uppuveli beaches, and diving on WWII shipwrecks. Prime May–September.</div>
+      </div>
+    </div>
+    <div class="dest-full-card">
+      <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=900&q=80" alt="Nuwara Eliya">
+      <div class="dest-full-info">
+        <div class="dest-full-name">Nuwara Eliya</div>
+        <div class="dest-full-region">Central Province</div>
+        <div class="dest-full-desc">The tea capital of Sri Lanka set at 1,900m elevation. Colonial bungalows, misty lake walks, and endless green terraced tea fields to explore on foot or by train.</div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== CULTURE PAGE ===== -->
+<div id="page-culture" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=1600&q=80" alt="Culture">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">Living Traditions</div>
+      <h1>A culture <em>alive</em> with ritual</h1>
+      <p>Two and a half millennia of Buddhism, Hinduism, colonial history, and ancient Vedda traditions make Sri Lanka one of Asia's most culturally rich destinations.</p>
+    </div>
+  </div>
+
+  <div class="culture-page">
+    <div class="culture-section">
+      <div class="culture-section-img">
+        <img src="https://images.unsplash.com/photo-1592278877031-e1c57e26ca55?w=900&q=80" alt="Temple of the Tooth">
+      </div>
+      <div class="culture-section-text">
+        <div class="section-eyebrow">Sacred Buddhism</div>
+        <h2 class="section-title">The <em>Temple of the Tooth</em></h2>
+        <p class="section-desc">The Sri Dalada Maligawa in Kandy houses Sri Lanka's most sacred relic — a tooth of the Buddha. It draws thousands of pilgrims daily and stands as the spiritual heart of the island.</p>
+        <ul class="culture-fact-list">
+          <li>Built in the 16th century by King Vimaladharmasuriya</li>
+          <li>Puja ceremonies held three times daily</li>
+          <li>UNESCO World Heritage Site since 1988</li>
+          <li>Centrepiece of the annual Esala Perahera</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="culture-section reverse alt">
+      <div class="culture-section-img">
+        <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=900&q=80" alt="Esala Perahera">
+      </div>
+      <div class="culture-section-text">
+        <div class="section-eyebrow">Grand Festivals</div>
+        <h2 class="section-title">Esala <em>Perahera</em></h2>
+        <p class="section-desc">Held each July or August, the Esala Perahera in Kandy is the grandest procession in all of Asia. For 10 consecutive nights, decorated elephants, fire dancers, whip crackers, and drummers parade through the ancient streets.</p>
+        <ul class="culture-fact-list">
+          <li>Over 100 adorned elephants in procession</li>
+          <li>Thousands of performers and dancers</li>
+          <li>10 nights of torchlit spectacle</li>
+          <li>One of Asia's oldest living festivals</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="culture-section">
+      <div class="culture-section-img">
+        <img src="https://images.unsplash.com/photo-1580674684081-7617fbf3d745?w=900&q=80" alt="Ancient Ruins">
+      </div>
+      <div class="culture-section-text">
+        <div class="section-eyebrow">Ancient Civilisations</div>
+        <h2 class="section-title">The <em>Sacred Triangle</em></h2>
+        <p class="section-desc">Anuradhapura, Polonnaruwa, and Sigiriya form Sri Lanka's Sacred Triangle — three ancient capitals with towering dagobas, carved moonstones, and colossal Buddha statues spanning 2,300 years of civilisation.</p>
+        <ul class="culture-fact-list">
+          <li>Anuradhapura — Sri Lanka's first great capital</li>
+          <li>Polonnaruwa — medieval capital with vast reservoirs</li>
+          <li>Sigiriya — the 5th-century cloud fortress</li>
+          <li>All three are UNESCO World Heritage Sites</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="culture-section reverse alt">
+      <div class="culture-section-img">
+        <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=900&q=80" alt="Traditions">
+      </div>
+      <div class="culture-section-text">
+        <div class="section-eyebrow">Everyday Traditions</div>
+        <h2 class="section-title">Food, <em>Art & Craft</em></h2>
+        <p class="section-desc">Sri Lankan culture lives in its food — rice and curry feasts served on banana leaves — and its crafts: hand-batik textiles, lacquerwork, and the ancient art of mask carving from the Ambalangoda coast.</p>
+        <ul class="culture-fact-list">
+          <li>Sinhala & Tamil New Year celebrations in April</li>
+          <li>Kandyan dance — an ancient classical performance art</li>
+          <li>Devil dancing and exorcism rituals (Tovil)</li>
+          <li>Ayurvedic traditions dating back 3,000 years</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== PLAN YOUR TRIP PAGE ===== -->
+<div id="page-plan" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=1600&q=80" alt="Plan Your Trip">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">Before You Go</div>
+      <h1>Plan your <em>perfect</em> journey</h1>
+      <p>Everything you need to travel Sri Lanka — from visas and getting there, to building your ideal itinerary.</p>
+    </div>
+  </div>
+
+  <div class="plan-page">
+    <div class="plan-intro">
+      <div class="section-eyebrow">Travel Essentials</div>
+      <h2 class="section-title">What you need <em>to know</em></h2>
+      <p class="section-desc">Sri Lanka is one of the world's easiest tropical destinations to navigate. Here's everything to get you started.</p>
+    </div>
+
+    <div class="plan-cards">
+      <div class="plan-card">
+        <div class="plan-icon">🛂</div>
+        <h3>Visa & Entry</h3>
+        <p>Most nationalities require an Electronic Travel Authorisation (ETA) obtained online before arrival.</p>
+        <ul>
+          <li>ETA valid for 30 days, extendable to 6 months</li>
+          <li>Apply at eta.gov.lk — takes under 10 minutes</li>
+          <li>Cost: USD 35 (tourist), USD 40 (transit)</li>
+          <li>Citizens of Singapore & Maldives: visa-free</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">✈️</div>
+        <h3>Getting There</h3>
+        <p>Bandaranaike International Airport (CMB) in Colombo is the main entry point, served by major global carriers.</p>
+        <ul>
+          <li>Direct flights from Dubai, Singapore, Doha, London</li>
+          <li>Mattala Rajapaksa Airport (HRI) serves the south</li>
+          <li>Colombo port receives cruise ships year-round</li>
+          <li>Taxi or bus from CMB to Colombo: ~45 minutes</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">🚂</div>
+        <h3>Getting Around</h3>
+        <p>Sri Lanka has a beloved and remarkably scenic rail network. Combine with tuk-tuks for the full experience.</p>
+        <ul>
+          <li>Kandy–Ella train: Asia's most scenic railway route</li>
+          <li>Tuk-tuks for short hops and city navigation</li>
+          <li>Private drivers for flexible multi-day touring</li>
+          <li>Intercity buses: cheap and frequent</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">💰</div>
+        <h3>Money & Budget</h3>
+        <p>Sri Lankan Rupee (LKR). ATMs widely available. Sri Lanka suits all budgets remarkably well.</p>
+        <ul>
+          <li>Budget: USD 30–50/day (guesthouses, local food)</li>
+          <li>Mid-range: USD 80–150/day (boutique stays)</li>
+          <li>Luxury: USD 300+/day (jungle lodges, villas)</li>
+          <li>Credit cards accepted at hotels and restaurants</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">🏥</div>
+        <h3>Health & Safety</h3>
+        <p>Sri Lanka is a safe, welcoming destination. Standard travel precautions apply.</p>
+        <ul>
+          <li>No mandatory vaccinations; Hep A & typhoid recommended</li>
+          <li>Tap water: drink bottled or filtered water</li>
+          <li>Sun protection essential year-round</li>
+          <li>Comprehensive private hospitals in Colombo and Kandy</li>
+        </ul>
+      </div>
+      <div class="plan-card">
+        <div class="plan-icon">📱</div>
+        <h3>Connectivity & SIM</h3>
+        <p>Local SIM cards are inexpensive and offer excellent 4G coverage across most of the island.</p>
+        <ul>
+          <li>Buy SIM at the airport on arrival (Dialog or Mobitel)</li>
+          <li>1GB data packages from LKR 100 (~USD 0.30)</li>
+          <li>Power: 230V, Type D/G sockets</li>
+          <li>WhatsApp and Google Maps work reliably</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="itinerary-section">
+      <div class="section-eyebrow">Sample Itineraries</div>
+      <h2 class="section-title" style="color:#fff;">Choose your <em>journey</em></h2>
+      <div class="itinerary-grid">
+        <div class="itin-card">
+          <div class="itin-day">7 Days · Classic</div>
+          <div class="itin-title">The Golden Triangle</div>
+          <div class="itin-desc">Colombo → Sigiriya → Kandy → Ella → Galle. Covers the cultural triangle, hill country train, and southern coast.</div>
+        </div>
+        <div class="itin-card">
+          <div class="itin-day">10 Days · Beach & Culture</div>
+          <div class="itin-title">Coast & Temples</div>
+          <div class="itin-desc">Colombo → Negombo → Dambulla → Kandy → Nuwara Eliya → Yala → Mirissa → Galle.</div>
+        </div>
+        <div class="itin-card">
+          <div class="itin-day">14 Days · Full Island</div>
+          <div class="itin-title">Complete Sri Lanka</div>
+          <div class="itin-desc">All of the above plus Trincomalee, Polonnaruwa, Arugam Bay, and a full week on the south coast — the definitive Sri Lanka loop.</div>
+        </div>
+        <div class="itin-card">
+          <div class="itin-day">5 Days · Weekend Escape</div>
+          <div class="itin-title">Hill Country Focus</div>
+          <div class="itin-desc">Colombo → Kandy → Ella → Nuwara Eliya → Colombo. Ideal for those wanting the scenic train and highland tea country in a compact trip.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div>
+
+<!-- ===== BEST TIME PAGE ===== -->
+<div id="page-besttime" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=1600&q=80" alt="Best Time to Visit">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">When to Go</div>
+      <h1>Sri Lanka is a <em>year-round</em> destination</h1>
+      <p>Two monsoon seasons mean different coasts shine at different times — so there's always a perfect part of the island to visit, whatever the month.</p>
+    </div>
+  </div>
+
+  <div class="besttime-page">
+    <div class="seasons-full">
+      <div class="season-full-panel">
+        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=900&q=80" alt="West Coast">
+        <div class="season-full-info">
+          <div class="season-full-months">December — March</div>
+          <div class="season-full-name">West & South Coast</div>
+          <div class="season-full-desc">Dry and sunny. Best for Colombo, Galle, Mirissa, Bentota, and Negombo. Peak whale-watching season at Mirissa (blue whales from Dec–April). Busiest and priciest period.</div>
+        </div>
+      </div>
+      <div class="season-full-panel">
+        <img src="https://images.unsplash.com/photo-1576610616656-d3aa5d1f4534?w=900&q=80" alt="Hill Country">
+        <div class="season-full-info">
+          <div class="season-full-months">Year-Round</div>
+          <div class="season-full-name">Hill Country</div>
+          <div class="season-full-desc">Ella, Nuwara Eliya, and Horton Plains are cool and green all year. Light mists are part of the charm. Best experienced January–March or August–September for clearest skies.</div>
+        </div>
+      </div>
+      <div class="season-full-panel">
+        <img src="https://images.unsplash.com/photo-1559628233-100c798642d1?w=900&q=80" alt="East Coast">
+        <div class="season-full-info">
+          <div class="season-full-months">May — September</div>
+          <div class="season-full-name">East Coast</div>
+          <div class="season-full-desc">While the west coast has its monsoon, the east shines. Trincomalee and Arugam Bay offer calm, crystal waters and world-class surf. Arugam Bay surf season peaks July–September.</div>
+        </div>
+      </div>
+      <div class="season-full-panel">
+        <img src="https://images.unsplash.com/photo-1617419258059-0ceabb07e6bf?w=900&q=80" alt="Festivals">
+        <div class="season-full-info">
+          <div class="season-full-months">July — August</div>
+          <div class="season-full-name">Festival Season</div>
+          <div class="season-full-desc">The Kandy Esala Perahera lights up the hill capital. Coincides with the east coast's best weather — combine Kandy's ceremony with Trincomalee's beaches for an unforgettable Sri Lanka summer.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="climate-strip">
+      <div class="section-eyebrow">Month by Month</div>
+      <h2 class="section-title">When to visit <em>where</em></h2>
+      <table class="climate-table">
+        <thead>
+          <tr>
+            <th>Month</th>
+            <th>West & South Coast</th>
+            <th>East Coast</th>
+            <th>Hill Country</th>
+            <th>Cultural Sites</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Jan</strong></td><td class="great">✦ Ideal</td><td class="wet">◌ Wet</td><td class="good">● Good</td><td class="great">✦ Ideal</td></tr>
+          <tr><td><strong>Feb</strong></td><td class="great">✦ Ideal</td><td class="wet">◌ Wet</td><td class="great">✦ Ideal</td><td class="great">✦ Ideal</td></tr>
+          <tr><td><strong>Mar</strong></td><td class="great">✦ Ideal</td><td class="good">● Good</td><td class="great">✦ Ideal</td><td class="great">✦ Ideal</td></tr>
+          <tr><td><strong>Apr</strong></td><td class="good">● Good</td><td class="good">● Good</td><td class="good">● Good</td><td class="great">✦ New Year</td></tr>
+          <tr><td><strong>May</strong></td><td class="wet">◌ Monsoon</td><td class="great">✦ Ideal</td><td class="good">● Good</td><td class="good">● Good</td></tr>
+          <tr><td><strong>Jun</strong></td><td class="wet">◌ Monsoon</td><td class="great">✦ Ideal</td><td class="good">● Good</td><td class="good">● Good</td></tr>
+          <tr><td><strong>Jul</strong></td><td class="wet">◌ Monsoon</td><td class="great">✦ Ideal</td><td class="good">● Good</td><td class="great">✦ Perahera</td></tr>
+          <tr><td><strong>Aug</strong></td><td class="wet">◌ Monsoon</td><td class="great">✦ Ideal</td><td class="great">✦ Ideal</td><td class="great">✦ Perahera</td></tr>
+          <tr><td><strong>Sep</strong></td><td class="good">● Good</td><td class="good">● Good</td><td class="great">✦ Ideal</td><td class="good">● Good</td></tr>
+          <tr><td><strong>Oct</strong></td><td class="wet">◌ Wet</td><td class="wet">◌ Wet</td><td class="good">● Good</td><td class="good">● Good</td></tr>
+          <tr><td><strong>Nov</strong></td><td class="wet">◌ Wet</td><td class="wet">◌ Wet</td><td class="good">● Good</td><td class="good">● Good</td></tr>
+          <tr><td><strong>Dec</strong></td><td class="great">✦ Ideal</td><td class="wet">◌ Turning</td><td class="good">● Good</td><td class="great">✦ Ideal</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <section class="newsletter">
+    <h2>Plan your trip <em>today</em></h2>
+    <p>Find the perfect season and let us help you build your itinerary.</p>
+    <div style="margin-top:1rem; display:flex; gap:1rem; justify-content:center;">
+      <a class="btn-primary" onclick="goPage('plan')">Plan Your Trip</a>
+      <a class="btn-ghost" onclick="goPage('destinations')" style="border-color:rgba(255,255,255,0.4);color:rgba(255,255,255,0.85);">View Destinations</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Sri Lanka Tourism. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div>
+
+<script>
+  const nav = document.getElementById('main-nav');
+  let currentPage = 'home';
+
+  function toggleMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    btn.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  function mobileGoPage(page) {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('hamburger');
+    menu.classList.remove('open');
+    btn.classList.remove('open');
+    document.body.style.overflow = '';
+    goPage(page);
+  }
+
+  function goPage(page) {
+    document.getElementById('page-' + currentPage).classList.remove('active');
+    document.getElementById('page-' + page).classList.add('active');
+    currentPage = page;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // Update nav highlight
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active-link'));
+    const activeLink = document.getElementById('nav-' + page);
+    if (activeLink) activeLink.classList.add('active-link');
+
+    // Nav solid on inner pages
+    if (page === 'home') {
+      nav.classList.remove('solid');
+    } else {
+      nav.classList.add('solid');
+    }
+  }
+
+  window.addEventListener('scroll', () => {
+    if (currentPage === 'home') {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }
+  });
+
+  function subscribeNewsletter(btn) {
+    const form = btn.closest('.newsletter-form');
+    const input = form.querySelector('input');
+    if (input && input.value.includes('@')) {
+      form.innerHTML = '<p style="color:var(--gold-light);font-size:1rem;font-weight:400;">✓ Thank you! Travel inspiration is on its way.</p>';
+    } else if (input) {
+      input.style.borderColor = '#C0395B';
+      input.focus();
+    }
+  }
+</script>
+</body>
+</html>
