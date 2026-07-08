@@ -949,7 +949,18 @@
     padding: 3.5rem 2.5rem;
     display: flex; flex-direction: column;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
   }
+  .quote-result-bg {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    transition: background-image 0.4s ease, opacity 0.4s ease;
+    z-index: 0;
+  }
+  .quote-result-placeholder, .quote-result-content { position: relative; z-index: 1; }
   .quote-result-placeholder { color: rgba(255,255,255,0.4); font-size: 0.88rem; line-height: 1.8; }
   .quote-result-content { display: none; }
   .quote-result-eyebrow {
@@ -2184,6 +2195,7 @@
         </div>
 
         <div class="quote-result">
+          <div class="quote-result-bg" id="quote-result-bg"></div>
           <div class="quote-result-placeholder" id="quote-placeholder">
             Select your destinations and trip details, then hit "Generate Price" to see your estimated cost — updated instantly, no need to wait for a reply.
           </div>
@@ -2346,6 +2358,17 @@
   const nav = document.getElementById('main-nav');
   let currentPage = 'home';
 
+  const DEST_IMAGES = {
+    'sigiriya': 'images/sigiriya.jpg',
+    'kandy': 'images/Kandy.jpg',
+    'ella': 'images/Ella.jpg',
+    'galle': 'images/Galle_Fort.jpg',
+    'mirissa': 'images/Mirissa.jpg',
+    'yala': 'images/Elephant.jpg',
+    'trincomalee': 'images/Diving.jpg',
+    'nuwara eliya': 'images/Tea_Hills.jpg'
+  };
+
   function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
     const btn = document.getElementById('hamburger');
@@ -2423,14 +2446,27 @@
     const errorEl = document.getElementById('quote-error');
     const placeholder = document.getElementById('quote-placeholder');
     const resultContent = document.getElementById('quote-result-content');
+    const resultBg = document.getElementById('quote-result-bg');
 
     if (destinations.length === 0) {
       errorEl.style.display = 'block';
       placeholder.style.display = 'block';
       resultContent.style.display = 'none';
+      if (resultBg) resultBg.style.backgroundImage = 'none';
       return;
     }
     errorEl.style.display = 'none';
+
+    if (resultBg) {
+      const images = destinations
+        .map(name => DEST_IMAGES[name.trim().toLowerCase()])
+        .filter(Boolean);
+      // Use the most recently selected destination's image as the featured backdrop
+      const featured = images[images.length - 1];
+      resultBg.style.backgroundImage = featured
+        ? `linear-gradient(180deg, rgba(14,31,24,0.5) 0%, rgba(14,31,24,0.88) 75%), url('${featured}')`
+        : 'none';
+    }
 
     let days = parseInt(document.getElementById('quote-days').value, 10);
     if (isNaN(days) || days < 2) days = 2;
