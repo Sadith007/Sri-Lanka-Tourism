@@ -488,6 +488,16 @@
     color: var(--gold-light);
     margin-top: 0.2rem;
   }
+  .dest-tour-badge {
+    display: inline-block;
+    margin-top: 0.65rem;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--dark);
+    background: var(--gold-light);
+    padding: 0.28rem 0.65rem;
+  }
 
   /* CULTURE */
   .culture {
@@ -754,6 +764,16 @@
     max-height: 0; overflow: hidden; transition: max-height 0.4s;
   }
   .dest-full-card:hover .dest-full-desc { max-height: 80px; }
+  .dest-full-card .dest-tour-badge {
+    display: inline-block;
+    margin-top: 0.75rem;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.03em;
+    color: var(--dark);
+    background: var(--gold-light);
+    padding: 0.32rem 0.75rem;
+  }
 
   /* CULTURE PAGE */
   .culture-page { background: var(--cream); }
@@ -803,6 +823,110 @@
   .plan-card p { font-size: 0.88rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
   .plan-card ul { margin-top: 0.75rem; padding-left: 1rem; }
   .plan-card ul li { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 0.35rem; }
+
+  /* QUOTE BUILDER FORM */
+  .quote-section {
+    padding: 2rem 5rem 5rem;
+  }
+  .quote-box {
+    background: var(--green-deep);
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+  }
+  .quote-form {
+    padding: 3.5rem;
+  }
+  .quote-form .section-eyebrow { color: var(--gold-light); }
+  .quote-form .section-eyebrow::before { background: var(--gold-light); }
+  .quote-form .section-title { color: #fff; }
+  .quote-form .section-desc { color: rgba(255,255,255,0.55); }
+  .quote-field { margin-top: 1.75rem; }
+  .quote-label {
+    font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.75rem;
+    display: block;
+  }
+  .quote-dest-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;
+  }
+  .dest-chip { position: relative; }
+  .dest-chip input { position: absolute; opacity: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+  .dest-chip label {
+    display: block; text-align: center;
+    padding: 0.65rem 0.4rem;
+    font-size: 0.76rem; font-weight: 400;
+    color: rgba(255,255,255,0.8);
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s, color 0.2s;
+  }
+  .dest-chip input:checked + label {
+    background: var(--gold); border-color: var(--gold); color: #fff;
+  }
+  .dest-chip label:hover { border-color: var(--gold-light); }
+  .quote-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+  .quote-input, .quote-select {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: #fff;
+    padding: 0.75rem 0.9rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+  }
+  .quote-select option { background: var(--green-deep); }
+  .quote-input:focus, .quote-select:focus { outline: none; border-color: var(--gold-light); }
+  .quote-btn {
+    margin-top: 2rem;
+    width: 100%;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    padding: 1rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .quote-btn:hover { background: var(--gold-light); color: var(--dark); }
+  .quote-error { color: #E8A0A0; font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+
+  .quote-result {
+    background: var(--dark);
+    padding: 3.5rem 2.5rem;
+    display: flex; flex-direction: column;
+    justify-content: center;
+  }
+  .quote-result-placeholder { color: rgba(255,255,255,0.4); font-size: 0.88rem; line-height: 1.8; }
+  .quote-result-content { display: none; }
+  .quote-result-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-light);
+  }
+  .quote-result-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3rem; color: #fff; margin-top: 0.5rem; line-height: 1;
+  }
+  .quote-result-price span { font-size: 1rem; color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; }
+  .quote-result-sub { font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.4rem; }
+  .quote-breakdown { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.65rem; }
+  .quote-breakdown-row {
+    display: flex; justify-content: space-between;
+    font-size: 0.82rem; color: rgba(255,255,255,0.7);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 0.65rem;
+  }
+  .quote-badge {
+    display: inline-block; margin-top: 1.5rem;
+    font-size: 0.72rem; letter-spacing: 0.05em;
+    color: var(--green-bright); border: 1px solid var(--green-bright);
+    padding: 0.35rem 0.75rem;
+  }
+  .quote-result-note { margin-top: 1.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.4); line-height: 1.6; }
+
   .itinerary-section {
     background: var(--green-deep);
     padding: 5rem;
@@ -827,6 +951,38 @@
     font-size: 1.3rem; color: #fff; margin-bottom: 0.75rem;
   }
   .itin-desc { font-size: 0.8rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+  .itin-price {
+    margin-top: 1rem;
+    padding-top: 0.9rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+    font-size: 0.95rem;
+    color: var(--gold-light);
+    font-family: 'Cormorant Garamond', serif;
+  }
+  .itin-price span { font-size: 0.65rem; color: rgba(255,255,255,0.5); font-family: 'DM Sans', sans-serif; text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-top: 0.15rem; }
+  .itin-card.itin-match { background: rgba(201,150,58,0.14); border-color: var(--gold-light); }
+  #itin-filter-note {
+    display: none;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding: 0.9rem 1.25rem;
+    background: rgba(255,255,255,0.06);
+    border-left: 3px solid var(--gold-light);
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.85);
+  }
+  #itin-filter-note button {
+    background: none;
+    border: 1px solid var(--gold-light);
+    color: var(--gold-light);
+    font-size: 0.72rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+  }
+  #itin-filter-note button:hover { background: var(--gold-light); color: var(--dark); }
 
   /* BEST TIME PAGE */
   .besttime-page { background: var(--cream); }
@@ -968,6 +1124,10 @@
     .exp-page-grid { padding: 3rem; grid-template-columns: repeat(2, 1fr); }
     .dest-page-grid { padding: 0 3rem 3rem; }
     .plan-cards { padding: 0 3rem 3rem; grid-template-columns: repeat(2, 1fr); }
+    .quote-section { padding: 1rem 3rem 4rem; }
+    .quote-box { grid-template-columns: 1fr; }
+    .quote-form { padding: 2.5rem; }
+    .quote-dest-grid { grid-template-columns: repeat(3, 1fr); }
     .itinerary-section { padding: 4rem 3rem; }
     .itinerary-grid { grid-template-columns: repeat(2, 1fr); }
     .plan-intro { padding: 4rem 3rem; }
@@ -1088,6 +1248,13 @@
     .plan-intro { padding: 2.5rem 1.25rem; }
     .plan-cards { padding: 0 1.25rem 2.5rem; grid-template-columns: 1fr; gap: 1rem; }
     .plan-card { padding: 1.75rem 1.25rem; }
+    .quote-section { padding: 0.5rem 1.25rem 3rem; }
+    .quote-box { grid-template-columns: 1fr; }
+    .quote-form { padding: 1.75rem; }
+    .quote-dest-grid { grid-template-columns: repeat(2, 1fr); }
+    .quote-row { grid-template-columns: 1fr; gap: 0.75rem; }
+    .quote-result { padding: 2.5rem 1.75rem; }
+    .quote-result-price { font-size: 2.3rem; }
     .itinerary-section { padding: 3rem 1.25rem; }
     .itinerary-grid { grid-template-columns: 1fr; gap: 0.75rem; }
 
@@ -1298,60 +1465,60 @@
       <p class="section-desc">From misty mountains to golden coasts, each corner of Sri Lanka tells a different story.</p>
     </div>
     <div class="dest-row">
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Sigiriya" onclick="filterTours('Sigiriya')">
         <img src="images/sigiriya.jpg" alt="Sigiriya">
         <div class="dest-card-info"><div class="dest-card-name">Sigiriya</div><div class="dest-card-region">North Central</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Mirissa" onclick="filterTours('Mirissa')">
         <img src="images/Mirissa.jpg" alt="Mirissa">
         <div class="dest-card-info"><div class="dest-card-name">Mirissa</div><div class="dest-card-region">Southern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Ella" onclick="filterTours('Ella')">
         <img src="images/Ella.jpg" alt="Ella">
         <div class="dest-card-info"><div class="dest-card-name">Ella</div><div class="dest-card-region">Uva Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Kandy" onclick="filterTours('Kandy')">
         <img src="images/Kandy.jpg" alt="Kandy">
         <div class="dest-card-info"><div class="dest-card-name">Kandy</div><div class="dest-card-region">Central Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Yala" onclick="filterTours('Yala')">
         <img src="images/Elephant.jpg" alt="Yala">
         <div class="dest-card-info"><div class="dest-card-name">Yala</div><div class="dest-card-region">Southern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Trincomalee" onclick="filterTours('Trincomalee')">
         <img src="images/Diving.jpg" alt="Trincomalee">
         <div class="dest-card-info"><div class="dest-card-name">Trincomalee</div><div class="dest-card-region">Eastern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Galle" onclick="filterTours('Galle')">
         <img src="images/Galle_Fort.jpg" alt="Galle">
         <div class="dest-card-info"><div class="dest-card-name">Galle</div><div class="dest-card-region">Southern Province</div></div>
       </div>
       <!-- Duplicate for seamless loop -->
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Sigiriya" onclick="filterTours('Sigiriya')">
         <img src="images/sigiriya.jpg" alt="Sigiriya">
         <div class="dest-card-info"><div class="dest-card-name">Sigiriya</div><div class="dest-card-region">North Central</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Mirissa" onclick="filterTours('Mirissa')">
         <img src="images/Mirissa.jpg" alt="Mirissa">
         <div class="dest-card-info"><div class="dest-card-name">Mirissa</div><div class="dest-card-region">Southern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Ella" onclick="filterTours('Ella')">
         <img src="images/Ella.jpg" alt="Ella">
         <div class="dest-card-info"><div class="dest-card-name">Ella</div><div class="dest-card-region">Uva Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Kandy" onclick="filterTours('Kandy')">
         <img src="images/Kandy.jpg" alt="Kandy">
         <div class="dest-card-info"><div class="dest-card-name">Kandy</div><div class="dest-card-region">Central Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Yala" onclick="filterTours('Yala')">
         <img src="images/Elephant.jpg" alt="Yala">
         <div class="dest-card-info"><div class="dest-card-name">Yala</div><div class="dest-card-region">Southern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Trincomalee" onclick="filterTours('Trincomalee')">
         <img src="images/Diving.jpg" alt="Trincomalee">
         <div class="dest-card-info"><div class="dest-card-name">Trincomalee</div><div class="dest-card-region">Eastern Province</div></div>
       </div>
-      <div class="dest-card" onclick="goPage('destinations')">
+      <div class="dest-card" data-dest-name="Galle" onclick="filterTours('Galle')">
         <img src="images/Galle_Fort.jpg" alt="Galle">
         <div class="dest-card-info"><div class="dest-card-name">Galle</div><div class="dest-card-region">Southern Province</div></div>
       </div>
@@ -1630,7 +1797,7 @@
   </div>
 
   <div class="dest-page-grid">
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Sigiriya" onclick="filterTours('Sigiriya')">
       <img src="images/sigiriya.jpg" alt="Sigiriya">
       <div class="dest-full-info">
         <div class="dest-full-name">Sigiriya</div>
@@ -1638,7 +1805,7 @@
         <div class="dest-full-desc">The iconic Lion Rock fortress. A 5th-century citadel rising from the jungle with royal gardens, mirror walls, and celestial frescoes.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Kandy" onclick="filterTours('Kandy')">
       <img src="images/Kandy.jpg" alt="Kandy">
       <div class="dest-full-info">
         <div class="dest-full-name">Kandy</div>
@@ -1646,7 +1813,7 @@
         <div class="dest-full-desc">Sri Lanka's cultural capital. Home to the sacred Temple of the Tooth Relic, Peradeniya Botanical Gardens, and the magnificent Esala Perahera festival.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Ella" onclick="filterTours('Ella')">
       <img src="images/Ella.jpg" alt="Ella">
       <div class="dest-full-info">
         <div class="dest-full-name">Ella</div>
@@ -1654,7 +1821,7 @@
         <div class="dest-full-desc">A cool mountain village surrounded by tea estates. Famous for the Nine Arch Bridge, Ella Rock trek, and the legendary Kandy–Ella train ride.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Galle" onclick="filterTours('Galle')">
       <img src="images/Galle_Fort.jpg" alt="Galle">
       <div class="dest-full-info">
         <div class="dest-full-name">Galle</div>
@@ -1662,7 +1829,7 @@
         <div class="dest-full-desc">A UNESCO World Heritage fortified city with Dutch colonial architecture, boutique hotels, art galleries, and some of the island's finest restaurants.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Mirissa" onclick="filterTours('Mirissa')">
       <img src="images/Mirissa.jpg" alt="Mirissa">
       <div class="dest-full-info">
         <div class="dest-full-name">Mirissa</div>
@@ -1670,7 +1837,7 @@
         <div class="dest-full-desc">Crescent-shaped beach paradise and the island's top whale-watching spot. Blue whales and sperm whales are regularly sighted offshore from November to April.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Yala" onclick="filterTours('Yala')">
       <img src="images/Elephant.jpg" alt="Yala">
       <div class="dest-full-info">
         <div class="dest-full-name">Yala National Park</div>
@@ -1678,7 +1845,7 @@
         <div class="dest-full-desc">The world's highest density of wild leopards. Plus elephants, sloth bears, crocodiles, and over 200 bird species in a dramatic landscape of lagoons and scrubland.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Trincomalee" onclick="filterTours('Trincomalee')">
       <img src="images/Diving.jpg" alt="Trincomalee">
       <div class="dest-full-info">
         <div class="dest-full-name">Trincomalee</div>
@@ -1686,7 +1853,7 @@
         <div class="dest-full-desc">One of the world's finest natural harbours. Crystal clear bays, pristine Nilaveli and Uppuveli beaches, and diving on WWII shipwrecks. Prime May–September.</div>
       </div>
     </div>
-    <div class="dest-full-card">
+    <div class="dest-full-card" data-dest-name="Nuwara Eliya" onclick="filterTours('Nuwara Eliya')">
       <img src="images/Tea_Hills.jpg" alt="Nuwara Eliya">
       <div class="dest-full-info">
         <div class="dest-full-name">Nuwara Eliya</div>
@@ -1884,29 +2051,94 @@
       </div>
     </div>
 
-    <div class="itinerary-section">
+    <div class="quote-section">
+      <div class="quote-box">
+        <div class="quote-form">
+          <div class="section-eyebrow">Instant Quote</div>
+          <h2 class="section-title">Build your <em>own trip</em></h2>
+          <p class="section-desc">Select where you want to go, tell us a little about your trip, and get a price on the spot.</p>
+
+          <div class="quote-field">
+            <label class="quote-label">1. Select Destinations</label>
+            <div class="quote-dest-grid" id="quote-dest-grid">
+              <div class="dest-chip"><input type="checkbox" id="qd-sigiriya" value="Sigiriya"><label for="qd-sigiriya">Sigiriya</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-kandy" value="Kandy"><label for="qd-kandy">Kandy</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-ella" value="Ella"><label for="qd-ella">Ella</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-galle" value="Galle"><label for="qd-galle">Galle</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-mirissa" value="Mirissa"><label for="qd-mirissa">Mirissa</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-yala" value="Yala"><label for="qd-yala">Yala</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-trincomalee" value="Trincomalee"><label for="qd-trincomalee">Trincomalee</label></div>
+              <div class="dest-chip"><input type="checkbox" id="qd-nuwaraeliya" value="Nuwara Eliya"><label for="qd-nuwaraeliya">Nuwara Eliya</label></div>
+            </div>
+          </div>
+
+          <div class="quote-field quote-row">
+            <div>
+              <label class="quote-label" for="quote-days">2. Trip Length (Days)</label>
+              <input type="number" id="quote-days" class="quote-input" min="2" max="30" value="7">
+            </div>
+            <div>
+              <label class="quote-label" for="quote-travelers">3. Travelers</label>
+              <input type="number" id="quote-travelers" class="quote-input" min="1" max="30" value="2">
+            </div>
+          </div>
+
+          <div class="quote-field">
+            <label class="quote-label" for="quote-tier">4. Hotel Category</label>
+            <select id="quote-tier" class="quote-select">
+              <option value="45">Budget — guesthouses & local stays</option>
+              <option value="75" selected>Comfort — boutique & mid-range</option>
+              <option value="130">Luxury — jungle lodges & villas</option>
+            </select>
+          </div>
+
+          <div class="quote-error" id="quote-error">Please select at least one destination.</div>
+          <button class="quote-btn" onclick="generateQuote()">Generate Price</button>
+        </div>
+
+        <div class="quote-result">
+          <div class="quote-result-placeholder" id="quote-placeholder">
+            Select your destinations and trip details, then hit "Generate Price" to see your estimated cost — updated instantly, no need to wait for a reply.
+          </div>
+          <div class="quote-result-content" id="quote-result-content">
+            <div class="quote-result-eyebrow">Estimated Trip Cost</div>
+            <div class="quote-result-price" id="quote-total-price">$0<span> total</span></div>
+            <div class="quote-result-sub" id="quote-per-person"></div>
+            <div class="quote-breakdown" id="quote-breakdown"></div>
+            <div class="quote-badge" id="quote-discount-badge" style="display:none;"></div>
+            <div class="quote-result-note">Estimate only — final pricing depends on season, availability, and exact hotel selection. Contact us to confirm and book.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="itinerary-section" id="itinerary-section">
       <div class="section-eyebrow">Sample Itineraries</div>
       <h2 class="section-title" style="color:#fff;">Choose your <em>journey</em></h2>
       <div class="itinerary-grid">
-        <div class="itin-card">
+        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle" data-price="650">
           <div class="itin-day">7 Days · Classic</div>
           <div class="itin-title">The Golden Triangle</div>
           <div class="itin-desc">Colombo → Sigiriya → Kandy → Ella → Galle. Covers the cultural triangle, hill country train, and southern coast.</div>
+          <div class="itin-price">From $650<span>Per person, twin sharing</span></div>
         </div>
-        <div class="itin-card">
+        <div class="itin-card" data-dest="kandy,nuwara eliya,yala,mirissa,galle" data-price="890">
           <div class="itin-day">10 Days · Beach & Culture</div>
           <div class="itin-title">Coast & Temples</div>
           <div class="itin-desc">Colombo → Negombo → Dambulla → Kandy → Nuwara Eliya → Yala → Mirissa → Galle.</div>
+          <div class="itin-price">From $890<span>Per person, twin sharing</span></div>
         </div>
-        <div class="itin-card">
+        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1250">
           <div class="itin-day">14 Days · Full Island</div>
           <div class="itin-title">Complete Sri Lanka</div>
           <div class="itin-desc">All of the above plus Trincomalee, Polonnaruwa, Arugam Bay, and a full week on the south coast — the definitive Sri Lanka loop.</div>
+          <div class="itin-price">From $1,250<span>Per person, twin sharing</span></div>
         </div>
-        <div class="itin-card">
+        <div class="itin-card" data-dest="kandy,ella,nuwara eliya" data-price="450">
           <div class="itin-day">5 Days · Weekend Escape</div>
           <div class="itin-title">Hill Country Focus</div>
           <div class="itin-desc">Colombo → Kandy → Ella → Nuwara Eliya → Colombo. Ideal for those wanting the scenic train and highland tea country in a compact trip.</div>
+          <div class="itin-price">From $450<span>Per person, twin sharing</span></div>
         </div>
       </div>
     </div>
@@ -2061,6 +2293,98 @@
     if (currentPage === 'home') {
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }
+  });
+
+  // ===== DESTINATION CARD → QUOTE FORM LINKING =====
+
+  function filterTours(destName) {
+    goPage('plan');
+    setTimeout(() => {
+      document.querySelectorAll('#quote-dest-grid input[type="checkbox"]').forEach(cb => {
+        if (cb.value.trim().toLowerCase() === destName.trim().toLowerCase()) cb.checked = true;
+      });
+      generateQuote();
+      const section = document.querySelector('.quote-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+
+  function initDestinationTourBadges() {
+    document.querySelectorAll('[data-dest-name]').forEach(card => {
+      const infoEl = card.querySelector('.dest-card-info, .dest-full-info');
+      if (!infoEl) return;
+      const badge = document.createElement('div');
+      badge.className = 'dest-tour-badge';
+      badge.textContent = 'Get an instant price →';
+      infoEl.appendChild(badge);
+    });
+  }
+
+  window.addEventListener('DOMContentLoaded', initDestinationTourBadges);
+
+  // ===== QUOTE BUILDER =====
+
+  function generateQuote() {
+    const checkboxes = document.querySelectorAll('#quote-dest-grid input:checked');
+    const destinations = Array.from(checkboxes).map(cb => cb.value);
+    const errorEl = document.getElementById('quote-error');
+    const placeholder = document.getElementById('quote-placeholder');
+    const resultContent = document.getElementById('quote-result-content');
+
+    if (destinations.length === 0) {
+      errorEl.style.display = 'block';
+      placeholder.style.display = 'block';
+      resultContent.style.display = 'none';
+      return;
+    }
+    errorEl.style.display = 'none';
+
+    let days = parseInt(document.getElementById('quote-days').value, 10);
+    if (isNaN(days) || days < 2) days = 2;
+    if (days > 30) days = 30;
+
+    let travelers = parseInt(document.getElementById('quote-travelers').value, 10);
+    if (isNaN(travelers) || travelers < 1) travelers = 1;
+    if (travelers > 30) travelers = 30;
+
+    const tierRate = parseFloat(document.getElementById('quote-tier').value);
+
+    const lineDaily = tierRate * days * travelers;
+    const lineDest = destinations.length * 20 * travelers;
+    const lineBase = 40;
+    const discountPct = travelers >= 8 ? 0.15 : (travelers >= 4 ? 0.08 : 0);
+    const discountAmount = (lineDaily + lineDest) * discountPct;
+    const total = lineDaily + lineDest + lineBase - discountAmount;
+    const perPerson = total / travelers;
+
+    document.getElementById('quote-total-price').innerHTML =
+      `$${Math.round(total).toLocaleString()}<span> total</span>`;
+    document.getElementById('quote-per-person').textContent =
+      `≈ $${Math.round(perPerson).toLocaleString()} per person · ${days} days · ${travelers} traveler${travelers !== 1 ? 's' : ''}`;
+
+    document.getElementById('quote-breakdown').innerHTML = `
+      <div class="quote-breakdown-row"><span>Stay, meals & transport (${days} days × ${travelers})</span><span>$${Math.round(lineDaily).toLocaleString()}</span></div>
+      <div class="quote-breakdown-row"><span>Site entries & guides (${destinations.length} destination${destinations.length !== 1 ? 's' : ''})</span><span>$${Math.round(lineDest).toLocaleString()}</span></div>
+      <div class="quote-breakdown-row"><span>Trip coordination</span><span>$${lineBase}</span></div>
+    `;
+
+    const badge = document.getElementById('quote-discount-badge');
+    if (discountPct > 0) {
+      badge.style.display = 'inline-block';
+      badge.textContent = `Group discount applied: −${Math.round(discountPct * 100)}% (saved $${Math.round(discountAmount).toLocaleString()})`;
+    } else {
+      badge.style.display = 'none';
+    }
+
+    placeholder.style.display = 'none';
+    resultContent.style.display = 'block';
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('#quote-dest-grid input, #quote-days, #quote-travelers, #quote-tier')
+      .forEach(el => el.addEventListener('change', () => {
+        if (document.querySelectorAll('#quote-dest-grid input:checked').length > 0) generateQuote();
+      }));
   });
 
   function subscribeNewsletter(btn) {
