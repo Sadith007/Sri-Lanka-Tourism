@@ -877,6 +877,7 @@
   }
   .quote-select option { background: var(--green-deep); }
   .quote-input:focus, .quote-select:focus { outline: none; border-color: var(--gold-light); }
+  .quote-hint { margin-top: 0.5rem; font-size: 0.72rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
   .quote-btn {
     margin-top: 2rem;
     width: 100%;
@@ -2092,6 +2093,17 @@
             </select>
           </div>
 
+          <div class="quote-field">
+            <label class="quote-label" for="quote-vehicle">5. Vehicle</label>
+            <select id="quote-vehicle" class="quote-select" data-auto="true">
+              <option value="35" data-min="1" data-max="3">Sedan Car (1–3 passengers)</option>
+              <option value="60" data-min="4" data-max="8">Van / KDH (4–8 passengers)</option>
+              <option value="95" data-min="9" data-max="15">Mini Coaster (9–15 passengers)</option>
+              <option value="160" data-min="16" data-max="30">Luxury Coach (16–30 passengers)</option>
+            </select>
+            <div class="quote-hint" id="quote-vehicle-hint">Auto-selected based on your traveler count — change anytime.</div>
+          </div>
+
           <div class="quote-error" id="quote-error">Please select at least one destination.</div>
           <button class="quote-btn" onclick="generateQuote()">Generate Price</button>
         </div>
@@ -2348,13 +2360,17 @@
     if (travelers > 30) travelers = 30;
 
     const tierRate = parseFloat(document.getElementById('quote-tier').value);
+    const vehicleSelect = document.getElementById('quote-vehicle');
+    const vehicleRate = parseFloat(vehicleSelect.value);
+    const vehicleLabel = vehicleSelect.options[vehicleSelect.selectedIndex].textContent;
 
     const lineDaily = tierRate * days * travelers;
     const lineDest = destinations.length * 20 * travelers;
+    const lineVehicle = vehicleRate * days;
     const lineBase = 40;
     const discountPct = travelers >= 8 ? 0.15 : (travelers >= 4 ? 0.08 : 0);
     const discountAmount = (lineDaily + lineDest) * discountPct;
-    const total = lineDaily + lineDest + lineBase - discountAmount;
+    const total = lineDaily + lineDest + lineVehicle + lineBase - discountAmount;
     const perPerson = total / travelers;
 
     document.getElementById('quote-total-price').innerHTML =
@@ -2363,8 +2379,9 @@
       `≈ $${Math.round(perPerson).toLocaleString()} per person · ${days} days · ${travelers} traveler${travelers !== 1 ? 's' : ''}`;
 
     document.getElementById('quote-breakdown').innerHTML = `
-      <div class="quote-breakdown-row"><span>Stay, meals & transport (${days} days × ${travelers})</span><span>$${Math.round(lineDaily).toLocaleString()}</span></div>
+      <div class="quote-breakdown-row"><span>Accommodation & meals (${days} days × ${travelers})</span><span>$${Math.round(lineDaily).toLocaleString()}</span></div>
       <div class="quote-breakdown-row"><span>Site entries & guides (${destinations.length} destination${destinations.length !== 1 ? 's' : ''})</span><span>$${Math.round(lineDest).toLocaleString()}</span></div>
+      <div class="quote-breakdown-row"><span>${vehicleLabel.replace(/\s*\(.*?\)/, '')} & driver (${days} days)</span><span>$${Math.round(lineVehicle).toLocaleString()}</span></div>
       <div class="quote-breakdown-row"><span>Trip coordination</span><span>$${lineBase}</span></div>
     `;
 
@@ -2380,8 +2397,35 @@
     resultContent.style.display = 'block';
   }
 
+  function autoSelectVehicle(travelers) {
+    const select = document.getElementById('quote-vehicle');
+    if (!select) return;
+    let bestOption = null;
+    Array.from(select.options).forEach(opt => {
+      const min = parseInt(opt.dataset.min, 10);
+      const max = parseInt(opt.dataset.max, 10);
+      if (travelers >= min && travelers <= max) bestOption = opt;
+    });
+    if (!bestOption) bestOption = select.options[select.options.length - 1];
+    select.value = bestOption.value;
+
+    const hint = document.getElementById('quote-vehicle-hint');
+    if (hint) {
+      hint.textContent = `Auto-selected: ${bestOption.textContent} for ${travelers} traveler${travelers !== 1 ? 's' : ''}. Change anytime.`;
+    }
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('#quote-dest-grid input, #quote-days, #quote-travelers, #quote-tier')
+    const travelersInput = document.getElementById('quote-travelers');
+    autoSelectVehicle(parseInt(travelersInput.value, 10) || 1);
+
+    travelersInput.addEventListener('input', () => {
+      const t = parseInt(travelersInput.value, 10) || 1;
+      autoSelectVehicle(t);
+      if (document.querySelectorAll('#quote-dest-grid input:checked').length > 0) generateQuote();
+    });
+
+    document.querySelectorAll('#quote-dest-grid input, #quote-days, #quote-tier, #quote-vehicle')
       .forEach(el => el.addEventListener('change', () => {
         if (document.querySelectorAll('#quote-dest-grid input:checked').length > 0) generateQuote();
       }));
