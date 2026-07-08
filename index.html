@@ -846,6 +846,13 @@
     text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.75rem;
     display: block;
   }
+  .quote-label-row { display: flex; justify-content: space-between; align-items: center; }
+  .quote-select-all {
+    text-transform: none; letter-spacing: 0.02em; font-size: 0.75rem;
+    color: var(--gold); cursor: pointer; text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .quote-select-all:hover { color: var(--gold-light); }
   .quote-dest-grid {
     display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;
   }
@@ -865,6 +872,47 @@
     background: var(--gold); border-color: var(--gold); color: #fff;
   }
   .dest-chip label:hover { border-color: var(--gold-light); }
+  .dest-chip-preview {
+    position: absolute;
+    bottom: calc(100% + 12px);
+    left: 50%;
+    transform: translateX(-50%) translateY(8px) scale(0.96);
+    width: 170px;
+    height: 115px;
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--gold-light);
+    box-shadow: 0 16px 34px rgba(0,0,0,0.45);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.22s ease;
+    z-index: 30;
+  }
+  .dest-chip-preview::after {
+    content: attr(data-name);
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    padding: 0.4rem 0.3rem;
+    background: linear-gradient(to top, rgba(14,31,24,0.92) 0%, transparent 100%);
+    color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    text-align: center;
+  }
+  .dest-chip-preview::before {
+    content: '';
+    position: absolute;
+    top: 100%; left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-top-color: var(--gold-light);
+  }
+  .dest-chip:hover .dest-chip-preview {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
   .quote-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
   .quote-input, .quote-select {
     width: 100%;
@@ -935,7 +983,7 @@
   .itinerary-section .section-title { color: #fff; }
   .itinerary-section .section-eyebrow { color: var(--gold-light); }
   .itinerary-section .section-eyebrow::before { background: var(--gold-light); }
-  .itinerary-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; }
+  .itinerary-grid { margin-top: 3rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 1rem; }
   .itin-card {
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -2060,16 +2108,43 @@
           <p class="section-desc">Select where you want to go, tell us a little about your trip, and get a price on the spot.</p>
 
           <div class="quote-field">
-            <label class="quote-label">1. Select Destinations</label>
+            <label class="quote-label quote-label-row">
+              <span>1. Select Destinations</span>
+              <span class="quote-select-all" onclick="selectAllIsland()">Select All Island</span>
+            </label>
             <div class="quote-dest-grid" id="quote-dest-grid">
-              <div class="dest-chip"><input type="checkbox" id="qd-sigiriya" value="Sigiriya"><label for="qd-sigiriya">Sigiriya</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-kandy" value="Kandy"><label for="qd-kandy">Kandy</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-ella" value="Ella"><label for="qd-ella">Ella</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-galle" value="Galle"><label for="qd-galle">Galle</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-mirissa" value="Mirissa"><label for="qd-mirissa">Mirissa</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-yala" value="Yala"><label for="qd-yala">Yala</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-trincomalee" value="Trincomalee"><label for="qd-trincomalee">Trincomalee</label></div>
-              <div class="dest-chip"><input type="checkbox" id="qd-nuwaraeliya" value="Nuwara Eliya"><label for="qd-nuwaraeliya">Nuwara Eliya</label></div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-sigiriya" value="Sigiriya"><label for="qd-sigiriya">Sigiriya</label>
+                <div class="dest-chip-preview" style="background-image:url('images/sigiriya.jpg')" data-name="Sigiriya"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-kandy" value="Kandy"><label for="qd-kandy">Kandy</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Kandy.jpg')" data-name="Kandy"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-ella" value="Ella"><label for="qd-ella">Ella</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Ella.jpg')" data-name="Ella"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-galle" value="Galle"><label for="qd-galle">Galle</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Galle_Fort.jpg')" data-name="Galle"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-mirissa" value="Mirissa"><label for="qd-mirissa">Mirissa</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Mirissa.jpg')" data-name="Mirissa"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-yala" value="Yala"><label for="qd-yala">Yala</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Elephant.jpg')" data-name="Yala"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-trincomalee" value="Trincomalee"><label for="qd-trincomalee">Trincomalee</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Diving.jpg')" data-name="Trincomalee"></div>
+              </div>
+              <div class="dest-chip">
+                <input type="checkbox" id="qd-nuwaraeliya" value="Nuwara Eliya"><label for="qd-nuwaraeliya">Nuwara Eliya</label>
+                <div class="dest-chip-preview" style="background-image:url('images/Tea_Hills.jpg')" data-name="Nuwara Eliya"></div>
+              </div>
             </div>
           </div>
 
@@ -2128,6 +2203,12 @@
       <div class="section-eyebrow">Sample Itineraries</div>
       <h2 class="section-title" style="color:#fff;">Choose your <em>journey</em></h2>
       <div class="itinerary-grid">
+        <div class="itin-card" data-dest="kandy,ella,nuwara eliya" data-price="450">
+          <div class="itin-day">5 Days · Weekend Escape</div>
+          <div class="itin-title">Hill Country Focus</div>
+          <div class="itin-desc">Colombo → Kandy → Ella → Nuwara Eliya → Colombo. Ideal for those wanting the scenic train and highland tea country in a compact trip.</div>
+          <div class="itin-price">From $450<span>Per person, twin sharing</span></div>
+        </div>
         <div class="itin-card" data-dest="sigiriya,kandy,ella,galle" data-price="650">
           <div class="itin-day">7 Days · Classic</div>
           <div class="itin-title">The Golden Triangle</div>
@@ -2146,11 +2227,11 @@
           <div class="itin-desc">All of the above plus Trincomalee, Polonnaruwa, Arugam Bay, and a full week on the south coast — the definitive Sri Lanka loop.</div>
           <div class="itin-price">From $1,250<span>Per person, twin sharing</span></div>
         </div>
-        <div class="itin-card" data-dest="kandy,ella,nuwara eliya" data-price="450">
-          <div class="itin-day">5 Days · Weekend Escape</div>
-          <div class="itin-title">Hill Country Focus</div>
-          <div class="itin-desc">Colombo → Kandy → Ella → Nuwara Eliya → Colombo. Ideal for those wanting the scenic train and highland tea country in a compact trip.</div>
-          <div class="itin-price">From $450<span>Per person, twin sharing</span></div>
+        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1850">
+          <div class="itin-day">21 Days · All Island</div>
+          <div class="itin-title">All Island Grand Tour</div>
+          <div class="itin-desc">Colombo → Anuradhapura → Sigiriya → Kandy → Nuwara Eliya → Ella → Yala → Mirissa → Galle → Trincomalee. Every province, every coast, at an unhurried pace — the full Sri Lanka experience, start to finish.</div>
+          <div class="itin-price">From $1,850<span>Per person, twin sharing</span></div>
         </div>
       </div>
     </div>
@@ -2395,6 +2476,15 @@
 
     placeholder.style.display = 'none';
     resultContent.style.display = 'block';
+  }
+
+  function selectAllIsland() {
+    document.querySelectorAll('#quote-dest-grid input[type="checkbox"]').forEach(cb => { cb.checked = true; });
+    const daysInput = document.getElementById('quote-days');
+    if (parseInt(daysInput.value, 10) < 14) daysInput.value = 21;
+    generateQuote();
+    const section = document.querySelector('.quote-section');
+    if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
   function autoSelectVehicle(travelers) {
