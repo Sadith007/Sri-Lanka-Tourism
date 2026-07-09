@@ -1000,8 +1000,15 @@
     border: 1px solid rgba(255,255,255,0.1);
     padding: 1.75rem;
     transition: background 0.25s;
+    cursor: pointer;
   }
   .itin-card:hover { background: rgba(255,255,255,0.1); }
+  .itin-view {
+    margin-top: 0.75rem;
+    font-size: 0.72rem;
+    color: var(--gold-light);
+    letter-spacing: 0.03em;
+  }
   .itin-day {
     font-size: 0.65rem; font-weight: 500; letter-spacing: 0.22em;
     text-transform: uppercase; color: var(--gold-light); margin-bottom: 0.5rem;
@@ -1043,6 +1050,129 @@
     cursor: pointer;
   }
   #itin-filter-note button:hover { background: var(--gold-light); color: var(--dark); }
+
+  /* PACKAGE DETAIL MODAL */
+  .package-modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 15, 0.75);
+    z-index: 500;
+    padding: 3rem 1.5rem;
+    overflow-y: auto;
+  }
+  .package-modal-overlay.active { display: block; }
+  .package-modal {
+    position: relative;
+    max-width: 780px;
+    margin: 0 auto;
+    background: var(--cream);
+  }
+  .package-modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    width: 38px; height: 38px;
+    background: rgba(14,31,24,0.6);
+    color: #fff;
+    border: none;
+    font-size: 1rem;
+    cursor: pointer;
+    z-index: 5;
+    transition: background 0.2s;
+  }
+  .package-modal-close:hover { background: var(--dark); }
+  .package-modal-hero {
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    background-color: var(--dark);
+  }
+  .package-modal-body { padding: 2.5rem 3rem 3rem; }
+  .package-modal-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold);
+  }
+  .package-modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.1rem;
+    color: var(--dark);
+    margin-top: 0.35rem;
+  }
+  .package-info-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    margin-top: 1.75rem;
+    padding: 1.25rem 0;
+    border-top: 1px solid rgba(14,31,24,0.12);
+    border-bottom: 1px solid rgba(14,31,24,0.12);
+  }
+  .package-info-label {
+    font-size: 0.65rem; letter-spacing: 0.08em; text-transform: uppercase;
+    color: var(--text-muted); margin-bottom: 0.3rem;
+  }
+  .package-info-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem; color: var(--dark);
+  }
+  .package-section { margin-top: 2.5rem; }
+  .package-section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.35rem; color: var(--dark); margin-bottom: 1.25rem;
+  }
+  .package-day-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .package-day {
+    border: 1px solid rgba(14,31,24,0.12);
+    background: #fff;
+  }
+  .package-day-head {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+  }
+  .package-day-head-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem; color: var(--dark);
+  }
+  .package-day-head-title span { color: var(--gold); margin-right: 0.5rem; }
+  .package-day-chevron { transition: transform 0.25s; color: var(--gold); }
+  .package-day.open .package-day-chevron { transform: rotate(180deg); }
+  .package-day-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+  }
+  .package-day.open .package-day-content { max-height: 220px; }
+  .package-day-content-inner {
+    padding: 0 1.25rem 1.25rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+  .package-inc-exc {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  .package-list { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+  .package-list li {
+    font-size: 0.84rem; color: var(--text-muted); line-height: 1.5;
+    padding-left: 1.3rem; position: relative;
+  }
+  .package-list-included li::before {
+    content: '✓'; position: absolute; left: 0; color: var(--green-bright); font-weight: 700;
+  }
+  .package-list-excluded li::before {
+    content: '✕'; position: absolute; left: 0; color: #C77; font-weight: 700;
+  }
+  .package-cta-row { margin-top: 2.5rem; }
+  .package-booking-form { margin-top: 0.5rem; display: flex; flex-direction: column; gap: 1rem; }
+  .package-booking-form .quote-input {
+    background: #fff; border: 1px solid rgba(14,31,24,0.18); color: var(--dark);
+  }
+  .package-booking-form .quote-input:focus { border-color: var(--gold); outline: none; }
+  .package-booking-form textarea.quote-input { resize: vertical; font-family: 'DM Sans', sans-serif; }
+  #pkg-form-error { display: none; }
+  .package-form-success { display: none; font-size: 0.82rem; color: var(--green-bright); margin-top: 0.5rem; line-height: 1.6; }
 
   /* BEST TIME PAGE */
   .besttime-page { background: var(--cream); }
@@ -1188,6 +1318,8 @@
     .quote-box { grid-template-columns: 1fr; }
     .quote-form { padding: 2.5rem; }
     .quote-dest-grid { grid-template-columns: repeat(3, 1fr); }
+    .package-modal-body { padding: 2rem; }
+    .package-info-bar { grid-template-columns: repeat(2, 1fr); row-gap: 1.25rem; }
     .itinerary-section { padding: 4rem 3rem; }
     .itinerary-grid { grid-template-columns: repeat(2, 1fr); }
     .plan-intro { padding: 4rem 3rem; }
@@ -1315,6 +1447,12 @@
     .quote-row { grid-template-columns: 1fr; gap: 0.75rem; }
     .quote-result { padding: 2.5rem 1.75rem; }
     .quote-result-price { font-size: 2.3rem; }
+    .package-modal-overlay { padding: 0; }
+    .package-modal-body { padding: 1.5rem; }
+    .package-modal-hero { height: 180px; }
+    .package-modal-title { font-size: 1.6rem; }
+    .package-info-bar { grid-template-columns: 1fr 1fr; row-gap: 1.25rem; }
+    .package-inc-exc { grid-template-columns: 1fr; gap: 1.5rem; }
     .itinerary-section { padding: 3rem 1.25rem; }
     .itinerary-grid { grid-template-columns: 1fr; gap: 0.75rem; }
 
@@ -1345,7 +1483,7 @@
 
 <!-- NAV -->
 <nav id="main-nav">
-  <a class="nav-logo" onclick="goPage('home'); return false;">🐘 Sri Lanka <span>Tourism</span></a>
+  <a class="nav-logo" onclick="goPage('home'); return false;">❄ Sri Lanka <span>Tourism</span></a>
   <ul class="nav-links">
     <li><a onclick="goPage('experiences')" id="nav-experiences">Experiences</a></li>
     <li><a onclick="goPage('destinations')" id="nav-destinations">Destinations</a></li>
@@ -2215,35 +2353,110 @@
       <div class="section-eyebrow">Sample Itineraries</div>
       <h2 class="section-title" style="color:#fff;">Choose your <em>journey</em></h2>
       <div class="itinerary-grid">
-        <div class="itin-card" data-dest="kandy,ella,nuwara eliya" data-price="450">
+        <div class="itin-card" data-pkg="pkg5" data-dest="kandy,ella,nuwara eliya" data-price="450" onclick="openPackageModal('pkg5')">
           <div class="itin-day">5 Days · Weekend Escape</div>
           <div class="itin-title">Hill Country Focus</div>
           <div class="itin-desc">Colombo → Kandy → Ella → Nuwara Eliya → Colombo. Ideal for those wanting the scenic train and highland tea country in a compact trip.</div>
           <div class="itin-price">From $450<span>Per person, twin sharing</span></div>
+          <div class="itin-view">View full itinerary →</div>
         </div>
-        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle" data-price="650">
+        <div class="itin-card" data-pkg="pkg7" data-dest="sigiriya,kandy,ella,galle" data-price="650" onclick="openPackageModal('pkg7')">
           <div class="itin-day">7 Days · Classic</div>
           <div class="itin-title">The Golden Triangle</div>
           <div class="itin-desc">Colombo → Sigiriya → Kandy → Ella → Galle. Covers the cultural triangle, hill country train, and southern coast.</div>
           <div class="itin-price">From $650<span>Per person, twin sharing</span></div>
+          <div class="itin-view">View full itinerary →</div>
         </div>
-        <div class="itin-card" data-dest="kandy,nuwara eliya,yala,mirissa,galle" data-price="890">
+        <div class="itin-card" data-pkg="pkg10" data-dest="kandy,nuwara eliya,yala,mirissa,galle" data-price="890" onclick="openPackageModal('pkg10')">
           <div class="itin-day">10 Days · Beach & Culture</div>
           <div class="itin-title">Coast & Temples</div>
           <div class="itin-desc">Colombo → Negombo → Dambulla → Kandy → Nuwara Eliya → Yala → Mirissa → Galle.</div>
           <div class="itin-price">From $890<span>Per person, twin sharing</span></div>
+          <div class="itin-view">View full itinerary →</div>
         </div>
-        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1250">
+        <div class="itin-card" data-pkg="pkg14" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1250" onclick="openPackageModal('pkg14')">
           <div class="itin-day">14 Days · Full Island</div>
           <div class="itin-title">Complete Sri Lanka</div>
           <div class="itin-desc">All of the above plus Trincomalee, Polonnaruwa, Arugam Bay, and a full week on the south coast — the definitive Sri Lanka loop.</div>
           <div class="itin-price">From $1,250<span>Per person, twin sharing</span></div>
+          <div class="itin-view">View full itinerary →</div>
         </div>
-        <div class="itin-card" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1850">
+        <div class="itin-card" data-pkg="pkg21" data-dest="sigiriya,kandy,ella,galle,nuwara eliya,yala,mirissa,trincomalee" data-price="1850" onclick="openPackageModal('pkg21')">
           <div class="itin-day">21 Days · All Island</div>
           <div class="itin-title">All Island Grand Tour</div>
           <div class="itin-desc">Colombo → Anuradhapura → Sigiriya → Kandy → Nuwara Eliya → Ella → Yala → Mirissa → Galle → Trincomalee. Every province, every coast, at an unhurried pace — the full Sri Lanka experience, start to finish.</div>
           <div class="itin-price">From $1,850<span>Per person, twin sharing</span></div>
+          <div class="itin-view">View full itinerary →</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="package-modal-overlay" id="package-modal-overlay" onclick="if(event.target===this) closePackageModal()">
+      <div class="package-modal">
+        <button class="package-modal-close" onclick="closePackageModal()">✕</button>
+        <div class="package-modal-hero" id="pkg-hero"></div>
+
+        <div class="package-modal-body">
+          <div class="package-modal-eyebrow" id="pkg-type">Promotional Tour Package</div>
+          <h2 class="package-modal-title" id="pkg-title">—</h2>
+
+          <div class="package-info-bar">
+            <div class="package-info-item">
+              <div class="package-info-label">Per Person / Double Sharing</div>
+              <div class="package-info-value" id="pkg-price">$0</div>
+            </div>
+            <div class="package-info-item">
+              <div class="package-info-label">Duration</div>
+              <div class="package-info-value" id="pkg-duration">—</div>
+            </div>
+            <div class="package-info-item">
+              <div class="package-info-label">Tour Type</div>
+              <div class="package-info-value" id="pkg-group-type">Family, Group</div>
+            </div>
+            <div class="package-info-item">
+              <div class="package-info-label">Min. Guests</div>
+              <div class="package-info-value">2</div>
+            </div>
+          </div>
+
+          <div class="package-section">
+            <h3 class="package-section-title">Tour Plan</h3>
+            <div class="package-day-list" id="pkg-day-list"></div>
+          </div>
+
+          <div class="package-section package-inc-exc">
+            <div>
+              <h3 class="package-section-title">Included</h3>
+              <ul class="package-list package-list-included" id="pkg-included"></ul>
+            </div>
+            <div>
+              <h3 class="package-section-title">Excluded</h3>
+              <ul class="package-list package-list-excluded" id="pkg-excluded"></ul>
+            </div>
+          </div>
+
+          <div class="package-cta-row">
+            <button class="quote-btn" onclick="customizePackage()">Customize This Package</button>
+          </div>
+
+          <div class="package-section">
+            <h3 class="package-section-title">Request This Package</h3>
+            <div class="package-booking-form">
+              <div class="quote-row">
+                <input type="text" id="pkg-form-name" class="quote-input" placeholder="Your name">
+                <input type="email" id="pkg-form-email" class="quote-input" placeholder="Your email">
+              </div>
+              <div class="quote-field">
+                <input type="date" id="pkg-form-date" class="quote-input">
+              </div>
+              <div class="quote-field">
+                <textarea id="pkg-form-message" class="quote-input" rows="3" placeholder="Message (number of travelers, preferred dates, questions...)"></textarea>
+              </div>
+              <div class="quote-error" id="pkg-form-error">Please enter your name and a valid email.</div>
+              <button class="quote-btn" onclick="submitPackageRequest()">Request a Reservation</button>
+              <div class="package-form-success" id="pkg-form-success">Thanks! Your email app should have opened with this request pre-filled — hit send and we'll be in touch shortly.</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2368,6 +2581,213 @@
     'trincomalee': 'images/Diving.jpg',
     'nuwara eliya': 'images/Tea_Hills.jpg'
   };
+
+  const PACKAGE_INCLUDED = [
+    'Accommodation on double sharing basis',
+    'Daily breakfast',
+    'Private air-conditioned vehicle with English-speaking driver',
+    'Airport pickup & drop-off',
+    'All applicable government taxes',
+    'Bottled water during tours'
+  ];
+  const PACKAGE_EXCLUDED = [
+    'International / domestic flights',
+    'Visa fees',
+    'Lunches & dinners unless specified',
+    'Entrance tickets to sites',
+    'Personal expenses & tips',
+    'Travel insurance'
+  ];
+
+  const PACKAGES = {
+    pkg5: {
+      title: 'Hill Country Focus',
+      days: 5, price: 450, hero: 'images/Ella.jpg',
+      destinations: ['Kandy', 'Ella', 'Nuwara Eliya'],
+      dayPlan: [
+        { range: 'Day 1', title: 'Colombo → Kandy', text: 'Airport pickup and a scenic drive to Kandy, with a stop at a spice garden en route. Evening free, or join an optional traditional dance show. Overnight in Kandy.' },
+        { range: 'Day 2', title: 'Kandy Sightseeing', text: 'Visit the Temple of the Sacred Tooth Relic, stroll around Kandy Lake, and explore the Royal Botanical Gardens at Peradeniya. Overnight in Kandy.' },
+        { range: 'Day 3', title: 'Kandy → Nuwara Eliya', text: 'Drive up into tea country, stopping at a working tea factory and Ramboda Falls along the way. Overnight in Nuwara Eliya.' },
+        { range: 'Day 4', title: 'Nuwara Eliya → Ella', text: 'Board the famous hill-country train to Ella, one of the most scenic rail journeys in the world. Visit the Nine Arches Bridge, with time to hike Little Adam\'s Peak if you like. Overnight in Ella.' },
+        { range: 'Day 5', title: 'Ella → Colombo · Departure', text: 'Morning at leisure, then transfer back to Colombo for your onward flight.' }
+      ]
+    },
+    pkg7: {
+      title: 'The Golden Triangle',
+      days: 7, price: 650, hero: 'images/sigiriya.jpg',
+      destinations: ['Sigiriya', 'Kandy', 'Ella', 'Galle'],
+      dayPlan: [
+        { range: 'Day 1', title: 'Arrival → Sigiriya', text: 'Airport pickup and transfer to Sigiriya. Evening at leisure to settle in.' },
+        { range: 'Day 2', title: 'Sigiriya Rock & Dambulla', text: 'Climb the Sigiriya Rock Fortress in the cooler morning hours, then visit the painted cave temples of Dambulla in the afternoon.' },
+        { range: 'Day 3', title: 'Sigiriya → Kandy', text: 'Drive to Kandy via a spice garden and an elephant sanctuary stop. Evening traditional dance performance.' },
+        { range: 'Day 4', title: 'Kandy Sightseeing', text: 'Temple of the Sacred Tooth Relic, Kandy Lake, and the Royal Botanical Gardens at Peradeniya.' },
+        { range: 'Day 5', title: 'Kandy → Ella', text: 'Ride the hill-country train through tea estates and misty peaks to Ella. Visit the Nine Arches Bridge.' },
+        { range: 'Day 6', title: 'Ella → Galle', text: 'Drive south to the coast. Afternoon walking tour of Galle Fort\'s ramparts, lighthouse, and colonial streets.' },
+        { range: 'Day 7', title: 'Galle → Colombo · Departure', text: 'Free morning by the coast, then transfer to Colombo for departure.' }
+      ]
+    },
+    pkg10: {
+      title: 'Coast & Temples',
+      days: 10, price: 890, hero: 'images/Elephant.jpg',
+      destinations: ['Kandy', 'Nuwara Eliya', 'Yala', 'Mirissa', 'Galle'],
+      dayPlan: [
+        { range: 'Day 1', title: 'Arrival → Negombo', text: 'Airport pickup, short transfer to Negombo. Relax on the beach and recover from your flight.' },
+        { range: 'Day 2', title: 'Negombo → Dambulla', text: 'Drive north to Dambulla, visiting the cave temple complex en route.' },
+        { range: 'Day 3', title: 'Dambulla → Kandy', text: 'Continue on to Kandy, with a stop at a spice garden.' },
+        { range: 'Day 4', title: 'Kandy Sightseeing', text: 'Temple of the Sacred Tooth Relic, Kandy Lake, and an evening cultural dance show.' },
+        { range: 'Day 5', title: 'Kandy → Nuwara Eliya', text: 'Climb into tea country, visiting a working tea factory and Ramboda Falls.' },
+        { range: 'Day 6', title: 'Nuwara Eliya → Yala', text: 'Transfer down to the southeast. Evening at leisure ahead of an early safari start.' },
+        { range: 'Day 7', title: 'Yala National Park Safari', text: 'Morning and afternoon game drives in search of leopards, elephants, and birdlife.' },
+        { range: 'Day 8', title: 'Yala → Mirissa', text: 'Drive to the south coast. Relax on the beach, with optional whale watching in season (Nov–Apr).' },
+        { range: 'Day 9', title: 'Mirissa → Galle', text: 'Short drive to Galle. Walking tour of the fort, ramparts, and boutique streets.' },
+        { range: 'Day 10', title: 'Galle → Colombo · Departure', text: 'Transfer to Colombo for your onward flight.' }
+      ]
+    },
+    pkg14: {
+      title: 'Complete Sri Lanka',
+      days: 14, price: 1250, hero: 'images/Diving.jpg',
+      destinations: ['Sigiriya', 'Kandy', 'Ella', 'Galle', 'Nuwara Eliya', 'Yala', 'Mirissa', 'Trincomalee'],
+      dayPlan: [
+        { range: 'Day 1', title: 'Arrival Colombo', text: 'Airport pickup and a short city orientation drive. Overnight in or near Colombo.' },
+        { range: 'Day 2', title: 'Colombo → Sigiriya', text: 'Drive north to the cultural triangle. Evening at leisure.' },
+        { range: 'Day 3', title: 'Sigiriya Rock & Dambulla', text: 'Climb Sigiriya Rock Fortress and visit the Dambulla cave temples.' },
+        { range: 'Day 4', title: 'Polonnaruwa Day Trip', text: 'Explore the ancient city of Polonnaruwa — palaces, stupas, and the famous Gal Vihara Buddha statues.' },
+        { range: 'Day 5', title: 'Sigiriya → Trincomalee', text: 'Drive east to the coast.' },
+        { range: 'Day 6', title: 'Trincomalee', text: 'Visit Koneswaram Temple and relax on Trincomalee\'s beaches, with optional diving or snorkeling.' },
+        { range: 'Day 7', title: 'Trincomalee → Kandy', text: 'Drive inland to the hill capital.' },
+        { range: 'Day 8', title: 'Kandy Sightseeing', text: 'Temple of the Sacred Tooth Relic, Kandy Lake, and an evening cultural dance show.' },
+        { range: 'Day 9', title: 'Kandy → Nuwara Eliya', text: 'Tea country drive with a factory visit and Ramboda Falls stop.' },
+        { range: 'Day 10', title: 'Nuwara Eliya → Ella', text: 'Ride the scenic hill-country train to Ella and visit the Nine Arches Bridge.' },
+        { range: 'Day 11', title: 'Ella → Yala', text: 'Transfer to Yala ahead of an early safari start.' },
+        { range: 'Day 12', title: 'Yala National Park Safari', text: 'Full day of game drives tracking leopards, elephants, and birdlife.' },
+        { range: 'Day 13', title: 'Yala → Mirissa → Galle', text: 'Beach time in Mirissa followed by an afternoon walking tour of Galle Fort.' },
+        { range: 'Day 14', title: 'Galle → Colombo · Departure', text: 'Transfer to Colombo for your onward flight.' }
+      ]
+    },
+    pkg21: {
+      title: 'All Island Grand Tour',
+      days: 21, price: 1850, hero: 'images/Mirissa.jpg',
+      destinations: ['Sigiriya', 'Kandy', 'Ella', 'Galle', 'Nuwara Eliya', 'Yala', 'Mirissa', 'Trincomalee'],
+      dayPlan: [
+        { range: 'Day 1–2', title: 'Colombo & Negombo', text: 'Arrival, city orientation, and time to relax on Negombo\'s beach before heading inland.' },
+        { range: 'Day 3–4', title: 'Anuradhapura', text: 'Explore the sacred ancient city — dagobas, monasteries, and the sacred Bodhi tree.' },
+        { range: 'Day 5–6', title: 'Sigiriya & Dambulla', text: 'Climb the Sigiriya Rock Fortress and visit the painted cave temples of Dambulla.' },
+        { range: 'Day 7', title: 'Polonnaruwa', text: 'A full day among the palaces, stupas, and statues of the medieval capital.' },
+        { range: 'Day 8–9', title: 'Trincomalee', text: 'Koneswaram Temple, calm turquoise beaches, and optional diving or snorkeling.' },
+        { range: 'Day 10–11', title: 'Kandy', text: 'Temple of the Sacred Tooth Relic, Kandy Lake, botanical gardens, and a cultural dance show.' },
+        { range: 'Day 12–13', title: 'Nuwara Eliya', text: 'Tea country at altitude — factory visits, waterfalls, and cool highland air.' },
+        { range: 'Day 14–15', title: 'Ella', text: 'Scenic train arrival, the Nine Arches Bridge, and a hike up Little Adam\'s Peak.' },
+        { range: 'Day 16–17', title: 'Yala', text: 'Two full days of safari game drives tracking leopards and elephants.' },
+        { range: 'Day 18–19', title: 'Mirissa', text: 'South-coast beach time, with optional whale watching in season.' },
+        { range: 'Day 20', title: 'Galle', text: 'Walking tour of Galle Fort\'s ramparts, lighthouse, and colonial streets.' },
+        { range: 'Day 21', title: 'Departure', text: 'Transfer to Colombo for your onward flight.' }
+      ]
+    }
+  };
+
+  let currentPackageId = null;
+
+  function openPackageModal(pkgId) {
+    const pkg = PACKAGES[pkgId];
+    if (!pkg) return;
+    currentPackageId = pkgId;
+
+    document.getElementById('pkg-hero').style.backgroundImage =
+      `linear-gradient(180deg, rgba(14,31,24,0) 40%, rgba(14,31,24,0.55) 100%), url('${pkg.hero}')`;
+    document.getElementById('pkg-title').textContent = pkg.title;
+    document.getElementById('pkg-price').textContent = `$${pkg.price.toLocaleString()}`;
+    document.getElementById('pkg-duration').textContent = `${pkg.days} days`;
+
+    const dayListEl = document.getElementById('pkg-day-list');
+    dayListEl.innerHTML = pkg.dayPlan.map((d, i) => `
+      <div class="package-day${i === 0 ? ' open' : ''}">
+        <div class="package-day-head" onclick="toggleDay(this)">
+          <div class="package-day-head-title"><span>${d.range}</span>${d.title}</div>
+          <div class="package-day-chevron">⌄</div>
+        </div>
+        <div class="package-day-content">
+          <div class="package-day-content-inner">${d.text}</div>
+        </div>
+      </div>
+    `).join('');
+
+    document.getElementById('pkg-included').innerHTML =
+      PACKAGE_INCLUDED.map(item => `<li>${item}</li>`).join('');
+    document.getElementById('pkg-excluded').innerHTML =
+      PACKAGE_EXCLUDED.map(item => `<li>${item}</li>`).join('');
+
+    document.getElementById('pkg-form-name').value = '';
+    document.getElementById('pkg-form-email').value = '';
+    document.getElementById('pkg-form-date').value = '';
+    document.getElementById('pkg-form-message').value = '';
+    document.getElementById('pkg-form-error').style.display = 'none';
+    document.getElementById('pkg-form-success').style.display = 'none';
+
+    document.getElementById('package-modal-overlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePackageModal() {
+    document.getElementById('package-modal-overlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function toggleDay(headEl) {
+    headEl.parentElement.classList.toggle('open');
+  }
+
+  function customizePackage() {
+    const pkg = PACKAGES[currentPackageId];
+    if (!pkg) return;
+    closePackageModal();
+
+    document.querySelectorAll('#quote-dest-grid input[type="checkbox"]').forEach(cb => {
+      cb.checked = pkg.destinations.some(d => d.toLowerCase() === cb.value.trim().toLowerCase());
+    });
+    document.getElementById('quote-days').value = pkg.days;
+
+    const travelers = parseInt(document.getElementById('quote-travelers').value, 10) || 2;
+    autoSelectVehicle(travelers);
+    generateQuote();
+
+    setTimeout(() => {
+      const section = document.querySelector('.quote-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+  }
+
+  function submitPackageRequest() {
+    const name = document.getElementById('pkg-form-name').value.trim();
+    const email = document.getElementById('pkg-form-email').value.trim();
+    const date = document.getElementById('pkg-form-date').value;
+    const message = document.getElementById('pkg-form-message').value.trim();
+    const errorEl = document.getElementById('pkg-form-error');
+    const successEl = document.getElementById('pkg-form-success');
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!name || !emailValid) {
+      errorEl.style.display = 'block';
+      successEl.style.display = 'none';
+      return;
+    }
+    errorEl.style.display = 'none';
+
+    const pkg = PACKAGES[currentPackageId] || {};
+    const subject = encodeURIComponent(`Reservation request: ${pkg.title || 'Tour Package'}`);
+    const body = encodeURIComponent(
+      `Package: ${pkg.title || ''} (${pkg.days || ''} days)\n` +
+      `Name: ${name}\n` +
+      `Email: ${email}\n` +
+      `Preferred date: ${date || 'Not specified'}\n\n` +
+      `Message:\n${message || '(none)'}`
+    );
+    window.location.href = `mailto:bookings@srilankatourism.example?subject=${subject}&body=${body}`;
+    successEl.style.display = 'block';
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closePackageModal();
+  });
 
   function toggleMenu() {
     const menu = document.getElementById('mobile-menu');
