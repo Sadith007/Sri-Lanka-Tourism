@@ -1174,6 +1174,138 @@
   #pkg-form-error { display: none; }
   .package-form-success { display: none; font-size: 0.82rem; color: var(--green-bright); margin-top: 0.5rem; line-height: 1.6; }
 
+  /* CHATBOT WIDGET */
+  .chat-fab {
+    position: fixed;
+    bottom: 1.75rem; right: 1.75rem;
+    width: 58px; height: 58px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    border-radius: 50%;
+    font-size: 1.4rem;
+    cursor: pointer;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+    z-index: 400;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .chat-fab:hover { background: var(--gold-light); transform: scale(1.06); }
+  .chat-fab-icon-close { display: none; }
+  .chat-fab.open .chat-fab-icon-open { display: none; }
+  .chat-fab.open .chat-fab-icon-close { display: block; }
+
+  .chat-panel {
+    display: none;
+    position: fixed;
+    bottom: 6rem; right: 1.75rem;
+    width: 360px;
+    max-width: calc(100vw - 2rem);
+    height: 520px;
+    max-height: calc(100vh - 8rem);
+    background: var(--cream);
+    box-shadow: 0 24px 60px rgba(0,0,0,0.35);
+    z-index: 400;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .chat-panel.open { display: flex; }
+
+  .chat-panel-header {
+    background: var(--green-deep);
+    padding: 1rem 1.1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .chat-panel-avatar {
+    width: 38px; height: 38px;
+    background: var(--gold);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem; flex-shrink: 0;
+  }
+  .chat-panel-title { color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; }
+  .chat-panel-status { color: rgba(255,255,255,0.55); font-size: 0.7rem; display: flex; align-items: center; gap: 0.35rem; margin-top: 0.1rem; }
+  .chat-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--green-bright); display: inline-block; }
+  .chat-panel-close {
+    margin-left: auto;
+    background: none; border: none; color: rgba(255,255,255,0.7);
+    font-size: 0.85rem; cursor: pointer; padding: 0.3rem;
+  }
+  .chat-panel-close:hover { color: #fff; }
+
+  .chat-panel-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 1.1rem;
+    display: flex; flex-direction: column; gap: 0.7rem;
+  }
+  .chat-msg { display: flex; }
+  .chat-msg.bot { justify-content: flex-start; }
+  .chat-msg.user { justify-content: flex-end; }
+  .chat-bubble {
+    max-width: 82%;
+    padding: 0.6rem 0.85rem;
+    font-size: 0.83rem;
+    line-height: 1.55;
+  }
+  .chat-msg.bot .chat-bubble { background: #fff; color: var(--dark); border: 1px solid rgba(14,31,24,0.1); }
+  .chat-msg.user .chat-bubble { background: var(--gold); color: #fff; }
+  .chat-bubble-action {
+    display: inline-block;
+    margin-top: 0.55rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--dark);
+    background: var(--gold-light);
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    border: none;
+  }
+  .chat-bubble-action:hover { background: var(--gold); color: #fff; }
+
+  .chat-quick-replies {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    padding: 0 1.1rem 0.85rem;
+  }
+  .chat-quick-replies button {
+    font-size: 0.72rem;
+    background: #fff;
+    border: 1px solid rgba(14,31,24,0.15);
+    color: var(--dark);
+    padding: 0.4rem 0.7rem;
+    cursor: pointer;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .chat-quick-replies button:hover { border-color: var(--gold); background: var(--gold-light); }
+
+  .chat-input-row {
+    display: flex; gap: 0.5rem;
+    padding: 0.85rem 1.1rem;
+    border-top: 1px solid rgba(14,31,24,0.1);
+    background: #fff;
+  }
+  .chat-input-row input {
+    flex: 1;
+    border: 1px solid rgba(14,31,24,0.15);
+    padding: 0.6rem 0.75rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.83rem;
+    background: var(--cream);
+  }
+  .chat-input-row input:focus { outline: none; border-color: var(--gold); }
+  .chat-send-btn {
+    width: 40px; height: 40px;
+    background: var(--gold);
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    transition: background 0.2s;
+  }
+  .chat-send-btn:hover { background: var(--gold-light); }
+
   /* BEST TIME PAGE */
   .besttime-page { background: var(--cream); }
   .seasons-full {
@@ -1455,6 +1587,8 @@
     .package-inc-exc { grid-template-columns: 1fr; gap: 1.5rem; }
     .itinerary-section { padding: 3rem 1.25rem; }
     .itinerary-grid { grid-template-columns: 1fr; gap: 0.75rem; }
+    .chat-fab { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; font-size: 1.25rem; }
+    .chat-panel { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%; }
 
     /* BEST TIME PAGE */
     .seasons-full { grid-template-columns: 1fr; }
@@ -1508,6 +1642,37 @@
   <button class="mobile-cta" onclick="mobileGoPage('plan')">Plan My Journey</button>
 </div>
 
+<!-- CHATBOT WIDGET -->
+<button class="chat-fab" id="chat-fab" onclick="toggleChat()" aria-label="Chat with us">
+  <span class="chat-fab-icon-open">💬</span>
+  <span class="chat-fab-icon-close">✕</span>
+</button>
+
+<div class="chat-panel" id="chat-panel">
+  <div class="chat-panel-header">
+    <div class="chat-panel-avatar">🌿</div>
+    <div>
+      <div class="chat-panel-title">Trip Assistant</div>
+      <div class="chat-panel-status"><span class="chat-dot"></span> Usually replies instantly</div>
+    </div>
+    <button class="chat-panel-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+  </div>
+
+  <div class="chat-panel-body" id="chat-body"></div>
+
+  <div class="chat-quick-replies" id="chat-quick-replies">
+    <button onclick="askChat('Show me packages and prices')">Packages & Prices</button>
+    <button onclick="askChat('What destinations can I visit?')">Destinations</button>
+    <button onclick="askChat('When is the best time to visit?')">Best Time to Visit</button>
+    <button onclick="askChat('How do I get a custom quote?')">Get a Quote</button>
+  </div>
+
+  <form class="chat-input-row" onsubmit="return handleChatSubmit(event)">
+    <input type="text" id="chat-input" placeholder="Ask about destinations, prices, tours..." autocomplete="off">
+    <button type="submit" class="chat-send-btn" aria-label="Send">➤</button>
+  </form>
+</div>
+
 <!-- ===== HOME PAGE ===== -->
 <div id="page-home" class="page active">
 
@@ -1522,6 +1687,7 @@
       <img src="images/Mirissa.jpg" alt="Sri Lanka beach">
       <img src="images/Tea_Hills.jpg" alt="Tea hills">
     </div>
+
 
     <div class="hero-content">
       <div class="hero-eyebrow">The Wonder of Asia</div>
@@ -2976,6 +3142,144 @@
         if (document.querySelectorAll('#quote-dest-grid input:checked').length > 0) generateQuote();
       }));
   });
+
+  // ===== CHATBOT WIDGET =====
+
+  const CHAT_KB = [
+    {
+      keywords: ['package', 'tour', 'itinerary', 'trip plan', 'sample'],
+      reply: "We have 5 set packages — from a 5-Day Hill Country Escape (from $450pp) up to a 21-Day All Island Grand Tour (from $1,850pp). Every package can also be customized.",
+      action: { label: 'View Packages', fn: 'chatGoToPackages' }
+    },
+    {
+      keywords: ['price', 'cost', 'how much', 'budget', 'quote', 'expensive', 'cheap'],
+      reply: "Pricing depends on your destinations, trip length, number of travelers, hotel category, and vehicle. Our Instant Quote tool gives you an exact estimate in seconds.",
+      action: { label: 'Get Instant Quote', fn: 'chatGoToQuote' }
+    },
+    {
+      keywords: ['destination', 'place', 'where', 'sigiriya', 'kandy', 'ella', 'galle', 'mirissa', 'yala', 'trincomalee', 'nuwara'],
+      reply: "Popular destinations include Sigiriya, Kandy, Ella, Galle, Mirissa, Yala, Trincomalee, and Nuwara Eliya — each with its own highlights, from ancient rock fortresses to tea country and safaris.",
+      action: { label: 'Browse Destinations', fn: 'chatGoToDestinations' }
+    },
+    {
+      keywords: ['best time', 'when should', 'weather', 'season', 'climate', 'monsoon', 'rain'],
+      reply: "Sri Lanka is a year-round destination. West & South coasts are best Dec–Mar, the East coast shines May–Sept, and the hill country is pleasant all year.",
+      action: { label: 'Best Time to Visit', fn: 'chatGoToBestTime' }
+    },
+    {
+      keywords: ['vehicle', 'car', 'van', 'transport', 'coach', 'driver'],
+      reply: "We offer Sedan Cars (1–3 pax), Vans (4–8 pax), Mini Coasters (9–15 pax), and Luxury Coaches (16–30 pax). The Instant Quote tool auto-suggests the right one for your group size."
+    },
+    {
+      keywords: ['visa', 'entry', 'airport', 'sim', 'currency', 'plug', 'wifi'],
+      reply: "Most visitors need an ETA (Electronic Travel Authorization) before arrival. Our Plan Your Trip page also covers SIM cards, currency, and power plug info.",
+      action: { label: 'Plan Your Trip', fn: 'chatGoToPlan' }
+    },
+    {
+      keywords: ['all island', '21 day', 'full island', 'everything'],
+      reply: "The All Island Grand Tour (21 days, from $1,850pp) covers every province — Sigiriya, Kandy, Nuwara Eliya, Ella, Yala, Mirissa, Galle, and Trincomalee, at an unhurried pace.",
+      action: { label: 'View Packages', fn: 'chatGoToPackages' }
+    },
+    {
+      keywords: ['custom', 'customize', 'build my own', 'tailor'],
+      reply: "Absolutely — pick any destinations, set your days, travelers, hotel category and vehicle in our Instant Quote tool, and get a price built just for you.",
+      action: { label: 'Build My Trip', fn: 'chatGoToQuote' }
+    },
+    {
+      keywords: ['contact', 'email', 'phone', 'whatsapp', 'call', 'reach', 'talk to someone', 'human'],
+      reply: "You can reach us through the contact details in our footer, or just submit a package request or quote and our team will follow up with you directly."
+    },
+    {
+      keywords: ['hello', 'hi', 'hey', 'ayubowan', 'good morning', 'good evening'],
+      reply: "Ayubowan! 🌿 Ask me about destinations, packages, prices, vehicles, or the best time to visit Sri Lanka."
+    },
+    {
+      keywords: ['thank'],
+      reply: "You're most welcome! Happy travels 🌴"
+    }
+  ];
+
+  const CHAT_FALLBACK = "I don't have an exact answer for that yet — try asking about destinations, packages, prices, vehicles, or the best time to visit. Or get an exact price with our Instant Quote tool.";
+
+  function toggleChat() {
+    const panel = document.getElementById('chat-panel');
+    const fab = document.getElementById('chat-fab');
+    const opening = !panel.classList.contains('open');
+    panel.classList.toggle('open');
+    fab.classList.toggle('open');
+    if (opening && document.getElementById('chat-body').children.length === 0) {
+      addChatMessage('bot', "Ayubowan! 🌿 I'm your trip assistant. Ask me about destinations, packages, prices, or the best time to visit — or tap a suggestion below.");
+    }
+    if (opening) {
+      setTimeout(() => document.getElementById('chat-input').focus(), 200);
+    }
+  }
+
+  function addChatMessage(sender, text, action) {
+    const body = document.getElementById('chat-body');
+    const msg = document.createElement('div');
+    msg.className = `chat-msg ${sender}`;
+    const bubble = document.createElement('div');
+    bubble.className = 'chat-bubble';
+    bubble.textContent = text;
+    if (action) {
+      const btn = document.createElement('button');
+      btn.className = 'chat-bubble-action';
+      btn.textContent = action.label;
+      btn.onclick = () => window[action.fn] && window[action.fn]();
+      bubble.appendChild(document.createElement('br'));
+      bubble.appendChild(btn);
+    }
+    msg.appendChild(bubble);
+    body.appendChild(msg);
+    body.scrollTop = body.scrollHeight;
+  }
+
+  function chatRespond(text) {
+    const lower = text.toLowerCase();
+    const match = CHAT_KB.find(entry => entry.keywords.some(k => lower.includes(k)));
+    setTimeout(() => {
+      if (match) {
+        addChatMessage('bot', match.reply, match.action);
+      } else {
+        addChatMessage('bot', CHAT_FALLBACK, { label: 'Get Instant Quote', fn: 'chatGoToQuote' });
+      }
+    }, 350);
+  }
+
+  function askChat(text) {
+    addChatMessage('user', text);
+    chatRespond(text);
+  }
+
+  function handleChatSubmit(e) {
+    e.preventDefault();
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return false;
+    addChatMessage('user', text);
+    chatRespond(text);
+    input.value = '';
+    return false;
+  }
+
+  function chatGoToPackages() {
+    goPage('plan');
+    setTimeout(() => {
+      const section = document.getElementById('itinerary-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+  function chatGoToQuote() {
+    goPage('plan');
+    setTimeout(() => {
+      const section = document.querySelector('.quote-section');
+      if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 300);
+  }
+  function chatGoToDestinations() { goPage('destinations'); }
+  function chatGoToBestTime() { goPage('besttime'); }
+  function chatGoToPlan() { goPage('plan'); }
 
   function subscribeNewsletter(btn) {
     const form = btn.closest('.newsletter-form');
