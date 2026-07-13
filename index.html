@@ -3305,7 +3305,20 @@
     return false;
   }
 
+  function closeChatIfMobile() {
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      const panel = document.getElementById('chat-panel');
+      const fab = document.getElementById('chat-fab');
+      if (panel.classList.contains('open')) {
+        panel.classList.remove('open');
+        fab.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+    }
+  }
+
   function chatGoToPackages() {
+    closeChatIfMobile();
     goPage('plan');
     setTimeout(() => {
       const section = document.getElementById('itinerary-section');
@@ -3313,15 +3326,16 @@
     }, 300);
   }
   function chatGoToQuote() {
+    closeChatIfMobile();
     goPage('plan');
     setTimeout(() => {
       const section = document.querySelector('.quote-section');
       if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 300);
   }
-  function chatGoToDestinations() { goPage('destinations'); }
-  function chatGoToBestTime() { goPage('besttime'); }
-  function chatGoToPlan() { goPage('plan'); }
+  function chatGoToDestinations() { closeChatIfMobile(); goPage('destinations'); }
+  function chatGoToBestTime() { closeChatIfMobile(); goPage('besttime'); }
+  function chatGoToPlan() { closeChatIfMobile(); goPage('plan'); }
 
   function subscribeNewsletter(btn) {
     const form = btn.closest('.newsletter-form');
