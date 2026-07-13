@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Sri Lanka Tourism — The Wonder of Asia</title>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
@@ -1209,7 +1209,15 @@
     flex-direction: column;
     overflow: hidden;
   }
-  .chat-panel.open { display: flex; }
+  .chat-panel.open { display: flex; animation: chatPanelIn 0.28s ease; }
+  @keyframes chatPanelIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes chatPanelSlideUp {
+    from { opacity: 0; transform: translateY(100%); }
+    to { opacity: 1; transform: translateY(0); }
+  }
 
   .chat-panel-header {
     background: var(--green-deep);
@@ -1587,8 +1595,37 @@
     .package-inc-exc { grid-template-columns: 1fr; gap: 1.5rem; }
     .itinerary-section { padding: 3rem 1.25rem; }
     .itinerary-grid { grid-template-columns: 1fr; gap: 0.75rem; }
-    .chat-fab { bottom: 1.25rem; right: 1.25rem; width: 52px; height: 52px; font-size: 1.25rem; }
-    .chat-panel { bottom: 0; right: 0; left: 0; width: 100%; max-width: 100%; height: 100%; max-height: 100%; }
+    .chat-fab { bottom: 1.25rem; right: 1.25rem; width: 54px; height: 54px; font-size: 1.3rem; }
+    .chat-fab.open { display: none; }
+    .chat-panel {
+      bottom: 0; right: 0; left: 0; top: 0;
+      width: 100%; max-width: 100%; height: 100%; max-height: 100%;
+    }
+    .chat-panel.open { animation: chatPanelSlideUp 0.3s ease; }
+    .chat-panel-header {
+      padding: calc(0.9rem + env(safe-area-inset-top)) 1.1rem 0.9rem;
+      flex-shrink: 0;
+    }
+    .chat-panel-avatar { width: 42px; height: 42px; font-size: 1.25rem; }
+    .chat-panel-title { font-size: 1.25rem; }
+    .chat-panel-status { font-size: 0.75rem; }
+    .chat-panel-close {
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+    }
+    .chat-panel-body { padding: 1.25rem 1rem; gap: 0.85rem; -webkit-overflow-scrolling: touch; }
+    .chat-bubble { max-width: 88%; font-size: 0.9rem; padding: 0.7rem 0.95rem; }
+    .chat-quick-replies { padding: 0 1rem 1rem; gap: 0.55rem; }
+    .chat-quick-replies button { font-size: 0.78rem; padding: 0.55rem 0.85rem; }
+    .chat-input-row {
+      padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+      flex-shrink: 0;
+    }
+    .chat-input-row input { padding: 0.7rem 0.85rem; font-size: 0.95rem; }
+    .chat-send-btn { width: 44px; height: 44px; font-size: 1.05rem; }
 
     /* BEST TIME PAGE */
     .seasons-full { grid-template-columns: 1fr; }
@@ -3207,11 +3244,16 @@
     const opening = !panel.classList.contains('open');
     panel.classList.toggle('open');
     fab.classList.toggle('open');
+
+    if (window.matchMedia('(max-width: 768px)').matches) {
+      document.body.style.overflow = opening ? 'hidden' : '';
+    }
+
     if (opening && document.getElementById('chat-body').children.length === 0) {
       addChatMessage('bot', "Ayubowan! 🌿 I'm your trip assistant. Ask me about destinations, packages, prices, or the best time to visit — or tap a suggestion below.");
     }
     if (opening) {
-      setTimeout(() => document.getElementById('chat-input').focus(), 200);
+      setTimeout(() => document.getElementById('chat-input').focus(), 350);
     }
   }
 
