@@ -208,22 +208,25 @@
   }
   .btn-ghost:hover { border-color: var(--gold-light); color: var(--gold-light); }
 
-  /* Photo strip */
+  /* Photo strip -> slideshow */
   .hero-photo-strip {
     position: absolute;
     right: 0; top: 0; bottom: 0;
     width: 38%;
     z-index: 5;
-    display: grid;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 3px;
     overflow: hidden;
   }
   .hero-photo-strip img {
+    position: absolute;
+    inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     filter: brightness(0.75);
-    transition: filter 0.4s;
+    opacity: 0;
+    transition: opacity 1.2s ease, filter 0.4s;
+  }
+  .hero-photo-strip img.active {
+    opacity: 1;
   }
   .hero-photo-strip img:hover { filter: brightness(1); }
 
@@ -1719,8 +1722,8 @@
       <img src="images/Beach.jpg" alt="Sri Lanka landscape" loading="eager">
     </div>
 
-    <div class="hero-photo-strip">
-      <img src="images/sigiriya.jpg" alt="Sigiriya">
+    <div class="hero-photo-strip" id="heroSlideshow">
+      <img src="images/sigiriya.jpg" alt="Sigiriya" class="active">
       <img src="images/Mirissa.jpg" alt="Sri Lanka beach">
       <img src="images/Tea_Hills.jpg" alt="Tea hills">
     </div>
@@ -3163,6 +3166,20 @@
       hint.textContent = `Auto-selected: ${bestOption.textContent} for ${travelers} traveler${travelers !== 1 ? 's' : ''}. Change anytime.`;
     }
   }
+
+  /* HERO PHOTO SLIDESHOW */
+  (function initHeroSlideshow() {
+    const strip = document.getElementById('heroSlideshow');
+    if (!strip) return;
+    const slides = strip.querySelectorAll('img');
+    if (slides.length < 2) return;
+    let current = 0;
+    setInterval(() => {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
+    }, 4000);
+  })();
 
   document.addEventListener('DOMContentLoaded', () => {
     const travelersInput = document.getElementById('quote-travelers');
