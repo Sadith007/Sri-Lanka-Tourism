@@ -108,10 +108,17 @@
     z-index: 0;
   }
   .hero-bg img {
+    position: absolute;
+    inset: 0;
     width: 100%; height: 100%;
     object-fit: cover;
     display: block;
     filter: brightness(0.55);
+    opacity: 0;
+    transition: opacity 1.5s ease;
+  }
+  .hero-bg img.active {
+    opacity: 1;
   }
   .hero-bg::after {
     content: '';
@@ -208,27 +215,8 @@
   }
   .btn-ghost:hover { border-color: var(--gold-light); color: var(--gold-light); }
 
-  /* Photo strip -> slideshow */
-  .hero-photo-strip {
-    position: absolute;
-    right: 0; top: 0; bottom: 0;
-    width: 38%;
-    z-index: 5;
-    overflow: hidden;
-  }
-  .hero-photo-strip img {
-    position: absolute;
-    inset: 0;
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: brightness(0.75);
-    opacity: 0;
-    transition: opacity 1.2s ease, filter 0.4s;
-  }
-  .hero-photo-strip img.active {
-    opacity: 1;
-  }
-  .hero-photo-strip img:hover { filter: brightness(1); }
+
+
 
   /* Hero stats bar */
   .hero-stats {
@@ -1485,7 +1473,6 @@
     .hero-desc { font-size: 0.95rem; max-width: 100%; }
     .hero-btns { flex-direction: column; align-items: flex-start; gap: 0.75rem; }
     .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 0.9rem 1.5rem; }
-    .hero-photo-strip { display: none; }
     .hero-stats {
       padding: 1rem 1.25rem;
       gap: 0;
@@ -1718,12 +1705,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <div class="hero-bg">
-      <img src="images/Beach.jpg" alt="Sri Lanka landscape" loading="eager">
-    </div>
-
-    <div class="hero-photo-strip" id="heroSlideshow">
-      <img src="images/sigiriya.jpg" alt="Sigiriya" class="active">
+    <div class="hero-bg" id="heroSlideshow">
+      <img src="images/Beach.jpg" alt="Sri Lanka landscape" loading="eager" class="active">
+      <img src="images/sigiriya.jpg" alt="Sigiriya">
       <img src="images/Mirissa.jpg" alt="Sri Lanka beach">
       <img src="images/Tea_Hills.jpg" alt="Tea hills">
     </div>
