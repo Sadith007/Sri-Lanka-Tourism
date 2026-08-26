@@ -120,6 +120,15 @@
   .hero-bg img.active {
     opacity: 1;
   }
+  .hero-bg video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(0.55);
+  }
   .hero-bg::after {
     content: '';
     position: absolute;
@@ -1706,12 +1715,10 @@
   <!-- HERO -->
  <section class="hero">
   <div class="hero-bg" id="heroSlideshow">
-    <video autoplay muted loop playsinline poster="images/Beach.jpg">
+    <video autoplay muted loop playsinline poster="video/serenity.mp4">
       <source src="videos/serenity-intro.mp4" type="video/mp4">
     </video>
   </div>
-</section>
-
 
     <div class="hero-content">
       <div class="hero-eyebrow">The Wonder of Asia</div>
