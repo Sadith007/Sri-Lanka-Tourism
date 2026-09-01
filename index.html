@@ -2074,6 +2074,31 @@
           <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
         </div>
         <input type="text" id="review-form-name" class="quote-input" placeholder="Your name">
+        <select id="review-form-country" class="quote-input quote-select">
+          <option value="">Select your country (optional)</option>
+          <option>Sri Lanka</option>
+          <option>United States</option>
+          <option>United Kingdom</option>
+          <option>Canada</option>
+          <option>Australia</option>
+          <option>Germany</option>
+          <option>France</option>
+          <option>Netherlands</option>
+          <option>India</option>
+          <option>China</option>
+          <option>Japan</option>
+          <option>Singapore</option>
+          <option>United Arab Emirates</option>
+          <option>Russia</option>
+          <option>Italy</option>
+          <option>Spain</option>
+          <option>Sweden</option>
+          <option>Switzerland</option>
+          <option>South Korea</option>
+          <option>New Zealand</option>
+          <option>South Africa</option>
+          <option>Other</option>
+        </select>
         <input type="text" id="review-form-package" class="quote-input" placeholder="Package / tour (optional)">
         <textarea id="review-form-comment" class="quote-input" rows="4" placeholder="Your review"></textarea>
         <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">Submit Review</button>
@@ -2881,13 +2906,14 @@
       listEl.innerHTML = data.map(r => {
         const rating = r.Ratings || r.rating || 0;
         const name = (r.Name || r.name || 'Anonymous').replace(/</g, '&lt;');
+        const country = (r.country || r.Country || '').replace(/</g, '&lt;');
         const comment = (r.Comments || r.comment || '').replace(/</g, '&lt;');
         const pkg = (r.package_name || r.Package_Name || r.Package || '').replace(/</g, '&lt;');
         const date = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
         return `
           <div class="review-card">
             <div class="review-card-top">
-              <span class="review-name">${name}</span>
+              <span class="review-name">${name}${country ? ' <span style="font-weight:300;color:var(--text-muted);font-size:0.8rem;">· ' + country + '</span>' : ''}</span>
               <span class="review-stars">${starsHtml(rating)}</span>
             </div>
             ${pkg ? `<div class="review-package">${pkg}</div>` : ''}
@@ -2917,6 +2943,7 @@
 
   async function submitReview() {
     const nameEl = document.getElementById('review-form-name');
+    const countryEl = document.getElementById('review-form-country');
     const pkgEl = document.getElementById('review-form-package');
     const commentEl = document.getElementById('review-form-comment');
     const errorEl = document.getElementById('review-form-error');
@@ -2942,12 +2969,14 @@
         Ratings: selectedReviewRating,
         Comments: comment,
         package_name: pkgEl.value.trim() || null,
+        country: countryEl.value.trim() || null,
         Approved: false
       }]);
       if (error) throw error;
 
       successEl.style.display = 'block';
       nameEl.value = '';
+      countryEl.value = '';
       pkgEl.value = '';
       commentEl.value = '';
       selectedReviewRating = 0;
