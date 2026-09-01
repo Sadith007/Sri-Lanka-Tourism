@@ -642,6 +642,48 @@
   }
 
   .newsletter { padding: 6rem 5rem; background: var(--dark); text-align: center; }
+
+  /* MEMORIES PAGE */
+  .memories-page { padding: 6rem 5rem; background: var(--cream); }
+  .memories-intro { text-align: center; max-width: 640px; margin: 0 auto 3.5rem; }
+  .memories-intro .section-desc { text-align: center; margin: 0 auto; }
+  .memories-tabs { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 3rem; }
+  .memories-tab {
+    padding: 0.7rem 1.75rem; font-family: 'DM Sans', sans-serif; font-size: 0.8rem;
+    letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; background: transparent;
+    border: 1px solid rgba(14,31,24,0.2); color: var(--dark); transition: all 0.2s;
+  }
+  .memories-tab.active, .memories-tab:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
+  .memories-panel { display: none; }
+  .memories-panel.active { display: block; }
+  .memories-photo-grid {
+    columns: 3 260px; column-gap: 1rem; max-width: 1200px; margin: 0 auto;
+  }
+  .memories-photo-item { break-inside: avoid; margin-bottom: 1rem; overflow: hidden; cursor: pointer; position: relative; }
+  .memories-photo-item img { width: 100%; display: block; transition: transform 0.5s ease, filter 0.3s; filter: brightness(0.92); }
+  .memories-photo-item:hover img { transform: scale(1.04); filter: brightness(1); }
+  .memories-photo-item .g-label { position: absolute; bottom: 0.75rem; left: 0.9rem; color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  .memories-video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
+  .memories-video-card { background: var(--green-deep); overflow: hidden; }
+  .memories-video-card video { width: 100%; display: block; max-height: 360px; object-fit: cover; }
+  .memories-video-caption { padding: 1.1rem 1.4rem; color: #fff; font-size: 0.85rem; font-weight: 300; }
+  .memories-video-caption strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; margin-bottom: 0.2rem; }
+  .memories-empty-note { text-align: center; color: var(--text-muted); font-size: 0.85rem; font-weight: 300; margin-top: 2rem; }
+  .memories-lightbox {
+    display: none; position: fixed; inset: 0; background: rgba(10,15,12,0.92); z-index: 900;
+    align-items: center; justify-content: center; padding: 2rem;
+  }
+  .memories-lightbox.active { display: flex; }
+  .memories-lightbox img { max-width: 90vw; max-height: 85vh; object-fit: contain; }
+  .memories-lightbox-close {
+    position: absolute; top: 1.5rem; right: 2rem; color: #fff; font-size: 2rem;
+    cursor: pointer; background: none; border: none; line-height: 1;
+  }
+  @media (max-width: 900px) {
+    .memories-page { padding: 3.5rem 1.25rem; }
+    .memories-photo-grid { columns: 2 180px; }
+    .memories-video-grid { grid-template-columns: 1fr; }
+  }
   .newsletter h2 {
     font-family: 'Cormorant Garamond', serif;
     font-size: 2.8rem; font-weight: 300;
@@ -1704,6 +1746,7 @@
     <li><a onclick="goPage('culture')" id="nav-culture">Culture</a></li>
     <li><a onclick="goPage('plan')" id="nav-plan">Plan Your Trip</a></li>
     <li><a onclick="goPage('besttime')" id="nav-besttime">Best Time</a></li>
+    <li><a onclick="goPage('memories')" id="nav-memories">Memories</a></li>
   </ul>
   <button class="nav-cta" onclick="goPage('plan')">Plan My Journey</button>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
@@ -1719,6 +1762,7 @@
   <a onclick="mobileGoPage('culture')">Culture</a>
   <a onclick="mobileGoPage('plan')">Plan Your Trip</a>
   <a onclick="mobileGoPage('besttime')">Best Time</a>
+  <a onclick="mobileGoPage('memories')">Memories</a>
   <button class="mobile-cta" onclick="mobileGoPage('plan')">Plan My Journey</button>
 </div>
 
@@ -2099,7 +2143,16 @@
           <option>South Africa</option>
           <option>Other</option>
         </select>
-        <input type="text" id="review-form-package" class="quote-input" placeholder="Package / tour (optional)">
+        <select id="review-form-package" class="quote-input quote-select">
+          <option value="">Which package? (optional)</option>
+          <option>Hill Country Focus</option>
+          <option>The Golden Triangle</option>
+          <option>Coast & Temples</option>
+          <option>Complete Sri Lanka</option>
+          <option>All Island Grand Tour</option>
+          <option>Custom Itinerary</option>
+          <option>Other</option>
+        </select>
         <textarea id="review-form-comment" class="quote-input" rows="4" placeholder="Your review"></textarea>
         <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">Submit Review</button>
         <div class="review-form-error" id="review-form-error">Please add your name, a rating, and a short review.</div>
@@ -2865,7 +2918,98 @@
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
   </footer>
-</div>
+</div><!-- /page-besttime -->
+
+<div id="page-memories" class="page">
+  <div class="page-hero">
+    <div class="page-hero-bg">
+      <img src="images/Sunset Beach.jpg" alt="Memories">
+    </div>
+    <div class="page-hero-content">
+      <div class="hero-eyebrow">Moments Worth Keeping</div>
+      <h1>Travel <em>memories</em></h1>
+      <p>Photos and videos from journeys across the island — the golden coastlines, misty hill country, and everything in between.</p>
+    </div>
+  </div>
+
+  <div class="memories-page">
+    <div class="memories-intro">
+      <div class="section-eyebrow" style="justify-content:center;">Gallery</div>
+      <h2 class="section-title">A look back at <em>the island</em></h2>
+      <p class="section-desc">Browse photos and video clips from past trips. Have your own to share? Send them our way and we'll feature them here.</p>
+    </div>
+
+    <div class="memories-tabs">
+      <button class="memories-tab active" data-tab="photos" onclick="showMemoriesTab('photos')">Photos</button>
+      <button class="memories-tab" data-tab="videos" onclick="showMemoriesTab('videos')">Videos</button>
+    </div>
+
+    <div class="memories-panel active" id="memories-panel-photos">
+      <div class="memories-photo-grid">
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Sigiriya1.jpg')">
+          <img src="images/Sigiriya1.jpg" alt="Sigiriya Rock Fortress"><span class="g-label">Sigiriya Rock Fortress</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Ella.jpg')">
+          <img src="images/Ella.jpg" alt="Nine Arches Bridge, Ella"><span class="g-label">Nine Arches Bridge, Ella</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Tea_Hills.jpg')">
+          <img src="images/Tea_Hills.jpg" alt="Tea country hills"><span class="g-label">Tea Country Hills</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Mirissa.jpg')">
+          <img src="images/Mirissa.jpg" alt="Mirissa coastline"><span class="g-label">Mirissa Coastline</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Galle_Fort.jpg')">
+          <img src="images/Galle_Fort.jpg" alt="Galle Fort ramparts"><span class="g-label">Galle Fort</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Elephant.jpg')">
+          <img src="images/Elephant.jpg" alt="Elephants in the wild"><span class="g-label">Wild Elephants</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Kandy.jpg')">
+          <img src="images/Kandy.jpg" alt="Temple of the Tooth, Kandy"><span class="g-label">Temple of the Tooth</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Yala Wild.jpg')">
+          <img src="images/Yala Wild.jpg" alt="Yala National Park"><span class="g-label">Yala National Park</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Tea Plantation.jpg')">
+          <img src="images/Tea Plantation.jpg" alt="Tea plantation"><span class="g-label">Tea Plantation</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Beach1.jpg')">
+          <img src="images/Beach1.jpg" alt="Southern coast beach"><span class="g-label">Southern Coast</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/temple.jpg')">
+          <img src="images/temple.jpg" alt="Ancient temple"><span class="g-label">Ancient Temple</span>
+        </div>
+        <div class="memories-photo-item" onclick="openMemoryLightbox('images/Diving.jpg')">
+          <img src="images/Diving.jpg" alt="Diving in Sri Lanka"><span class="g-label">Reef Diving</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="memories-panel" id="memories-panel-videos">
+      <div class="memories-video-grid">
+        <div class="memories-video-card">
+          <video controls poster="images/Beach.jpg">
+            <source src="/serenity-intro.mp4" type="video/mp4">
+          </video>
+          <div class="memories-video-caption"><strong>Serenity Ceylon — Introduction</strong>A quick look at what a trip with us feels like.</div>
+        </div>
+      </div>
+      <p class="memories-empty-note">More guest videos coming soon. Drop new clips into the <code>/videos</code> folder and add a matching card to feature them here.</p>
+    </div>
+  </div>
+
+  <div class="memories-lightbox" id="memories-lightbox" onclick="closeMemoryLightbox()">
+    <button class="memories-lightbox-close" onclick="closeMemoryLightbox()">✕</button>
+    <img id="memories-lightbox-img" src="" alt="Memory photo">
+  </div>
+
+  <footer>
+    <div class="footer-bottom" style="padding-top:2rem;">
+      <span>© 2026 Serenity Ceylon. All rights reserved.</span>
+      <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
+    </div>
+  </footer>
+</div><!-- /page-memories -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
@@ -3259,6 +3403,20 @@
       nav.classList.toggle('scrolled', window.scrollY > 60);
     }
   });
+
+  // ===== MEMORIES PAGE =====
+  function showMemoriesTab(tab) {
+    document.querySelectorAll('.memories-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === tab));
+    document.querySelectorAll('.memories-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById('memories-panel-' + tab).classList.add('active');
+  }
+  function openMemoryLightbox(src) {
+    document.getElementById('memories-lightbox-img').src = src;
+    document.getElementById('memories-lightbox').classList.add('active');
+  }
+  function closeMemoryLightbox() {
+    document.getElementById('memories-lightbox').classList.remove('active');
+  }
 
   // ===== DESTINATION CARD → QUOTE FORM LINKING =====
 
