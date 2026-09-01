@@ -598,6 +598,49 @@
   .season-panel:hover .season-desc { max-height: 80px; }
 
   /* NEWSLETTER */
+  /* REVIEWS */
+  .reviews-section { padding: 7rem 5rem; background: var(--cream); }
+  .reviews-header { text-align: center; margin-bottom: 3.5rem; }
+  .reviews-header .section-desc { margin: 0 auto; text-align: center; }
+  .reviews-summary { display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 1.25rem; }
+  .reviews-summary .stars { color: var(--gold); font-size: 1.3rem; letter-spacing: 0.1em; }
+  .reviews-summary .reviews-count { font-size: 0.85rem; color: var(--text-muted); }
+  .reviews-layout { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem; align-items: start; max-width: 1200px; margin: 0 auto; }
+  .reviews-list { display: flex; flex-direction: column; gap: 1.25rem; max-height: 620px; overflow-y: auto; padding-right: 0.5rem; }
+  .review-card { background: #fff; border: 1px solid rgba(14,31,24,0.08); padding: 1.75rem; transition: transform 0.25s, box-shadow 0.25s; }
+  .review-card:hover { transform: translateY(-4px); box-shadow: 0 16px 48px rgba(14,31,24,0.08); }
+  .review-card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.6rem; }
+  .review-name { font-family: 'Cormorant Garamond', serif; font-size: 1.15rem; font-weight: 600; color: var(--dark); }
+  .review-stars { color: var(--gold); font-size: 0.95rem; letter-spacing: 0.08em; }
+  .review-package { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--green-mid); margin-bottom: 0.5rem; }
+  .review-comment { font-size: 0.9rem; font-weight: 300; color: var(--text-muted); line-height: 1.75; }
+  .review-date { font-size: 0.72rem; color: rgba(44,44,42,0.35); margin-top: 0.75rem; }
+  .reviews-empty { font-size: 0.9rem; color: var(--text-muted); font-weight: 300; padding: 2rem 0; text-align: center; }
+  .review-form-panel { background: var(--green-deep); padding: 2.5rem; position: sticky; top: 100px; }
+  .review-form-panel h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 600; color: #fff; margin-bottom: 0.4rem; }
+  .review-form-panel .review-form-sub { font-size: 0.82rem; color: rgba(255,255,255,0.5); font-weight: 300; margin-bottom: 1.5rem; }
+  .review-star-picker { display: flex; gap: 0.4rem; margin-bottom: 1.25rem; }
+  .review-star-picker span { font-size: 1.6rem; color: rgba(255,255,255,0.25); cursor: pointer; transition: color 0.15s; }
+  .review-star-picker span.active, .review-star-picker span:hover { color: var(--gold-light); }
+  .review-form-panel .quote-input { margin-bottom: 1rem; }
+  .review-form-panel textarea.quote-input { resize: vertical; font-family: 'DM Sans', sans-serif; }
+  .review-submit-btn {
+    margin-top: 0.5rem; width: 100%; background: var(--gold); color: #fff; border: none;
+    padding: 0.9rem; font-family: 'DM Sans', sans-serif; font-size: 0.82rem; font-weight: 500;
+    letter-spacing: 0.08em; text-transform: uppercase; cursor: pointer; transition: background 0.2s;
+  }
+  .review-submit-btn:hover { background: var(--gold-light); color: var(--dark); }
+  .review-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .review-form-error { color: #E8A0A0; font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+  .review-form-success { display: none; color: var(--gold-light); font-size: 0.85rem; margin-top: 1rem; line-height: 1.6; }
+  .review-form-note { font-size: 0.7rem; color: rgba(255,255,255,0.35); margin-top: 1rem; line-height: 1.5; }
+  @media (max-width: 900px) {
+    .reviews-section { padding: 4rem 1.25rem; }
+    .reviews-layout { grid-template-columns: 1fr; }
+    .review-form-panel { position: static; }
+    .reviews-list { max-height: none; }
+  }
+
   .newsletter { padding: 6rem 5rem; background: var(--dark); text-align: center; }
   .newsletter h2 {
     font-family: 'Cormorant Garamond', serif;
@@ -2009,6 +2052,38 @@
     </div>
   </section>
 
+  <!-- REVIEWS -->
+  <section class="reviews-section" id="reviews">
+    <div class="reviews-header">
+      <div class="section-eyebrow" style="justify-content:center;">Traveler Stories</div>
+      <h2 class="section-title">What our <em>guests</em> say</h2>
+      <p class="section-desc">Real experiences from travelers who explored Sri Lanka with us.</p>
+      <div class="reviews-summary">
+        <span class="stars" id="reviews-avg-stars">★★★★★</span>
+        <span class="reviews-count" id="reviews-count-label">Loading reviews…</span>
+      </div>
+    </div>
+    <div class="reviews-layout">
+      <div class="reviews-list" id="reviews-list">
+        <div class="reviews-empty" id="reviews-loading">Loading reviews...</div>
+      </div>
+      <div class="review-form-panel">
+        <h3>Share your experience</h3>
+        <p class="review-form-sub">Tell fellow travelers about your journey. Approved reviews appear here.</p>
+        <div class="review-star-picker" id="review-star-picker">
+          <span data-val="1">★</span><span data-val="2">★</span><span data-val="3">★</span><span data-val="4">★</span><span data-val="5">★</span>
+        </div>
+        <input type="text" id="review-form-name" class="quote-input" placeholder="Your name">
+        <input type="text" id="review-form-package" class="quote-input" placeholder="Package / tour (optional)">
+        <textarea id="review-form-comment" class="quote-input" rows="4" placeholder="Your review"></textarea>
+        <button class="review-submit-btn" id="review-submit-btn" onclick="submitReview()">Submit Review</button>
+        <div class="review-form-error" id="review-form-error">Please add your name, a rating, and a short review.</div>
+        <div class="review-form-success" id="review-form-success">✓ Thank you! Your review has been submitted and will appear here once approved.</div>
+        <div class="review-form-note">Reviews are moderated before publishing, usually within a day or two.</div>
+      </div>
+    </div>
+  </section>
+
   <!-- NEWSLETTER -->
   <section class="newsletter">
     <h2>Ready to discover <em>wonder</em>?</h2>
@@ -2767,7 +2842,132 @@
   </footer>
 </div>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  /* ===== SUPABASE / REVIEWS ===== */
+  const REVIEWS_SUPABASE_URL = 'https://ljsvrbtbonbhadnhvqup.supabase.co';
+  const REVIEWS_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxqc3ZyYnRib25iaGFkbmh2cXVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjIyOTQsImV4cCI6MjEwMzczODI5NH0.n78FRqD0GRmGveq0B8E_1IF7ltOlmMS_UCLAvN_YGpQ';
+  const reviewsClient = window.supabase.createClient(REVIEWS_SUPABASE_URL, REVIEWS_SUPABASE_ANON_KEY);
+  let selectedReviewRating = 0;
+
+  function starsHtml(n) {
+    return '★★★★★☆☆☆☆☆'.slice(5 - n, 10 - n);
+  }
+
+  async function loadReviews() {
+    const listEl = document.getElementById('reviews-list');
+    const countEl = document.getElementById('reviews-count-label');
+    const avgEl = document.getElementById('reviews-avg-stars');
+    try {
+      const { data, error } = await reviewsClient
+        .from('Reviews')
+        .select('*')
+        .eq('Approved', true)
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+
+      if (!data || data.length === 0) {
+        listEl.innerHTML = '<div class="reviews-empty">No reviews yet — be the first to share your experience!</div>';
+        countEl.textContent = 'No reviews yet';
+        avgEl.textContent = '☆☆☆☆☆';
+        return;
+      }
+
+      const avg = data.reduce((sum, r) => sum + (r.Ratings || r.rating || 0), 0) / data.length;
+      avgEl.textContent = starsHtml(Math.round(avg));
+      countEl.textContent = avg.toFixed(1) + ' out of 5 · ' + data.length + ' review' + (data.length === 1 ? '' : 's');
+
+      listEl.innerHTML = data.map(r => {
+        const rating = r.Ratings || r.rating || 0;
+        const name = (r.Name || r.name || 'Anonymous').replace(/</g, '&lt;');
+        const comment = (r.Comments || r.comment || '').replace(/</g, '&lt;');
+        const pkg = (r.package_name || r.Package || '').replace(/</g, '&lt;');
+        const date = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
+        return `
+          <div class="review-card">
+            <div class="review-card-top">
+              <span class="review-name">${name}</span>
+              <span class="review-stars">${starsHtml(rating)}</span>
+            </div>
+            ${pkg ? `<div class="review-package">${pkg}</div>` : ''}
+            <p class="review-comment">${comment}</p>
+            ${date ? `<div class="review-date">${date}</div>` : ''}
+          </div>`;
+      }).join('');
+    } catch (err) {
+      console.error('loadReviews error:', err);
+      const msg = (err && (err.message || err.error_description || err.hint)) || JSON.stringify(err);
+      listEl.innerHTML = '<div class="reviews-empty">Could not load reviews.<br><small style="opacity:0.6;">' + msg + '</small></div>';
+      countEl.textContent = '';
+    }
+  }
+
+  function initReviewStarPicker() {
+    const picker = document.getElementById('review-star-picker');
+    if (!picker) return;
+    const stars = Array.from(picker.querySelectorAll('span'));
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedReviewRating = parseInt(star.dataset.val, 10);
+        stars.forEach(s => s.classList.toggle('active', parseInt(s.dataset.val, 10) <= selectedReviewRating));
+      });
+    });
+  }
+
+  async function submitReview() {
+    const nameEl = document.getElementById('review-form-name');
+    const pkgEl = document.getElementById('review-form-package');
+    const commentEl = document.getElementById('review-form-comment');
+    const errorEl = document.getElementById('review-form-error');
+    const successEl = document.getElementById('review-form-success');
+    const btn = document.getElementById('review-submit-btn');
+
+    const name = nameEl.value.trim();
+    const comment = commentEl.value.trim();
+
+    if (!name || !comment || selectedReviewRating < 1) {
+      errorEl.style.display = 'block';
+      successEl.style.display = 'none';
+      return;
+    }
+    errorEl.style.display = 'none';
+
+    btn.disabled = true;
+    btn.textContent = 'Submitting...';
+
+    try {
+      const { error } = await reviewsClient.from('Reviews').insert([{
+        Name: name,
+        Ratings: selectedReviewRating,
+        Comments: comment,
+        package_name: pkgEl.value.trim() || null,
+        Approved: false
+      }]);
+      if (error) throw error;
+
+      successEl.style.display = 'block';
+      nameEl.value = '';
+      pkgEl.value = '';
+      commentEl.value = '';
+      selectedReviewRating = 0;
+      document.querySelectorAll('#review-star-picker span').forEach(s => s.classList.remove('active'));
+      btn.textContent = 'Submit Review';
+      btn.disabled = false;
+    } catch (err) {
+      console.error('submitReview error:', err);
+      const msg = (err && (err.message || err.error_description || err.hint)) || JSON.stringify(err);
+      errorEl.textContent = 'Something went wrong: ' + msg;
+      errorEl.style.display = 'block';
+      btn.textContent = 'Submit Review';
+      btn.disabled = false;
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    loadReviews();
+    initReviewStarPicker();
+  });
   const nav = document.getElementById('main-nav');
   let currentPage = 'home';
 
