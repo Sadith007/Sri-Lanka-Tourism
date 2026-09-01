@@ -2882,7 +2882,7 @@
         const rating = r.Ratings || r.rating || 0;
         const name = (r.Name || r.name || 'Anonymous').replace(/</g, '&lt;');
         const comment = (r.Comments || r.comment || '').replace(/</g, '&lt;');
-        const pkg = (r.package_name || r.Package || '').replace(/</g, '&lt;');
+        const pkg = (r.package_name || r.Package_Name || r.Package || '').replace(/</g, '&lt;');
         const date = r.created_at ? new Date(r.created_at).toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' }) : '';
         return `
           <div class="review-card">
