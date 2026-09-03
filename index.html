@@ -1029,6 +1029,12 @@
   }
   .quote-btn:hover { background: var(--gold-light); color: var(--dark); }
   .quote-error { color: #E8A0A0; font-size: 0.8rem; margin-top: 0.75rem; display: none; }
+  .quote-whatsapp-btn {
+    margin-top: 1.5rem;
+    background: #25D366;
+    display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  }
+  .quote-whatsapp-btn:hover { background: #1EBE5A; color: #fff; }
 
   .quote-result {
     background: var(--dark);
@@ -2668,7 +2674,14 @@
             </div>
           </div>
 
-                  
+          <div class="quote-field">
+            <label class="quote-label" for="quote-tier">4. Hotel Category</label>
+            <select id="quote-tier" class="quote-select">
+              <option value="25">Budget (guesthouses, 2–3★)</option>
+              <option value="45" selected>Mid-Range (boutique, 3–4★)</option>
+              <option value="80">Luxury (4–5★, premium resorts)</option>
+            </select>
+          </div>
 
           <div class="quote-field">
             <label class="quote-label" for="quote-vehicle">5. Vehicle</label>
@@ -2696,6 +2709,10 @@
             <div class="quote-result-sub" id="quote-per-person"></div>
             <div class="quote-breakdown" id="quote-breakdown"></div>
             <div class="quote-badge" id="quote-discount-badge" style="display:none;"></div>
+            <button class="quote-btn quote-whatsapp-btn" onclick="bookViaWhatsApp()">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden="true"><path d="M17.47 14.38c-.29-.15-1.73-.85-2-.95-.27-.1-.46-.15-.66.15-.2.29-.76.95-.93 1.14-.17.2-.34.22-.63.07-.29-.15-1.22-.45-2.32-1.43-.86-.76-1.44-1.71-1.6-2-.17-.29-.02-.45.13-.6.13-.13.29-.34.44-.51.15-.17.2-.29.29-.49.1-.2.05-.37-.02-.51-.07-.15-.66-1.59-.91-2.18-.24-.57-.48-.5-.66-.51-.17-.01-.36-.01-.56-.01-.2 0-.51.07-.78.37-.27.29-1.02 1-1.02 2.43 0 1.43 1.04 2.82 1.19 3.01.15.2 2.05 3.13 4.96 4.39.69.3 1.23.48 1.65.61.69.22 1.32.19 1.82.11.55-.08 1.73-.71 1.98-1.39.24-.68.24-1.27.17-1.39-.07-.12-.27-.2-.56-.35z"/><path d="M12.02 2C6.5 2 2.02 6.48 2.02 12c0 1.85.5 3.58 1.36 5.07L2 22l5.06-1.33A9.94 9.94 0 0012.02 22C17.54 22 22 17.52 22 12S17.54 2 12.02 2zm0 18.2a8.17 8.17 0 01-4.17-1.14l-.3-.18-3 .79.8-2.93-.2-.3A8.19 8.19 0 013.82 12c0-4.53 3.68-8.2 8.2-8.2S20.2 7.47 20.2 12s-3.67 8.2-8.18 8.2z"/></svg>
+              <span>Book Now via WhatsApp</span>
+            </button>
             <div class="quote-result-note">Estimate only — final pricing depends on season, availability, and exact hotel selection. Contact us to confirm and book.</div>
           </div>
         </div>
@@ -3013,6 +3030,10 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
+  /* ===== WHATSAPP BOOKING CONFIG ===== */
+  const WHATSAPP_NUMBER = '94776378875'; // country code + number, no + or leading zero
+  let lastQuote = null; // populated by generateQuote(), read by bookViaWhatsApp()
+
   /* ===== SUPABASE / REVIEWS ===== */
   const REVIEWS_SUPABASE_URL = 'https://ljsvrbtbonbhadnhvqup.supabase.co';
   const REVIEWS_SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxqc3ZyYnRib25iaGFkbmh2cXVwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODgxNjIyOTQsImV4cCI6MjEwMzczODI5NH0.n78FRqD0GRmGveq0B8E_1IF7ltOlmMS_UCLAvN_YGpQ';
@@ -3519,6 +3540,42 @@
 
     placeholder.style.display = 'none';
     resultContent.style.display = 'block';
+
+    const tierSelect = document.getElementById('quote-tier');
+    const tierLabel = tierSelect.options[tierSelect.selectedIndex].textContent;
+
+    lastQuote = {
+      destinations,
+      days,
+      travelers,
+      tierLabel,
+      vehicleLabel: vehicleLabel.replace(/\s*\(.*?\)/, ''),
+      total: Math.round(total),
+      perPerson: Math.round(perPerson),
+      discountPct: Math.round(discountPct * 100)
+    };
+  }
+
+  function bookViaWhatsApp() {
+    if (!lastQuote) return;
+    const q = lastQuote;
+    const lines = [
+      'Ayubowan! I would like to book this trip:',
+      '',
+      `Destinations: ${q.destinations.join(', ')}`,
+      `Trip Length: ${q.days} day${q.days !== 1 ? 's' : ''}`,
+      `Travelers: ${q.travelers}`,
+      `Hotel Category: ${q.tierLabel}`,
+      `Vehicle: ${q.vehicleLabel}`,
+      q.discountPct > 0 ? `Group Discount: -${q.discountPct}%` : null,
+      '',
+      `Estimated Total: $${q.total.toLocaleString()} (≈ $${q.perPerson.toLocaleString()} per person)`,
+      '',
+      'Please confirm availability and next steps to book. Thank you!'
+    ].filter(Boolean);
+
+    const message = encodeURIComponent(lines.join('\n'));
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
   }
 
   function selectAllIsland() {
