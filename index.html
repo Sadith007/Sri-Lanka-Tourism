@@ -93,6 +93,81 @@
   }
   .nav-cta:hover { background: var(--gold-light); color: var(--dark); }
 
+  /* LANGUAGE SWITCHER */
+  .lang-switch { position: relative; }
+  .lang-current {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.9);
+    padding: 0.45rem 0.8rem;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .lang-current:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .lang-current svg { transition: transform 0.2s; opacity: 0.8; }
+  .lang-switch.open .lang-current svg { transform: rotate(180deg); }
+  .lang-menu {
+    position: absolute;
+    top: calc(100% + 0.6rem);
+    right: 0;
+    min-width: 160px;
+    list-style: none;
+    background: rgba(10, 20, 15, 0.98);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.35);
+    padding: 0.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s, transform 0.2s, visibility 0.2s;
+    z-index: 200;
+    max-height: 320px;
+    overflow-y: auto;
+  }
+  .lang-menu.open { opacity: 1; visibility: visible; transform: translateY(0); }
+  .lang-menu a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.8);
+    text-decoration: none;
+    cursor: pointer;
+    letter-spacing: 0.02em;
+  }
+  .lang-menu a:hover { background: rgba(255,255,255,0.06); color: var(--gold-light); }
+  .lang-menu a.active { color: var(--gold-light); font-weight: 500; }
+  .mobile-lang-block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: 0.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(255,255,255,0.12);
+  }
+  .mobile-lang-block a {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.75);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 0.4rem 0.75rem;
+    cursor: pointer;
+  }
+  .mobile-lang-block a.active { color: var(--dark); background: var(--gold-light); border-color: var(--gold-light); }
+
+  /* Google Translate widget — keep invisible, we drive it via our own UI */
+  #google_translate_element { display: none !important; }
+  .goog-te-banner-frame.skiptranslate { display: none !important; }
+  body { top: 0 !important; }
+  .goog-tooltip, .goog-tooltip:hover { display: none !important; box-shadow: none !important; }
+  .goog-text-highlight { background: none !important; box-shadow: none !important; }
+
   /* HERO */
   .hero {
     position: relative;
@@ -1754,6 +1829,24 @@
     <li><a onclick="goPage('besttime')" id="nav-besttime">Best Time</a></li>
     <li><a onclick="goPage('memories')" id="nav-memories">Memories</a></li>
   </ul>
+  <div class="lang-switch" id="lang-switch">
+    <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+      <span id="lang-current-code">EN</span>
+      <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+    </button>
+    <ul class="lang-menu" id="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+    </ul>
+  </div>
   <button class="nav-cta" onclick="goPage('plan')">Plan My Journey</button>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
@@ -1770,6 +1863,18 @@
   <a onclick="mobileGoPage('besttime')">Best Time</a>
   <a onclick="mobileGoPage('memories')">Memories</a>
   <button class="mobile-cta" onclick="mobileGoPage('plan')">Plan My Journey</button>
+  <div class="mobile-lang-block" id="mobile-lang-block">
+    <a data-lang="en" onclick="setLanguage('en')">EN</a>
+    <a data-lang="de" onclick="setLanguage('de')">DE</a>
+    <a data-lang="fr" onclick="setLanguage('fr')">FR</a>
+    <a data-lang="it" onclick="setLanguage('it')">IT</a>
+    <a data-lang="es" onclick="setLanguage('es')">ES</a>
+    <a data-lang="nl" onclick="setLanguage('nl')">NL</a>
+    <a data-lang="ru" onclick="setLanguage('ru')">RU</a>
+    <a data-lang="pl" onclick="setLanguage('pl')">PL</a>
+    <a data-lang="sv" onclick="setLanguage('sv')">SV</a>
+    <a data-lang="cs" onclick="setLanguage('cs')">CS</a>
+  </div>
 </div>
 
 <!-- CHATBOT WIDGET -->
@@ -3775,6 +3880,76 @@
   function chatGoToBestTime() { closeChatIfMobile(); goPage('besttime'); }
   function chatGoToPlan() { closeChatIfMobile(); goPage('plan'); }
 
+  // ===== LANGUAGE SWITCHER (Google Translate under the hood) =====
+
+  function toggleLangMenu(e) {
+    if (e) e.stopPropagation();
+    document.getElementById('lang-switch').classList.toggle('open');
+    document.getElementById('lang-menu').classList.toggle('open');
+  }
+  document.addEventListener('click', (e) => {
+    const wrap = document.getElementById('lang-switch');
+    if (wrap && !wrap.contains(e.target)) {
+      wrap.classList.remove('open');
+      document.getElementById('lang-menu').classList.remove('open');
+    }
+  });
+
+  function getCookie(name) {
+    const match = document.cookie.match(new RegExp('(?:^|; )' + name + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  }
+
+  function setLangCookie(lang) {
+    const value = `/en/${lang}`;
+    const host = window.location.hostname;
+    document.cookie = `googtrans=${value};path=/`;
+    if (host) {
+      document.cookie = `googtrans=${value};path=/;domain=${host}`;
+      document.cookie = `googtrans=${value};path=/;domain=.${host}`;
+    }
+  }
+
+  function setLanguage(lang) {
+    if (lang === 'en') {
+      // Clear translation cookies to restore original English
+      ['googtrans'].forEach(name => {
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/`;
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=${window.location.hostname}`;
+        document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 UTC;path=/;domain=.${window.location.hostname}`;
+      });
+    } else {
+      setLangCookie(lang);
+    }
+    location.reload();
+  }
+
+  function updateLangLabel(lang) {
+    const codeEl = document.getElementById('lang-current-code');
+    if (codeEl) codeEl.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-menu a, .mobile-lang-block a').forEach(a => {
+      a.classList.toggle('active', a.dataset.lang === lang);
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const cookie = getCookie('googtrans');
+    let lang = 'en';
+    if (cookie) {
+      const parts = cookie.split('/').filter(Boolean);
+      if (parts.length >= 2 && parts[1]) lang = parts[1];
+    }
+    updateLangLabel(lang);
+  });
+
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      includedLanguages: 'de,fr,it,es,nl,ru,pl,sv,cs',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+
   function subscribeNewsletter(btn) {
     const form = btn.closest('.newsletter-form');
     const input = form.querySelector('input');
@@ -3786,5 +3961,9 @@
     }
   }
 </script>
+
+<!-- Language translation engine (Google Translate, hidden — driven by the language switcher above) -->
+<div id="google_translate_element"></div>
+<script src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 </body>
 </html>
