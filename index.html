@@ -1848,7 +1848,6 @@
       <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
       <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
       <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
-      <li><a data-lang="jp" onclick="setlanguage('jp')">日本語</a></li>
     </ul>
   </div>
   <button class="nav-cta" onclick="goPage('plan')">Plan My Journey</button>
@@ -1878,7 +1877,6 @@
     <a data-lang="pl" onclick="setLanguage('pl')">PL</a>
     <a data-lang="sv" onclick="setLanguage('sv')">SV</a>
     <a data-lang="cs" onclick="setLanguage('cs')">CS</a>
-    <a data-lang="jp" onclick="setlanguage('jp')">JP</a>
   </div>
 </div>
 
@@ -1920,8 +1918,7 @@
  <section class="hero">
   <div class="hero-bg" id="heroSlideshow">
     <video autoplay muted loop playsinline poster="images/Beach.jpg">
-      <source src="video
-       Videos/serenity-intro.mp4" type="video/mp4">
+      <source src="/serenity-intro.mp4" type="video/mp4">
     </video>
   </div>
 
@@ -3950,7 +3947,7 @@
   function googleTranslateElementInit() {
     new google.translate.TranslateElement({
       pageLanguage: 'en',
-      includedLanguages: 'de,fr,it,es,nl,ru,pl,sv,cs,jp',
+      includedLanguages: 'de,fr,it,es,nl,ru,pl,sv,cs',
       autoDisplay: false
     }, 'google_translate_element');
   }
