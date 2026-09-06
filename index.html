@@ -163,8 +163,11 @@
 
   /* Google Translate widget — keep invisible, we drive it via our own UI */
   #google_translate_element { display: none !important; }
-  .goog-te-banner-frame.skiptranslate { display: none !important; }
-  body { top: 0 !important; }
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-banner-frame,
+  body > .skiptranslate,
+  iframe.skiptranslate { display: none !important; visibility: hidden !important; height: 0 !important; }
+  body { top: 0 !important; position: static !important; }
   .goog-tooltip, .goog-tooltip:hover { display: none !important; box-shadow: none !important; }
   .goog-text-highlight { background: none !important; box-shadow: none !important; }
 
@@ -3949,6 +3952,22 @@
       autoDisplay: false
     }, 'google_translate_element');
   }
+
+  // Safety net: Google's widget sometimes re-injects the top banner with
+  // inline styles after translating. Keep forcing it hidden.
+  (function keepTranslateBannerHidden() {
+    function enforce() {
+      document.querySelectorAll('.goog-te-banner-frame, iframe.skiptranslate, body > .skiptranslate')
+        .forEach(el => { el.style.display = 'none'; el.style.visibility = 'hidden'; el.style.height = '0'; });
+      if (document.body) {
+        document.body.style.top = '0px';
+        document.body.style.position = document.body.style.position === 'fixed' ? 'static' : document.body.style.position;
+      }
+    }
+    enforce();
+    setInterval(enforce, 400);
+    window.addEventListener('load', enforce);
+  })();
 
   function subscribeNewsletter(btn) {
     const form = btn.closest('.newsletter-form');
