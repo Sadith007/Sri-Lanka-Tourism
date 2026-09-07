@@ -155,6 +155,15 @@
   }
   .lang-menu a:hover { background: rgba(255,255,255,0.06); color: var(--gold-light); }
   .lang-menu a.active { color: var(--gold-light); font-weight: 500; }
+  .footer-bottom { flex-wrap: wrap; gap: 1rem; }
+  .footer-lang-switch .lang-current {
+    border-color: rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.6);
+    padding: 0.4rem 0.7rem;
+    font-size: 0.72rem;
+  }
+  .footer-lang-switch .lang-current:hover { border-color: var(--gold-light); color: var(--gold-light); }
+  .footer-lang-switch .lang-menu { top: auto; bottom: calc(100% + 0.6rem); left: 0; right: auto; }
   .mobile-lang-block {
     display: flex;
     flex-wrap: wrap;
@@ -1843,9 +1852,9 @@
     <li><a onclick="goPage('besttime')" id="nav-besttime">Best Time</a></li>
     <li><a onclick="goPage('memories')" id="nav-memories">Memories</a></li>
   </ul>
-  <div class="lang-switch" id="lang-switch">
+    <div class="lang-switch" id="lang-switch">
     <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
-      <span id="lang-current-code">EN</span>
+      <span class="lang-current-code" id="lang-current-code">EN</span>
       <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
     </button>
     <ul class="lang-menu" id="lang-menu">
@@ -2351,6 +2360,24 @@
       </div>
     </div>
     <div class="footer-bottom">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span>Privacy Policy · Terms of Use · Sitemap</span>
     </div>
@@ -2453,6 +2480,24 @@
   </section>
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -2547,6 +2592,24 @@
 
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -2638,6 +2701,24 @@
 
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -2943,6 +3024,24 @@
 
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -3040,6 +3139,24 @@
 
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -3137,6 +3254,24 @@
 
   <footer>
     <div class="footer-bottom" style="padding-top:2rem;">
+      <div class="lang-switch footer-lang-switch">
+        <button class="lang-current" onclick="toggleLangMenu(event)" aria-label="Select language">
+          <span class="lang-current-code">EN</span>
+          <svg width="10" height="6" viewBox="0 0 10 6"><path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" fill="none"/></svg>
+        </button>
+        <ul class="lang-menu">
+      <li><a data-lang="en" onclick="setLanguage('en')">English</a></li>
+      <li><a data-lang="de" onclick="setLanguage('de')">Deutsch</a></li>
+      <li><a data-lang="fr" onclick="setLanguage('fr')">Français</a></li>
+      <li><a data-lang="it" onclick="setLanguage('it')">Italiano</a></li>
+      <li><a data-lang="es" onclick="setLanguage('es')">Español</a></li>
+      <li><a data-lang="nl" onclick="setLanguage('nl')">Nederlands</a></li>
+      <li><a data-lang="ru" onclick="setLanguage('ru')">Русский</a></li>
+      <li><a data-lang="pl" onclick="setLanguage('pl')">Polski</a></li>
+      <li><a data-lang="sv" onclick="setLanguage('sv')">Svenska</a></li>
+      <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
+        </ul>
+      </div>
       <span>© 2026 Serenity Ceylon. All rights reserved.</span>
       <span><a onclick="goPage('home')" style="color:var(--gold-light);cursor:pointer;">← Back to Home</a></span>
     </div>
@@ -3903,15 +4038,20 @@
 
   function toggleLangMenu(e) {
     if (e) e.stopPropagation();
-    document.getElementById('lang-switch').classList.toggle('open');
-    document.getElementById('lang-menu').classList.toggle('open');
+    const wrap = e.currentTarget.closest('.lang-switch');
+    if (!wrap) return;
+    const menu = wrap.querySelector('.lang-menu');
+    wrap.classList.toggle('open');
+    if (menu) menu.classList.toggle('open');
   }
   document.addEventListener('click', (e) => {
-    const wrap = document.getElementById('lang-switch');
-    if (wrap && !wrap.contains(e.target)) {
-      wrap.classList.remove('open');
-      document.getElementById('lang-menu').classList.remove('open');
-    }
+    document.querySelectorAll('.lang-switch.open').forEach(wrap => {
+      if (!wrap.contains(e.target)) {
+        wrap.classList.remove('open');
+        const menu = wrap.querySelector('.lang-menu');
+        if (menu) menu.classList.remove('open');
+      }
+    });
   });
 
   function getCookie(name) {
@@ -3944,8 +4084,7 @@
   }
 
   function updateLangLabel(lang) {
-    const codeEl = document.getElementById('lang-current-code');
-    if (codeEl) codeEl.textContent = lang.toUpperCase();
+    document.querySelectorAll('.lang-current-code').forEach(el => el.textContent = lang.toUpperCase());
     document.querySelectorAll('.lang-menu a, .mobile-lang-block a').forEach(a => {
       a.classList.toggle('active', a.dataset.lang === lang);
     });
