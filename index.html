@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐘</text></svg>">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Serenity Ceylon — Peaceful Tranquil Moments with us</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐘</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -92,6 +93,16 @@
     transition: background 0.2s;
   }
   .nav-cta:hover { background: var(--gold-light); color: var(--dark); }
+
+  /* NAV — tighten spacing on laptop-width screens so the language switcher
+     doesn't crowd/overlap the last nav link (kicks in before the hamburger) */
+  @media (max-width: 1360px) and (min-width: 769px) {
+    nav { padding: 1.15rem 1.5rem; }
+    .nav-links { gap: 1.3rem; }
+    .nav-links a { font-size: 0.76rem; letter-spacing: 0.03em; }
+    .nav-cta { padding: 0.55rem 1.05rem; font-size: 0.72rem; }
+    .lang-current { padding: 0.4rem 0.6rem; font-size: 0.7rem; }
+  }
 
   /* LANGUAGE SWITCHER */
   .lang-switch { position: relative; }
@@ -2125,7 +2136,7 @@
   <!-- CULTURE -->
   <section class="culture">
     <div class="culture-img">
-      <img src="images/IMG_2583.jpg" alt="Sri Lanka Culture">
+      <img src="images/Culture.jpg" alt="Sri Lanka Culture">
     </div>
     <div class="culture-content">
       <div class="section-eyebrow">Living Traditions</div>
@@ -3113,12 +3124,6 @@
             <source src="/images/VIDEO-2026-09-03-11-04-52.mp4" type="video/mp4">
           </video>
           <div class="memories-video-caption"><strong>Yala National Park</strong>Trip That you can experiance the wild life like Africa.</div>
-        </div>
-        <div class="memories-video-card">
-          <video controls>
-            <source src="/images/VIDEO-2026-09-03-11-05-22.mp4" type="video/mp4">
-          </video>
-          <div class="memories-video-caption"><strong>Sri Lanka Traditional Dancing</strong>Discover serenity in the land of smiles - Sri Lanka.</div>
         </div>
       </div>
       <p class="memories-empty-note">More guest videos coming soon. Drop new clips into the <code>/videos</code> folder and add a matching card to feature them here.</p>
