@@ -755,19 +755,21 @@
   .memories-panel { display: none; }
   .memories-panel.active { display: block; }
   .split-slider {
-    position: relative; max-width: 1100px; height: 480px; margin: 0 auto;
-    overflow: hidden; background: var(--dark); box-shadow: 0 30px 70px rgba(0,0,0,0.25);
+    position: relative; width: 100%; max-width: 780px; aspect-ratio: 4 / 3; margin: 0 auto;
+    overflow: hidden; background: var(--dark); box-shadow: 0 24px 60px rgba(0,0,0,0.22);
   }
   .split-slides { position: relative; width: 100%; height: 100%; list-style: none; margin: 0; padding: 0; }
   .split-slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; z-index: 1; transition: opacity 0.05s; }
   .split-slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
   .split-half {
-    position: absolute; top: 0; width: 50%; height: 100%; background-size: 200% 100%;
-    background-repeat: no-repeat; transform: translateX(0);
-    transition: transform 0.9s cubic-bezier(.77,0,.18,1);
+    position: absolute; top: 0; width: 50%; height: 100%; overflow: hidden;
+    transform: translateX(0); transition: transform 0.9s cubic-bezier(.77,0,.18,1);
   }
-  .split-left { left: 0; background-position: left center; }
-  .split-right { right: 0; background-position: right center; }
+  .split-left { left: 0; }
+  .split-right { right: 0; }
+  .split-half img { position: absolute; top: 0; width: 200%; height: 100%; object-fit: cover; display: block; }
+  .split-left img { left: 0; }
+  .split-right img { right: 0; }
   .split-title {
     position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;
     color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
@@ -811,7 +813,7 @@
   }
   @media (max-width: 900px) {
     .memories-page { padding: 3.5rem 1.25rem; }
-    .split-slider { height: 320px; }
+    .split-slider { max-width: 100%; aspect-ratio: 3 / 4; }
     .split-title { font-size: 1.7rem; white-space: normal; padding: 0 1rem; }
     .split-nav { width: 38px; height: 38px; font-size: 1.15rem; }
     .split-prev { left: 0.6rem; }
@@ -3227,63 +3229,63 @@
       <div class="split-slider" id="splitSlider">
         <ul class="split-slides" id="splitSlides">
         <li class="split-slide active" data-index="0">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2235.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2235.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2235.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2235.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
         <li class="split-slide" data-index="1">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2316.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2316.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2316.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2316.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
         <li class="split-slide" data-index="2">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_4251.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_4251.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_4251.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_4251.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
         <li class="split-slide" data-index="3">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2239.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2239.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2239.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2239.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
         <li class="split-slide" data-index="4">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2304.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2304.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2304.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2304.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
         <li class="split-slide" data-index="5">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2373.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2373.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2373.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2373.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
         <li class="split-slide" data-index="6">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_4254.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_4254.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_4254.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_4254.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
         <li class="split-slide" data-index="7">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2242.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2242.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2242.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2242.jpeg" alt=""></div>
           <h3 class="split-title"><span>Snaking Time</span></h3>
         </li>
         <li class="split-slide" data-index="8">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2308.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2308.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2308.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2308.jpeg" alt=""></div>
           <h3 class="split-title"><span>Snaking Time</span></h3>
         </li>
         <li class="split-slide" data-index="9">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2372.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2372.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2372.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2372.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
         <li class="split-slide" data-index="10">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_2246.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_2246.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_2246.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_2246.jpeg" alt=""></div>
           <h3 class="split-title"><span>Coldy</span></h3>
         </li>
         <li class="split-slide" data-index="11">
-          <div class="split-half split-left" style="background-image:url('memories/IMG_4253.jpeg')"></div>
-          <div class="split-half split-right" style="background-image:url('memories/IMG_4253.jpeg')"></div>
+          <div class="split-half split-left"><img src="memories/IMG_4253.jpeg" alt=""></div>
+          <div class="split-half split-right"><img src="memories/IMG_4253.jpeg" alt=""></div>
           <h3 class="split-title"><span>Love It</span></h3>
         </li>
         </ul>
