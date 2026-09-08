@@ -3228,62 +3228,62 @@
     <div class="memories-panel active" id="memories-panel-photos">
       <div class="split-slider" id="splitSlider">
         <ul class="split-slides" id="splitSlides">
-        <li class="split-slide active" data-index="0">
+        <li class="split-slide active" data-index="0" onclick="openMemoryLightbox('memories/IMG_2235.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2235.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2235.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="1">
+        <li class="split-slide" data-index="1" onclick="openMemoryLightbox('memories/IMG_2316.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2316.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2316.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="2">
+        <li class="split-slide" data-index="2" onclick="openMemoryLightbox('memories/IMG_4251.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_4251.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_4251.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="3">
+        <li class="split-slide" data-index="3" onclick="openMemoryLightbox('memories/IMG_2239.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2239.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2239.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="4">
+        <li class="split-slide" data-index="4" onclick="openMemoryLightbox('memories/IMG_2304.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2304.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2304.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="5">
+        <li class="split-slide" data-index="5" onclick="openMemoryLightbox('memories/IMG_2373.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2373.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2373.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="6">
+        <li class="split-slide" data-index="6" onclick="openMemoryLightbox('memories/IMG_4254.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_4254.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_4254.jpeg" alt=""></div>
           <h3 class="split-title"><span>With Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="7">
+        <li class="split-slide" data-index="7" onclick="openMemoryLightbox('memories/IMG_2242.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2242.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2242.jpeg" alt=""></div>
           <h3 class="split-title"><span>Snaking Time</span></h3>
         </li>
-        <li class="split-slide" data-index="8">
+        <li class="split-slide" data-index="8" onclick="openMemoryLightbox('memories/IMG_2308.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2308.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2308.jpeg" alt=""></div>
           <h3 class="split-title"><span>Snaking Time</span></h3>
         </li>
-        <li class="split-slide" data-index="9">
+        <li class="split-slide" data-index="9" onclick="openMemoryLightbox('memories/IMG_2372.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2372.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2372.jpeg" alt=""></div>
           <h3 class="split-title"><span>Friends</span></h3>
         </li>
-        <li class="split-slide" data-index="10">
+        <li class="split-slide" data-index="10" onclick="openMemoryLightbox('memories/IMG_2246.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_2246.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_2246.jpeg" alt=""></div>
           <h3 class="split-title"><span>Coldy</span></h3>
         </li>
-        <li class="split-slide" data-index="11">
+        <li class="split-slide" data-index="11" onclick="openMemoryLightbox('memories/IMG_4253.jpeg')">
           <div class="split-half split-left"><img src="memories/IMG_4253.jpeg" alt=""></div>
           <div class="split-half split-right"><img src="memories/IMG_4253.jpeg" alt=""></div>
           <h3 class="split-title"><span>Love It</span></h3>
@@ -3818,10 +3818,30 @@
       splitIndex = nextIndex;
       document.querySelectorAll('#splitDots .split-dot').forEach((d, i) => d.classList.toggle('active', i === splitIndex));
       splitAnimating = false;
+      if (typeof startSplitAutoplay === 'function' && splitAutoplayTimer !== null) startSplitAutoplay();
     }, 950);
   }
   function splitSlideChange(dir) { splitGoTo(splitIndex + dir); }
   function splitSlideGoTo(i) { splitGoTo(i); }
+
+  // Autoplay — advances every 4.5s, resets its timer on any slide change
+  // (manual or auto), and pauses while the mouse is over the slider.
+  let splitAutoplayTimer = null;
+  function startSplitAutoplay() {
+    stopSplitAutoplay();
+    splitAutoplayTimer = setInterval(() => splitSlideChange(1), 4500);
+  }
+  function stopSplitAutoplay() {
+    if (splitAutoplayTimer) { clearInterval(splitAutoplayTimer); splitAutoplayTimer = null; }
+  }
+  document.addEventListener('DOMContentLoaded', () => {
+    const slider = document.getElementById('splitSlider');
+    if (slider) {
+      startSplitAutoplay();
+      slider.addEventListener('mouseenter', stopSplitAutoplay);
+      slider.addEventListener('mouseleave', startSplitAutoplay);
+    }
+  });
 
   // ===== DESTINATION CARD → QUOTE FORM LINKING =====
 
