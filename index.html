@@ -754,16 +754,45 @@
   .memories-tab.active, .memories-tab:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
   .memories-panel { display: none; }
   .memories-panel.active { display: block; }
-  .memories-photo-grid {
-    display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 210px;
-    grid-auto-flow: dense; gap: 0.9rem; max-width: 1200px; margin: 0 auto;
+  .split-slider {
+    position: relative; max-width: 1100px; height: 480px; margin: 0 auto;
+    overflow: hidden; background: var(--dark); box-shadow: 0 30px 70px rgba(0,0,0,0.25);
   }
-  .memories-photo-item { overflow: hidden; cursor: pointer; position: relative; }
-  .memories-photo-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease, filter 0.3s; filter: brightness(0.92); }
-  .memories-photo-item:hover img { transform: scale(1.06); filter: brightness(1); }
-  .memories-photo-item:nth-child(6n+1) { grid-column: span 2; grid-row: span 2; }
-  .memories-photo-item:nth-child(6n+4) { grid-row: span 2; }
-  .memories-photo-item .g-label { position: absolute; bottom: 0.75rem; left: 0.9rem; color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; text-shadow: 0 2px 8px rgba(0,0,0,0.6); }
+  .split-slides { position: relative; width: 100%; height: 100%; list-style: none; margin: 0; padding: 0; }
+  .split-slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; z-index: 1; transition: opacity 0.05s; }
+  .split-slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
+  .split-half {
+    position: absolute; top: 0; width: 50%; height: 100%; background-size: 200% 100%;
+    background-repeat: no-repeat; transform: translateX(0);
+    transition: transform 0.9s cubic-bezier(.77,0,.18,1);
+  }
+  .split-left { left: 0; background-position: left center; }
+  .split-right { right: 0; background-position: right center; }
+  .split-title {
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;
+    color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
+    letter-spacing: 0.04em; text-align: center; text-shadow: 0 4px 24px rgba(0,0,0,0.55);
+    pointer-events: none; opacity: 0; transition: opacity 0.6s ease 0.35s; white-space: nowrap;
+  }
+  .split-slide.active .split-title { opacity: 1; }
+  .split-nav {
+    position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
+    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.4); color: #fff;
+    width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem; line-height: 1;
+    cursor: pointer; transition: background 0.2s, border-color 0.2s;
+  }
+  .split-nav:hover { background: rgba(255,255,255,0.28); border-color: var(--gold-light); }
+  .split-prev { left: 1.25rem; }
+  .split-next { right: 1.25rem; }
+  .split-dots {
+    position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 0.5rem; z-index: 5; list-style: none; margin: 0; padding: 0;
+  }
+  .split-dot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
+    cursor: pointer; transition: background 0.2s, transform 0.2s;
+  }
+  .split-dot.active { background: var(--gold-light); transform: scale(1.35); }
   .memories-video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
   .memories-video-card { background: var(--green-deep); overflow: hidden; }
   .memories-video-card video { width: 100%; display: block; max-height: 360px; object-fit: cover; }
@@ -782,9 +811,11 @@
   }
   @media (max-width: 900px) {
     .memories-page { padding: 3.5rem 1.25rem; }
-    .memories-photo-grid { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 160px; gap: 0.6rem; }
-    .memories-photo-item:nth-child(6n+1) { grid-column: span 2; grid-row: span 1; }
-    .memories-photo-item:nth-child(6n+4) { grid-row: span 1; }
+    .split-slider { height: 320px; }
+    .split-title { font-size: 1.7rem; white-space: normal; padding: 0 1rem; }
+    .split-nav { width: 38px; height: 38px; font-size: 1.15rem; }
+    .split-prev { left: 0.6rem; }
+    .split-next { right: 0.6rem; }
     .memories-video-grid { grid-template-columns: 1fr; }
   }
   .newsletter h2 {
@@ -3193,46 +3224,87 @@
     </div>
 
     <div class="memories-panel active" id="memories-panel-photos">
-      <div class="memories-photo-grid">
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2235.jpeg')">
-          <img src="memories/IMG_2235.jpeg" alt="Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2316.jpeg')">
-          <img src="memories/IMG_2316.jpeg" alt="Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_4251.jpeg')">
-          <img src="memories/IMG_4251.jpeg" alt="Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2239.jpeg')">
-          <img src="memories/IMG_2239.jpeg" alt="With Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2304.jpeg')">
-          <img src="memories/IMG_2304.jpeg" alt="With Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2373.jpeg')">
-          <img src="memories/IMG_2373.jpeg" alt="With Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_4254.jpeg')">
-          <img src="memories/IMG_4254.jpeg" alt="With Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2242.jpeg')">
-          <img src="memories/IMG_2242.jpeg" alt="Snaking Time"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2308.jpeg')">
-          <img src="memories/IMG_2308.jpeg" alt="Snaking Time"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2372.jpeg')">
-          <img src="memories/IMG_2372.jpeg" alt="Friends"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_2246.jpeg')">
-          <img src="memories/IMG_2246.jpeg" alt="Coldy"><span class="g-label"></span>
-        </div>
-        <div class="memories-photo-item" onclick="openMemoryLightbox('memories/IMG_4253.jpeg')">
-          <img src="memories/IMG_4253.jpeg" alt="Love It"><span class="g-label"></span>
-        </div>
+      <div class="split-slider" id="splitSlider">
+        <ul class="split-slides" id="splitSlides">
+        <li class="split-slide active" data-index="0">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2235.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2235.jpeg')"></div>
+          <h3 class="split-title"><span>Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="1">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2316.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2316.jpeg')"></div>
+          <h3 class="split-title"><span>Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="2">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_4251.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_4251.jpeg')"></div>
+          <h3 class="split-title"><span>Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="3">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2239.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2239.jpeg')"></div>
+          <h3 class="split-title"><span>With Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="4">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2304.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2304.jpeg')"></div>
+          <h3 class="split-title"><span>With Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="5">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2373.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2373.jpeg')"></div>
+          <h3 class="split-title"><span>With Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="6">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_4254.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_4254.jpeg')"></div>
+          <h3 class="split-title"><span>With Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="7">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2242.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2242.jpeg')"></div>
+          <h3 class="split-title"><span>Snaking Time</span></h3>
+        </li>
+        <li class="split-slide" data-index="8">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2308.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2308.jpeg')"></div>
+          <h3 class="split-title"><span>Snaking Time</span></h3>
+        </li>
+        <li class="split-slide" data-index="9">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2372.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2372.jpeg')"></div>
+          <h3 class="split-title"><span>Friends</span></h3>
+        </li>
+        <li class="split-slide" data-index="10">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_2246.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_2246.jpeg')"></div>
+          <h3 class="split-title"><span>Coldy</span></h3>
+        </li>
+        <li class="split-slide" data-index="11">
+          <div class="split-half split-left" style="background-image:url('memories/IMG_4253.jpeg')"></div>
+          <div class="split-half split-right" style="background-image:url('memories/IMG_4253.jpeg')"></div>
+          <h3 class="split-title"><span>Love It</span></h3>
+        </li>
+        </ul>
+        <button class="split-nav split-prev" onclick="splitSlideChange(-1)" aria-label="Previous photo">&#8249;</button>
+        <button class="split-nav split-next" onclick="splitSlideChange(1)" aria-label="Next photo">&#8250;</button>
+        <ul class="split-dots" id="splitDots">
+          <li class="split-dot active" onclick="splitSlideGoTo(0)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(1)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(2)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(3)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(4)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(5)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(6)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(7)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(8)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(9)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(10)"></li>
+          <li class="split-dot" onclick="splitSlideGoTo(11)"></li>
+        </ul>
       </div>
     </div>
-
     <div class="memories-panel" id="memories-panel-videos">
       <div class="memories-video-grid">
         <div class="memories-video-card">
@@ -3693,6 +3765,61 @@
   function closeMemoryLightbox() {
     document.getElementById('memories-lightbox').classList.remove('active');
   }
+
+  // ===== MEMORIES SPLIT-REVEAL PHOTO SLIDER =====
+  let splitIndex = 0;
+  let splitAnimating = false;
+  function splitGoTo(targetIndex) {
+    const slides = document.querySelectorAll('#splitSlides .split-slide');
+    if (!slides.length) return;
+    const total = slides.length;
+    const nextIndex = ((targetIndex % total) + total) % total;
+    if (splitAnimating || nextIndex === splitIndex) return;
+    splitAnimating = true;
+
+    const current = slides[splitIndex];
+    const next = slides[nextIndex];
+    const nextLeft = next.querySelector('.split-left');
+    const nextRight = next.querySelector('.split-right');
+    const curLeft = current.querySelector('.split-left');
+    const curRight = current.querySelector('.split-right');
+
+    next.style.zIndex = 3;
+    current.style.zIndex = 2;
+    next.classList.add('active');
+
+    nextLeft.style.transition = 'none';
+    nextRight.style.transition = 'none';
+    nextLeft.style.transform = 'translateX(-100%)';
+    nextRight.style.transform = 'translateX(100%)';
+    void next.offsetWidth; // force reflow so the "none" transition takes effect first
+
+    requestAnimationFrame(() => {
+      nextLeft.style.transition = '';
+      nextRight.style.transition = '';
+      nextLeft.style.transform = 'translateX(0)';
+      nextRight.style.transform = 'translateX(0)';
+      curLeft.style.transform = 'translateX(-100%)';
+      curRight.style.transform = 'translateX(100%)';
+    });
+
+    setTimeout(() => {
+      current.classList.remove('active');
+      current.style.zIndex = 1;
+      curLeft.style.transition = 'none';
+      curRight.style.transition = 'none';
+      curLeft.style.transform = 'translateX(0)';
+      curRight.style.transform = 'translateX(0)';
+      void current.offsetWidth;
+      curLeft.style.transition = '';
+      curRight.style.transition = '';
+      splitIndex = nextIndex;
+      document.querySelectorAll('#splitDots .split-dot').forEach((d, i) => d.classList.toggle('active', i === splitIndex));
+      splitAnimating = false;
+    }, 950);
+  }
+  function splitSlideChange(dir) { splitGoTo(splitIndex + dir); }
+  function splitSlideGoTo(i) { splitGoTo(i); }
 
   // ===== DESTINATION CARD → QUOTE FORM LINKING =====
 
