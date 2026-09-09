@@ -754,47 +754,54 @@
   .memories-tab.active, .memories-tab:hover { background: var(--dark); color: #fff; border-color: var(--dark); }
   .memories-panel { display: none; }
   .memories-panel.active { display: block; }
-  .split-slider {
-    position: relative; width: 100%; max-width: 780px; aspect-ratio: 4 / 3; margin: 0 auto;
-    overflow: hidden; background: var(--dark); box-shadow: 0 24px 60px rgba(0,0,0,0.22);
+  .peek-slider {
+    position: relative; max-width: 980px; height: 440px; margin: 0 auto;
+    perspective: 1400px; background: var(--dark); overflow: hidden;
+    box-shadow: 0 30px 70px rgba(0,0,0,0.3);
   }
-  .split-slides { position: relative; width: 100%; height: 100%; list-style: none; margin: 0; padding: 0; }
-  .split-slide { position: absolute; inset: 0; opacity: 0; pointer-events: none; z-index: 1; transition: opacity 0.05s; }
-  .split-slide.active { opacity: 1; pointer-events: auto; z-index: 2; }
-  .split-half {
-    position: absolute; top: 0; width: 50%; height: 100%; overflow: hidden;
-    transform: translateX(0); transition: transform 0.9s cubic-bezier(.77,0,.18,1);
+  .peek-track { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+  .peek-slide {
+    position: absolute; top: 0; left: 50%; width: 54%; height: 100%;
+    transform: translateX(-50%) scale(0.8) rotateY(0deg);
+    opacity: 0; z-index: 1; pointer-events: none; cursor: pointer;
+    overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+    transition: left 0.6s cubic-bezier(.65,0,.35,1), transform 0.6s cubic-bezier(.65,0,.35,1), opacity 0.6s ease;
   }
-  .split-left { left: 0; }
-  .split-right { right: 0; }
-  .split-half img { position: absolute; top: 0; width: 200%; height: 100%; object-fit: cover; display: block; }
-  .split-left img { left: 0; }
-  .split-right img { right: 0; }
-  .split-title {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 3;
-    color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 3rem; font-weight: 300;
-    letter-spacing: 0.04em; text-align: center; text-shadow: 0 4px 24px rgba(0,0,0,0.55);
-    pointer-events: none; opacity: 0; transition: opacity 0.6s ease 0.35s; white-space: nowrap;
+  .peek-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .peek-slide.is-center { left: 50%; transform: translateX(-50%) scale(1) rotateY(0deg); opacity: 1; z-index: 3; pointer-events: auto; }
+  .peek-slide.is-prev {
+    left: 2%; transform: translateX(-50%) scale(0.78) rotateY(28deg);
+    transform-origin: left center; opacity: 0.5; z-index: 2; pointer-events: auto;
   }
-  .split-slide.active .split-title { opacity: 1; }
-  .split-nav {
+  .peek-slide.is-next {
+    left: 98%; transform: translateX(-50%) scale(0.78) rotateY(-28deg);
+    transform-origin: right center; opacity: 0.5; z-index: 2; pointer-events: auto;
+  }
+  .peek-cap {
+    position: absolute; bottom: 0; left: 0; right: 0; padding: 1.1rem 1.4rem;
+    background: linear-gradient(0deg, rgba(0,0,0,0.65), transparent);
+    color: #fff; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; font-weight: 300;
+    letter-spacing: 0.03em; opacity: 0; transition: opacity 0.4s ease 0.2s;
+  }
+  .peek-slide.is-center .peek-cap { opacity: 1; }
+  .peek-nav {
     position: absolute; top: 50%; transform: translateY(-50%); z-index: 5;
-    background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.4); color: #fff;
-    width: 46px; height: 46px; border-radius: 50%; font-size: 1.4rem; line-height: 1;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff;
+    width: 48px; height: 48px; border-radius: 50%; font-size: 1.3rem; line-height: 1;
     cursor: pointer; transition: background 0.2s, border-color 0.2s;
   }
-  .split-nav:hover { background: rgba(255,255,255,0.28); border-color: var(--gold-light); }
-  .split-prev { left: 1.25rem; }
-  .split-next { right: 1.25rem; }
-  .split-dots {
-    position: absolute; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
-    display: flex; gap: 0.5rem; z-index: 5; list-style: none; margin: 0; padding: 0;
+  .peek-nav:hover { background: rgba(255,255,255,0.25); border-color: var(--gold-light); }
+  .peek-prev { left: 0.75rem; }
+  .peek-next { right: 0.75rem; }
+  .peek-dots {
+    position: absolute; bottom: 1.1rem; left: 50%; transform: translateX(-50%);
+    display: flex; gap: 0.5rem; z-index: 6; list-style: none; margin: 0; padding: 0;
   }
-  .split-dot {
+  .peek-dot {
     width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.4);
     cursor: pointer; transition: background 0.2s, transform 0.2s;
   }
-  .split-dot.active { background: var(--gold-light); transform: scale(1.35); }
+  .peek-dot.active { background: var(--gold-light); transform: scale(1.35); }
   .memories-video-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; max-width: 1000px; margin: 0 auto; }
   .memories-video-card { background: var(--green-deep); overflow: hidden; }
   .memories-video-card video { width: 100%; display: block; max-height: 360px; object-fit: cover; }
@@ -813,11 +820,13 @@
   }
   @media (max-width: 900px) {
     .memories-page { padding: 3.5rem 1.25rem; }
-    .split-slider { max-width: 100%; aspect-ratio: 3 / 4; }
-    .split-title { font-size: 1.7rem; white-space: normal; padding: 0 1rem; }
-    .split-nav { width: 38px; height: 38px; font-size: 1.15rem; }
-    .split-prev { left: 0.6rem; }
-    .split-next { right: 0.6rem; }
+    .peek-slider { max-width: 100%; height: 340px; perspective: none; }
+    .peek-slide { width: 88%; }
+    .peek-slide.is-prev, .peek-slide.is-next { opacity: 0; transform: translateX(-50%) scale(0.8); pointer-events: none; }
+    .peek-cap { font-size: 1.15rem; padding: 0.85rem 1rem; }
+    .peek-nav { width: 38px; height: 38px; font-size: 1.1rem; }
+    .peek-prev { left: 0.4rem; }
+    .peek-next { right: 0.4rem; }
     .memories-video-grid { grid-template-columns: 1fr; }
   }
   .newsletter h2 {
@@ -3226,84 +3235,72 @@
     </div>
 
     <div class="memories-panel active" id="memories-panel-photos">
-      <div class="split-slider" id="splitSlider">
-        <ul class="split-slides" id="splitSlides">
-        <li class="split-slide active" data-index="0" onclick="openMemoryLightbox('memories/IMG_2235.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2235.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2235.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="1" onclick="openMemoryLightbox('memories/IMG_2316.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2316.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2316.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="2" onclick="openMemoryLightbox('memories/IMG_4251.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_4251.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_4251.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="3" onclick="openMemoryLightbox('memories/IMG_2239.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2239.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2239.jpeg" alt=""></div>
-          <h3 class="split-title"><span>With Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="4" onclick="openMemoryLightbox('memories/IMG_2304.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2304.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2304.jpeg" alt=""></div>
-          <h3 class="split-title"><span>With Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="5" onclick="openMemoryLightbox('memories/IMG_2373.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2373.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2373.jpeg" alt=""></div>
-          <h3 class="split-title"><span>With Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="6" onclick="openMemoryLightbox('memories/IMG_4254.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_4254.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_4254.jpeg" alt=""></div>
-          <h3 class="split-title"><span>With Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="7" onclick="openMemoryLightbox('memories/IMG_2242.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2242.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2242.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Snaking Time</span></h3>
-        </li>
-        <li class="split-slide" data-index="8" onclick="openMemoryLightbox('memories/IMG_2308.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2308.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2308.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Snaking Time</span></h3>
-        </li>
-        <li class="split-slide" data-index="9" onclick="openMemoryLightbox('memories/IMG_2372.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2372.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2372.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Friends</span></h3>
-        </li>
-        <li class="split-slide" data-index="10" onclick="openMemoryLightbox('memories/IMG_2246.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_2246.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_2246.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Coldy</span></h3>
-        </li>
-        <li class="split-slide" data-index="11" onclick="openMemoryLightbox('memories/IMG_4253.jpeg')">
-          <div class="split-half split-left"><img src="memories/IMG_4253.jpeg" alt=""></div>
-          <div class="split-half split-right"><img src="memories/IMG_4253.jpeg" alt=""></div>
-          <h3 class="split-title"><span>Love It</span></h3>
-        </li>
-        </ul>
-        <button class="split-nav split-prev" onclick="splitSlideChange(-1)" aria-label="Previous photo">&#8249;</button>
-        <button class="split-nav split-next" onclick="splitSlideChange(1)" aria-label="Next photo">&#8250;</button>
-        <ul class="split-dots" id="splitDots">
-          <li class="split-dot active" onclick="splitSlideGoTo(0)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(1)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(2)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(3)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(4)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(5)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(6)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(7)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(8)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(9)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(10)"></li>
-          <li class="split-dot" onclick="splitSlideGoTo(11)"></li>
+      <div class="peek-slider" id="peekSlider">
+        <button class="peek-nav peek-prev" onclick="peekChange(-1)" aria-label="Previous photo">&#8592;</button>
+        <div class="peek-track" id="peekTrack">
+          <div class="peek-slide" data-index="0" onclick="handlePeekClick(0, 'memories/IMG_2235.jpeg')">
+            <img src="memories/IMG_2235.jpeg" alt="Friends">
+            <div class="peek-cap">Friends</div>
+          </div>
+          <div class="peek-slide" data-index="1" onclick="handlePeekClick(1, 'memories/IMG_2316.jpeg')">
+            <img src="memories/IMG_2316.jpeg" alt="Friends">
+            <div class="peek-cap">Friends</div>
+          </div>
+          <div class="peek-slide" data-index="2" onclick="handlePeekClick(2, 'memories/IMG_4251.jpeg')">
+            <img src="memories/IMG_4251.jpeg" alt="Friends">
+            <div class="peek-cap">Friends</div>
+          </div>
+          <div class="peek-slide" data-index="3" onclick="handlePeekClick(3, 'memories/IMG_2239.jpeg')">
+            <img src="memories/IMG_2239.jpeg" alt="With Friends">
+            <div class="peek-cap">With Friends</div>
+          </div>
+          <div class="peek-slide" data-index="4" onclick="handlePeekClick(4, 'memories/IMG_2304.jpeg')">
+            <img src="memories/IMG_2304.jpeg" alt="With Friends">
+            <div class="peek-cap">With Friends</div>
+          </div>
+          <div class="peek-slide" data-index="5" onclick="handlePeekClick(5, 'memories/IMG_2373.jpeg')">
+            <img src="memories/IMG_2373.jpeg" alt="With Friends">
+            <div class="peek-cap">With Friends</div>
+          </div>
+          <div class="peek-slide" data-index="6" onclick="handlePeekClick(6, 'memories/IMG_4254.jpeg')">
+            <img src="memories/IMG_4254.jpeg" alt="With Friends">
+            <div class="peek-cap">With Friends</div>
+          </div>
+          <div class="peek-slide" data-index="7" onclick="handlePeekClick(7, 'memories/IMG_2242.jpeg')">
+            <img src="memories/IMG_2242.jpeg" alt="Snaking Time">
+            <div class="peek-cap">Snaking Time</div>
+          </div>
+          <div class="peek-slide" data-index="8" onclick="handlePeekClick(8, 'memories/IMG_2308.jpeg')">
+            <img src="memories/IMG_2308.jpeg" alt="Snaking Time">
+            <div class="peek-cap">Snaking Time</div>
+          </div>
+          <div class="peek-slide" data-index="9" onclick="handlePeekClick(9, 'memories/IMG_2372.jpeg')">
+            <img src="memories/IMG_2372.jpeg" alt="Friends">
+            <div class="peek-cap">Friends</div>
+          </div>
+          <div class="peek-slide" data-index="10" onclick="handlePeekClick(10, 'memories/IMG_2246.jpeg')">
+            <img src="memories/IMG_2246.jpeg" alt="Coldy">
+            <div class="peek-cap">Coldy</div>
+          </div>
+          <div class="peek-slide" data-index="11" onclick="handlePeekClick(11, 'memories/IMG_4253.jpeg')">
+            <img src="memories/IMG_4253.jpeg" alt="Love It">
+            <div class="peek-cap">Love It</div>
+          </div>
+        </div>
+        <button class="peek-nav peek-next" onclick="peekChange(1)" aria-label="Next photo">&#8594;</button>
+        <ul class="peek-dots" id="peekDots">
+          <li class="peek-dot active" onclick="peekGoTo(0)"></li>
+          <li class="peek-dot" onclick="peekGoTo(1)"></li>
+          <li class="peek-dot" onclick="peekGoTo(2)"></li>
+          <li class="peek-dot" onclick="peekGoTo(3)"></li>
+          <li class="peek-dot" onclick="peekGoTo(4)"></li>
+          <li class="peek-dot" onclick="peekGoTo(5)"></li>
+          <li class="peek-dot" onclick="peekGoTo(6)"></li>
+          <li class="peek-dot" onclick="peekGoTo(7)"></li>
+          <li class="peek-dot" onclick="peekGoTo(8)"></li>
+          <li class="peek-dot" onclick="peekGoTo(9)"></li>
+          <li class="peek-dot" onclick="peekGoTo(10)"></li>
+          <li class="peek-dot" onclick="peekGoTo(11)"></li>
         </ul>
       </div>
     </div>
@@ -3768,91 +3765,64 @@
     document.getElementById('memories-lightbox').classList.remove('active');
   }
 
-  // ===== MEMORIES SPLIT-REVEAL PHOTO SLIDER =====
-  let splitIndex = 0;
-  let splitAnimating = false;
-  function splitGoTo(targetIndex) {
-    const slides = document.querySelectorAll('#splitSlides .split-slide');
-    if (!slides.length) return;
+  // ===== MEMORIES PEEK/COVERFLOW PHOTO CAROUSEL =====
+  let peekIndex = 0;
+  function renderPeekSlider() {
+    const slides = document.querySelectorAll('#peekTrack .peek-slide');
     const total = slides.length;
-    const nextIndex = ((targetIndex % total) + total) % total;
-    if (splitAnimating || nextIndex === splitIndex) return;
-    splitAnimating = true;
-
-    const current = slides[splitIndex];
-    const next = slides[nextIndex];
-    const nextLeft = next.querySelector('.split-left');
-    const nextRight = next.querySelector('.split-right');
-    const curLeft = current.querySelector('.split-left');
-    const curRight = current.querySelector('.split-right');
-
-    next.style.zIndex = 3;
-    current.style.zIndex = 2;
-    next.classList.add('active');
-
-    nextLeft.style.transition = 'none';
-    nextRight.style.transition = 'none';
-    nextLeft.style.transform = 'translateX(-100%)';
-    nextRight.style.transform = 'translateX(100%)';
-    void next.offsetWidth; // force reflow so the "none" transition takes effect first
-
-    requestAnimationFrame(() => {
-      nextLeft.style.transition = '';
-      nextRight.style.transition = '';
-      nextLeft.style.transform = 'translateX(0)';
-      nextRight.style.transform = 'translateX(0)';
-      curLeft.style.transform = 'translateX(-100%)';
-      curRight.style.transform = 'translateX(100%)';
+    if (!total) return;
+    slides.forEach((el, i) => {
+      el.classList.remove('is-center', 'is-prev', 'is-next');
+      const diff = (i - peekIndex + total) % total;
+      if (diff === 0) el.classList.add('is-center');
+      else if (diff === 1) el.classList.add('is-next');
+      else if (diff === total - 1) el.classList.add('is-prev');
     });
-
-    setTimeout(() => {
-      current.classList.remove('active');
-      current.style.zIndex = 1;
-      curLeft.style.transition = 'none';
-      curRight.style.transition = 'none';
-      curLeft.style.transform = 'translateX(0)';
-      curRight.style.transform = 'translateX(0)';
-      void current.offsetWidth;
-      curLeft.style.transition = '';
-      curRight.style.transition = '';
-      splitIndex = nextIndex;
-      document.querySelectorAll('#splitDots .split-dot').forEach((d, i) => d.classList.toggle('active', i === splitIndex));
-      splitAnimating = false;
-      if (typeof startSplitAutoplay === 'function' && splitAutoplayTimer !== null) startSplitAutoplay();
-    }, 950);
+    document.querySelectorAll('#peekDots .peek-dot').forEach((d, i) => d.classList.toggle('active', i === peekIndex));
   }
-  function splitSlideChange(dir) { splitGoTo(splitIndex + dir); }
-  function splitSlideGoTo(i) { splitGoTo(i); }
+  function peekGoTo(i) {
+    const total = document.querySelectorAll('#peekTrack .peek-slide').length;
+    if (!total) return;
+    peekIndex = ((i % total) + total) % total;
+    renderPeekSlider();
+    if (peekAutoplayTimer !== null) startPeekAutoplay();
+  }
+  function peekChange(dir) { peekGoTo(peekIndex + dir); }
+  function handlePeekClick(idx, src) {
+    if (idx === peekIndex) openMemoryLightbox(src);
+    else peekGoTo(idx);
+  }
 
   // Autoplay — advances every 4.5s, resets its timer on any slide change
   // (manual or auto), and pauses while the mouse is over the slider.
-  let splitAutoplayTimer = null;
-  function startSplitAutoplay() {
-    stopSplitAutoplay();
-    splitAutoplayTimer = setInterval(() => splitSlideChange(1), 4500);
+  let peekAutoplayTimer = null;
+  function startPeekAutoplay() {
+    stopPeekAutoplay();
+    peekAutoplayTimer = setInterval(() => peekChange(1), 4500);
   }
-  function stopSplitAutoplay() {
-    if (splitAutoplayTimer) { clearInterval(splitAutoplayTimer); splitAutoplayTimer = null; }
+  function stopPeekAutoplay() {
+    if (peekAutoplayTimer) { clearInterval(peekAutoplayTimer); peekAutoplayTimer = null; }
   }
   document.addEventListener('DOMContentLoaded', () => {
-    const slider = document.getElementById('splitSlider');
+    const slider = document.getElementById('peekSlider');
     if (slider) {
-      startSplitAutoplay();
-      slider.addEventListener('mouseenter', stopSplitAutoplay);
-      slider.addEventListener('mouseleave', startSplitAutoplay);
+      renderPeekSlider();
+      startPeekAutoplay();
+      slider.addEventListener('mouseenter', stopPeekAutoplay);
+      slider.addEventListener('mouseleave', startPeekAutoplay);
 
       // Touch/swipe support (glide.js-style gesture handling, no external library)
-      let splitTouchStartX = 0;
-      let splitTouchStartY = 0;
+      let peekTouchStartX = 0;
+      let peekTouchStartY = 0;
       slider.addEventListener('touchstart', (e) => {
-        splitTouchStartX = e.touches[0].clientX;
-        splitTouchStartY = e.touches[0].clientY;
+        peekTouchStartX = e.touches[0].clientX;
+        peekTouchStartY = e.touches[0].clientY;
       }, { passive: true });
       slider.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - splitTouchStartX;
-        const dy = e.changedTouches[0].clientY - splitTouchStartY;
+        const dx = e.changedTouches[0].clientX - peekTouchStartX;
+        const dy = e.changedTouches[0].clientY - peekTouchStartY;
         if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
-          splitSlideChange(dx < 0 ? 1 : -1);
+          peekChange(dx < 0 ? 1 : -1);
         }
       }, { passive: true });
     }
