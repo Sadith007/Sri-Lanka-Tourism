@@ -3840,6 +3840,21 @@
       startSplitAutoplay();
       slider.addEventListener('mouseenter', stopSplitAutoplay);
       slider.addEventListener('mouseleave', startSplitAutoplay);
+
+      // Touch/swipe support (glide.js-style gesture handling, no external library)
+      let splitTouchStartX = 0;
+      let splitTouchStartY = 0;
+      slider.addEventListener('touchstart', (e) => {
+        splitTouchStartX = e.touches[0].clientX;
+        splitTouchStartY = e.touches[0].clientY;
+      }, { passive: true });
+      slider.addEventListener('touchend', (e) => {
+        const dx = e.changedTouches[0].clientX - splitTouchStartX;
+        const dy = e.changedTouches[0].clientY - splitTouchStartY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          splitSlideChange(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
     }
   });
 
