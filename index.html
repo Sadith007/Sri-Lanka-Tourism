@@ -94,6 +94,34 @@
   }
   .nav-cta:hover { background: var(--gold-light); color: var(--dark); }
 
+  /* AIRPLANE TAKEOFF & LANDING (Plan My Journey) */
+  .plane-fly {
+    position: fixed; left: 0; top: 0; z-index: 9999;
+    width: 56px; height: 56px; margin: -28px 0 0 -28px;
+    pointer-events: none; will-change: transform;
+    filter: drop-shadow(0 6px 10px rgba(0,0,0,0.35));
+  }
+  .plane-fly svg { width: 100%; height: 100%; display: block; }
+  .plane-dot {
+    position: fixed; z-index: 9998; width: 8px; height: 8px; margin: -4px 0 0 -4px;
+    border-radius: 50%; background: rgba(255,255,255,0.85);
+    pointer-events: none; animation: planeDotFade 0.9s ease-out forwards;
+  }
+  @keyframes planeDotFade {
+    from { opacity: 0.9; transform: scale(1); }
+    to { opacity: 0; transform: scale(2.4); }
+  }
+  .plane-runway {
+    position: fixed; left: 0; right: 0; bottom: 0; height: 70px; z-index: 9990;
+    pointer-events: none; opacity: 0; transition: opacity 0.5s ease;
+    background: linear-gradient(to top, rgba(10,20,15,0.92), rgba(10,20,15,0));
+  }
+  .plane-runway::after {
+    content: ''; position: absolute; left: 6%; right: 6%; bottom: 22px; height: 3px;
+    background: repeating-linear-gradient(to right, var(--gold-light) 0 28px, transparent 28px 52px);
+  }
+  .plane-runway.show { opacity: 1; }
+
   /* NAV — tighten spacing on laptop-width screens so the language switcher
      doesn't crowd/overlap the last nav link (kicks in before the hamburger) */
   @media (max-width: 1360px) and (min-width: 769px) {
@@ -1915,7 +1943,7 @@
       <li><a data-lang="cs" onclick="setLanguage('cs')">Čeština</a></li>
     </ul>
   </div>
-  <button class="nav-cta" onclick="goPage('plan')">Plan My Journey</button>
+  <button class="nav-cta" onclick="planJourney(this)">Plan My Journey</button>
   <button class="hamburger" id="hamburger" onclick="toggleMenu()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
@@ -1930,7 +1958,7 @@
   <a onclick="mobileGoPage('plan')">Plan Your Trip</a>
   <a onclick="mobileGoPage('besttime')">Best Time</a>
   <a onclick="mobileGoPage('memories')">Memories</a>
-  <button class="mobile-cta" onclick="mobileGoPage('plan')">Plan My Journey</button>
+  <button class="mobile-cta" onclick="planJourney(this)">Plan My Journey</button>
   <div class="mobile-lang-block" id="mobile-lang-block">
     <a data-lang="en" onclick="setLanguage('en')">EN</a>
     <a data-lang="de" onclick="setLanguage('de')">DE</a>
@@ -3475,7 +3503,12 @@
           </div>`;
       }).join('');
     } catch (err) {
-      console.error('loadReviews error:', err);
+      console.error('loadReviews error:', JSON.stringify({
+        message: err && err.message,
+        code: err && err.code,
+        details: err && err.details,
+        hint: err && err.hint
+      }, null, 2));
       const msg = (err && (err.message || err.error_description || err.hint)) || JSON.stringify(err);
       listEl.innerHTML = '<div class="reviews-empty">Could not load reviews.<br><small style="opacity:0.6;">' + msg + '</small></div>';
       countEl.textContent = '';
@@ -3537,7 +3570,12 @@
       btn.textContent = 'Submit Review';
       btn.disabled = false;
     } catch (err) {
-      console.error('submitReview error:', err);
+      console.error('submitReview error:', JSON.stringify({
+        message: err && err.message,
+        code: err && err.code,
+        details: err && err.details,
+        hint: err && err.hint
+      }, null, 2));
       const msg = (err && (err.message || err.error_description || err.hint)) || JSON.stringify(err);
       errorEl.textContent = 'Something went wrong: ' + msg;
       errorEl.style.display = 'block';
@@ -3777,6 +3815,107 @@
     menu.classList.toggle('open');
     btn.classList.toggle('open');
     document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+
+  // ===== AIRPLANE TAKEOFF & LANDING ANIMATION =====
+  let planeBusy = false;
+  function planJourney(btn) {
+    if (planeBusy) return;
+
+    // Capture button position first (mobile menu hides after we close it)
+    const r = btn.getBoundingClientRect();
+    const start = { x: r.left + r.width / 2, y: r.top + r.height / 2 };
+
+    // Close mobile menu if open
+    const menu = document.getElementById('mobile-menu');
+    if (menu && menu.classList.contains('open')) {
+      menu.classList.remove('open');
+      document.getElementById('hamburger').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    // Respect reduced-motion preference
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      goPage('plan');
+      return;
+    }
+
+    planeBusy = true;
+    const W = window.innerWidth, H = window.innerHeight;
+    const end = { x: W * 0.5, y: H - 40 };            // landing spot on the runway
+    const ctrl = { x: W * 0.08, y: H * 0.02 };         // swing wide to the left, then glide down
+    const DURATION = 2600;
+
+    const plane = document.createElement('div');
+    plane.className = 'plane-fly';
+    const PLANE_D = 'M62 32 40 24 26 6h-6l7 18-14 3-6-7H2l4 12-4 12h4l6-7 14 3-7 18h6l14-18 22-8z';
+    plane.innerHTML =
+      '<svg viewBox="0 0 64 64" aria-hidden="true">' +
+        '<defs><clipPath id="planeClip"><path d="' + PLANE_D + '"/></clipPath></defs>' +
+        // Sri Lankan flag colours: green + saffron stripes at the tail, maroon body
+        '<g clip-path="url(#planeClip)">' +
+          '<rect x="0" y="0" width="64" height="64" fill="#8D153A"/>' +
+          '<rect x="0" y="0" width="11" height="64" fill="#00534E"/>' +
+          '<rect x="11" y="0" width="11" height="64" fill="#EB7400"/>' +
+        '</g>' +
+        '<path d="' + PLANE_D + '" fill="none" stroke="#FFBE29" stroke-width="2.5" stroke-linejoin="round"/>' +
+      '</svg>';
+    document.body.appendChild(plane);
+
+    const runway = document.createElement('div');
+    runway.className = 'plane-runway';
+    document.body.appendChild(runway);
+
+    const ease = t => 0.5 - Math.cos(Math.PI * t) / 2;
+    const bez = (t, a, c, b) => {
+      const u = 1 - t;
+      return { x: u*u*a.x + 2*u*t*c.x + t*t*b.x, y: u*u*a.y + 2*u*t*c.y + t*t*b.y };
+    };
+
+    let t0 = null, lastDot = 0;
+    function frame(now) {
+      if (t0 === null) t0 = now;
+      const raw = Math.min((now - t0) / DURATION, 1);
+      const t = ease(raw);
+      const p = bez(t, start, ctrl, end);
+      const p2 = bez(Math.min(t + 0.01, 1), start, ctrl, end);
+
+      // Heading follows the path, then levels out for landing
+      let angle = Math.atan2(p2.y - p.y, p2.x - p.x) * 180 / Math.PI;
+      const level = Math.max(0, (raw - 0.8) / 0.2);
+      if (angle > 90 || angle < -90) angle = angle > 0 ? angle - 360 : angle; // keep rotation continuous
+      angle = angle * (1 - level);
+      const heading = Math.cos(angle * Math.PI / 180) < 0 ? -1 : 1;
+      const scale = 0.6 + 0.5 * Math.sin(Math.PI * Math.min(raw * 1.1, 1)) + 0.2 * level; // small → big → settles
+      plane.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${angle}deg) scale(${scale}) scaleY(${heading})`;
+
+      if (raw > 0.55) runway.classList.add('show');
+
+      if (now - lastDot > 45 && raw < 0.97) {
+        lastDot = now;
+        const d = document.createElement('div');
+        d.className = 'plane-dot';
+        d.style.left = p.x + 'px';
+        d.style.top = p.y + 'px';
+        document.body.appendChild(d);
+        setTimeout(() => d.remove(), 950);
+      }
+
+      if (raw < 1) {
+        requestAnimationFrame(frame);
+      } else {
+        // Touchdown: roll forward a bit, then go to the Plan page
+        plane.style.transition = 'transform 0.45s ease-out, opacity 0.45s ease-out 0.15s';
+        plane.style.transform = `translate(${end.x + 90}px, ${end.y}px) rotate(0deg) scale(0.85)`;
+        plane.style.opacity = '0';
+        setTimeout(() => {
+          goPage('plan');
+          runway.classList.remove('show');
+          setTimeout(() => { plane.remove(); runway.remove(); planeBusy = false; }, 500);
+        }, 450);
+      }
+    }
+    requestAnimationFrame(frame);
   }
 
   function mobileGoPage(page) {
